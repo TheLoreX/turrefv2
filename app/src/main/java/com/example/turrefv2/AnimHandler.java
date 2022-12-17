@@ -28,7 +28,6 @@ public class AnimHandler {
     public void openAttach() {
         binding.FrameAttach.startAnimation(AnimationUtils.loadAnimation(activity, R.anim.attachin));
         binding.FrameAttach.invalidate();
-        if
         binding.ImageCurrentList.setVisibility(View.VISIBLE);
         binding.ImageCurrentList.startAnimation(AnimationUtils.loadAnimation(activity, R.anim.bounce));
         binding.ImageCurrentList.invalidate();
