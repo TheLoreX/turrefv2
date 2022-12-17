@@ -1,5 +1,5 @@
 package com.example.turrefv2;
-sa
+
 import androidx.activity.result.ActivityResult;
 import androidx.activity.result.ActivityResultCallback;
 import androidx.activity.result.ActivityResultLauncher;
