@@ -12,14 +12,10 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Build;
 import android.os.Bundle;
-import android.os.Environment;
-import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
 import com.example.turrefv2.databinding.ActivityMainBinding;
-
-import java.io.File;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -81,10 +77,5 @@ public class MainActivity extends AppCompatActivity {
             requestPermissions(new String[]{Manifest.permission.MANAGE_EXTERNAL_STORAGE}, 1000);
         }
     }
-
-
-<<<<<<< HEAD
 }
-=======
-}
->>>>>>> 5dbe0e643fd0fc4ee7aea66462792b84c188382e
+
