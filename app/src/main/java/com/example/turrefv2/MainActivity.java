@@ -83,4 +83,8 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> 5dbe0e643fd0fc4ee7aea66462792b84c188382e
