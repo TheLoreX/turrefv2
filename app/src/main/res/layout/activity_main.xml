@@ -1,0 +1,202 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/App"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/homepage"
+    tools:context=".MainActivity">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/pageHome"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <View
+            android:id="@+id/FrameAttach"
+            android:layout_width="285dp"
+            android:layout_height="1dp"
+            android:layout_marginTop="55dp"
+            app:layout_constraintEnd_toEndOf="@+id/panelListadder"
+            app:layout_constraintStart_toStartOf="@+id/panelListadder"
+            app:layout_constraintTop_toTopOf="@+id/panelListadder"
+            android:background="@drawable/attachframe"/>
+
+        <ImageView
+            android:id="@+id/TextWelcome"
+            android:layout_width="249dp"
+            android:layout_height="96dp"
+            android:layout_marginStart="18dp"
+            android:layout_marginTop="50dp"
+            android:contentDescription="@string/todo"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/textwelcome"
+            tools:ignore="ImageContrastCheck" />
+
+        <ImageView
+            android:id="@+id/ImageLogo"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:layout_marginTop="57dp"
+            android:layout_marginEnd="15dp"
+            android:contentDescription="@string/todo"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/appicon"
+            tools:ignore="ImageContrastCheck" />
+
+        <View
+            android:id="@+id/ImageCurrentList"
+            android:layout_width="110dp"
+            android:layout_height="135dp"
+            android:layout_marginStart="65dp"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/notepadframe"
+            android:visibility="gone"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/FrameAttach" />
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/bottomPanel"
+            android:layout_width="0dp"
+            android:layout_height="86dp"
+            android:background="@drawable/bottomframe"
+            android:elevation="1dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent">
+
+            <Button
+                android:id="@+id/ButtonHome"
+                android:layout_width="35dp"
+                android:layout_height="35dp"
+                android:layout_marginStart="22dp"
+                android:background="@drawable/homebutton"
+                android:backgroundTint="#C1BDBA"
+                app:layout_constraintBottom_toBottomOf="@id/buttonbases"
+                app:layout_constraintStart_toStartOf="parent"
+                tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck" />
+
+            <Button
+                android:id="@+id/ButtonList"
+                android:layout_width="31dp"
+                android:layout_height="35dp"
+                android:layout_marginStart="43dp"
+                android:background="@drawable/listbutton"
+                app:layout_constraintBottom_toTopOf="@+id/buttonbases"
+                app:layout_constraintStart_toEndOf="@+id/ButtonHome"
+                tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck" />
+
+            <Button
+                android:id="@+id/ButtonPlay"
+                android:layout_width="33dp"
+                android:layout_height="35dp"
+                android:background="@drawable/playbutton"
+                app:layout_constraintBottom_toTopOf="@+id/buttonbases"
+                app:layout_constraintEnd_toStartOf="@+id/ButtonInfo"
+                app:layout_constraintStart_toEndOf="@+id/ButtonList"
+                tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck" />
+
+            <Button
+                android:id="@+id/ButtonInfo"
+                android:layout_width="35dp"
+                android:layout_height="35dp"
+                android:layout_marginEnd="43dp"
+                android:background="@drawable/infobutton"
+                app:layout_constraintBottom_toBottomOf="@id/buttonbases"
+                app:layout_constraintEnd_toStartOf="@+id/ButtonSettings"
+                tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck" />
+
+            <Button
+                android:id="@+id/ButtonSettings"
+                android:layout_width="35dp"
+                android:layout_height="35dp"
+                android:layout_marginEnd="22dp"
+                android:background="@drawable/settingsbutton"
+                app:layout_constraintBottom_toBottomOf="@id/buttonbases"
+                app:layout_constraintEnd_toEndOf="parent"
+                tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck" />
+
+            <ImageView
+                android:id="@+id/ImageToggle"
+                android:layout_width="54.6dp"
+                android:layout_height="3.6dp"
+                android:layout_marginStart="12dp"
+                android:layout_marginTop="10dp"
+                android:contentDescription="@string/todo"
+                android:elevation="2dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/buttonbases"
+                app:srcCompat="@drawable/toggle"
+                tools:ignore="ImageContrastCheck" />
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/buttonbases"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                app:layout_constraintGuide_end="32dp" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/panelListadder"
+            android:layout_width="348.8dp"
+            android:layout_height="67dp"
+            android:layout_marginTop="55dp"
+            android:background="@drawable/listadder"
+            android:elevation="1dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.51"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/TextWelcome">
+
+            <ImageView
+                android:id="@+id/ButtonAdd"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:layout_marginStart="149dp"
+                android:layout_marginBottom="9dp"
+                android:background="@drawable/addbutton"
+                android:contentDescription="@string/todo"
+                android:elevation="1dp"
+                app:layout_constraintBottom_toBottomOf="@+id/panelListadder"
+                app:layout_constraintStart_toStartOf="@+id/panelListadder"
+                tools:ignore="TouchTargetSizeCheck,SpeakableTextPresentCheck,ImageContrastCheck" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/midPanel"
+            android:layout_width="0dp"
+            android:layout_height="370dp"
+            android:background="@drawable/midframe"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent">
+
+            <TextView
+                android:id="@+id/TextRecentlist"
+                android:layout_width="190dp"
+                android:layout_height="20dp"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentBottom="true"
+                android:layout_marginTop="25dp"
+                android:background="@drawable/textrecentlists"
+                android:elevation="2dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.497"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
