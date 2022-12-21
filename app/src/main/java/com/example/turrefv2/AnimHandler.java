@@ -2,18 +2,25 @@ package com.example.turrefv2;
 
 import android.animation.ObjectAnimator;
 import android.app.Activity;
+import android.util.Log;
 import android.view.View;
+import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
+import android.widget.Toast;
+
+import androidx.dynamicanimation.animation.DynamicAnimation;
 
 import com.example.turrefv2.databinding.ActivityMainBinding;
+
+import java.time.Duration;
 
 public class AnimHandler {
 
     ActivityMainBinding binding;
     Activity activity;
 
-    AnimHandler(ActivityMainBinding binding, Activity activity) {
 
+    AnimHandler(ActivityMainBinding binding, Activity activity) {
         this.binding = binding;
         this.activity = activity;
     }
@@ -26,10 +33,19 @@ public class AnimHandler {
     }
 
     public void openAttach() {
-        binding.FrameAttach.startAnimation(AnimationUtils.loadAnimation(activity, R.anim.attachin));
-        binding.FrameAttach.invalidate();
-        binding.ImageCurrentList.setVisibility(View.VISIBLE);
-        binding.ImageCurrentList.startAnimation(AnimationUtils.loadAnimation(activity, R.anim.bounce));
-        binding.ImageCurrentList.invalidate();
+        binding.TextFilename.setText(MainActivity.path.substring(1,MainActivity.path.indexOf(".")));
+        Animation frameAttach = AnimationUtils.loadAnimation(activity, R.anim.attachin);
+        binding.FrameAttach.startAnimation(frameAttach);
+
+        binding.ImageCurrentlist.setVisibility(View.VISIBLE);
+        Animation imageCurrentList = AnimationUtils.loadAnimation(activity, R.anim.fadein);
+        binding.ImageCurrentlist.startAnimation(imageCurrentList);
+
+        binding.TextFilename.setVisibility(View.VISIBLE);
+        Animation textFilename = AnimationUtils.loadAnimation(activity, R.anim.fadein);
+        binding.TextFilename.startAnimation(textFilename);
+
+        //binding.TextLinecount.setText();
+
     }
 }

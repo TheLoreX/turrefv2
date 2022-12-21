@@ -12,16 +12,20 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Environment;
+import android.util.Log;
 import android.view.View;
+import android.view.animation.Animation;
 import android.widget.Toast;
 
 import com.example.turrefv2.databinding.ActivityMainBinding;
-sa
+
 public class MainActivity extends AppCompatActivity {
 
     ActivityMainBinding binding;
-    String path;
+    public static String path;
     public static ActivityResultLauncher<Intent> activityResultLauncher;
+    public static int countOfLine;
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -32,6 +36,7 @@ public class MainActivity extends AppCompatActivity {
         // class definitions
         ButtonHandler buttonHandler = new ButtonHandler( binding, this);
         TouchHandler touchHandler = new TouchHandler(this);
+        AnimHandler animHandler = new AnimHandler(binding,this);
         // listeners
         binding.ButtonHome.setOnClickListener(buttonHandler);
         binding.ButtonHome.setOnTouchListener(touchHandler);
@@ -45,6 +50,7 @@ public class MainActivity extends AppCompatActivity {
         binding.ButtonSettings.setOnTouchListener(touchHandler);
         binding.ButtonAdd.setOnClickListener(buttonHandler);
         binding.ButtonAdd.setOnTouchListener(touchHandler);
+
         // executions
         getPermission();
 
@@ -56,12 +62,12 @@ public class MainActivity extends AppCompatActivity {
                 if(result.getResultCode() == Activity.RESULT_OK) {
                     if (result.getData() != null) {
                         path = "/" + result.getData().getData().getPath().substring(result.getData().getData().getPath().indexOf(":") + 1);
-                        Toast.makeText(MainActivity.this, path, Toast.LENGTH_SHORT).show();
+                        animHandler.openAttach();
+                        buttonHandler.notepadInform(path);
                     }
                 }
             }
         });
-
     }
 
 

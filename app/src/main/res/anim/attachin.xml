@@ -10,7 +10,7 @@
         android:pivotX="0%"
         android:pivotY="0%"
         android:toXScale="285dp"
-        android:toYScale="170dp"
+        android:toYScale="180dp"
         >
     </scale>
 

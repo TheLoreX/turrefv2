@@ -4,11 +4,11 @@ android:fillAfter="true"
 
 <scale
     xmlns:android="http://schemas.android.com/apk/res/android"
-    android:duration="900"
+    android:duration="500"
     android:fromXScale="110dp"
     android:fromYScale="0dp"
     android:pivotX="0%"
-    android:pivotY="10%"
+    android:pivotY="0%"
     android:toXScale="110dp"
     android:toYScale="140dp"
     >
