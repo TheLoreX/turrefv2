@@ -10,9 +10,11 @@ import android.Manifest;
 import android.app.Activity;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
+import android.provider.Settings;
 import android.util.Log;
 import android.view.View;
 import android.view.animation.Animation;
@@ -51,8 +53,20 @@ public class MainActivity extends AppCompatActivity {
         binding.ButtonAdd.setOnClickListener(buttonHandler);
         binding.ButtonAdd.setOnTouchListener(touchHandler);
 
+        binding.ButtonAdd.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(Settings.ACTION_MANAGE_APP_ALL_FILES_ACCESS_PERMISSION);
+                Uri uri = Uri.fromParts("package",getPackageName(),null);
+                intent.setData(uri);
+                activityResultLauncher.launch(intent);
+            }
+        });
+
         // executions
         getPermission();
+
+        Intent intent = new Intent(Settings.ACTION_MANAGE_ALL_FILES_ACCESS_PERMISSION);
 
 
         // ---

@@ -7,10 +7,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.turrefv2.databinding.ActivityMainBinding;
 
-import java.io.IOException;
-
 public class ButtonHandler extends AppCompatActivity implements View.OnClickListener {
-
 
     ActivityMainBinding binding;
     Activity activity;
@@ -44,8 +41,8 @@ public class ButtonHandler extends AppCompatActivity implements View.OnClickList
                 animate.moveToggle(binding.ButtonSettings.getLeft()-62);
                 break;
             case R.id.ButtonAdd:
-                PathHandler pathHandler = new PathHandler();
-                pathHandler.pathReceiver();
+                //PathHandler pathHandler = new PathHandler(activity);
+                //pathHandler.pathReceiver();
                 break;
         }
     }
