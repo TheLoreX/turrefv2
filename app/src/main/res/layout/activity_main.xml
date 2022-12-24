@@ -13,13 +13,15 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@drawable/homepage"
-        android:visibility="gone">
+        android:visibility="gone"
+        tools:visibility="visible">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/bottomPanel_pW"
             android:layout_width="0dp"
             android:layout_height="90dp"
-            android:background="@drawable/palette"
+            android:background="@drawable/bottomframe"
+            android:elevation="1dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent">
@@ -57,12 +59,25 @@
                 app:layout_constraintEnd_toEndOf="@+id/bottomPanel_pW"
                 tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck" />
         </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/midPanel_pW"
+            android:layout_width="0dp"
+            android:layout_height="310dp"
+            android:background="@drawable/midlayer_pw"
+            app:layout_constraintBottom_toBottomOf="@+id/bottomPanel_pW"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent">
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/pageHome"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        tools:visibility="gone">
 
         <View
             android:id="@+id/FrameAttach"

@@ -57,6 +57,7 @@ public class AnimHandler {
                     binding.pageHome.startAnimation(AnimationUtils.loadAnimation(activity, R.anim.slide_out_left));
                     binding.pageWord.startAnimation(AnimationUtils.loadAnimation(activity, R.anim.slide_in_right));
                     binding.pageHome.setVisibility(View.GONE);
+                    binding.pageHome.setEnabled(false);
                     binding.pageWord.setVisibility(View.VISIBLE);
                 }
                 else {
