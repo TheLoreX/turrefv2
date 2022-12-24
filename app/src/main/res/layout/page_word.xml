@@ -2,13 +2,13 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/wordpage"
+    android:id="@+id/pageWord"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/homepage" >
 
     <View
-        android:id="@+id/bottomFrame"
+        android:id="@+id/bottomPanel_pW"
         android:layout_width="409dp"
         android:layout_height="91dp"
         android:background="@drawable/palette"
@@ -24,7 +24,7 @@
         android:layout_marginBottom="26dp"
         android:background="@drawable/back"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="@+id/bottomFrame"
+        app:layout_constraintStart_toStartOf="@+id/bottomPanel_pW"
         tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck" />
 
     <Button
@@ -46,6 +46,6 @@
         android:layout_marginBottom="26dp"
         android:background="@drawable/switchbutton"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="@+id/bottomFrame"
+        app:layout_constraintEnd_toEndOf="@+id/bottomPanel_pW"
         tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck" />
 </androidx.constraintlayout.widget.ConstraintLayout>

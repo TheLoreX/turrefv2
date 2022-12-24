@@ -2,7 +2,12 @@ package com.example.turrefv2;
 
 
 import android.app.Activity;
+import android.os.Build;
+import android.os.Environment;
+import android.util.Log;
 import android.view.View;
+import android.view.animation.AnimationUtils;
+
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.turrefv2.databinding.ActivityMainBinding;
@@ -10,44 +15,55 @@ import com.example.turrefv2.databinding.ActivityMainBinding;
 public class ButtonHandler extends AppCompatActivity implements View.OnClickListener {
 
     ActivityMainBinding binding;
-    Activity activity;
-    AnimHandler animate;
+    AnimHandler animHandler;
     WordHandler wordHandler;
+    PathHandler pathHandler;
+    PermissionHandler permissionHandler;
 
-    public ButtonHandler(ActivityMainBinding binding, Activity activity) {
+    public ButtonHandler(ActivityMainBinding binding, Activity activity, PermissionHandler permissionHandler, PathHandler pathHandler) {
         this.binding = binding;
-        this.activity = activity;
-        animate = new AnimHandler(binding, activity);
-        wordHandler= new WordHandler();
+        this.permissionHandler = permissionHandler;
+        this.pathHandler = pathHandler;
+        animHandler = new AnimHandler(binding, activity);
+        wordHandler = new WordHandler();
     }
 
     @Override
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.ButtonHome:
-
-                animate.moveToggle(binding.ButtonHome.getLeft()-58);
+                animHandler.moveToggle(binding.ButtonHome.getLeft()-58);
                 break;
             case R.id.ButtonList:
-                animate.moveToggle(binding.ButtonList.getLeft()-64);
+                animHandler.moveToggle(binding.ButtonList.getLeft()-64);
                 break;
             case R.id.ButtonPlay:
-                animate.moveToggle(binding.ButtonPlay.getLeft()-66);
+                animHandler.moveToggle(binding.ButtonPlay.getLeft()-66);
+                animHandler.pageHandler((byte) 2, false);
                 break;
             case R.id.ButtonInfo:
-                animate.moveToggle(binding.ButtonInfo.getLeft()-62);
+                animHandler.moveToggle(binding.ButtonInfo.getLeft()-62);
                 break;
             case R.id.ButtonSettings:
-                animate.moveToggle(binding.ButtonSettings.getLeft()-62);
+                animHandler.moveToggle(binding.ButtonSettings.getLeft()-62);
                 break;
             case R.id.ButtonAdd:
-                //PathHandler pathHandler = new PathHandler(activity);
-                //pathHandler.pathReceiver();
+                if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
+                    if(!Environment.isExternalStorageManager()) {
+                        permissionHandler.getBroadPermission(pathHandler);
+                    }
+                    else {pathHandler.pathReceiver(this);}
+                }
+                else {pathHandler.pathReceiver(this);}
                 break;
+            case R.id.ButtonBack:
+                animHandler.pageHandler((byte) 2, true);
+                break;
+            }
         }
-    }
 
-    public void notepadInform(String path) {
-        wordHandler.LineCounter(path);
+    public void attachTrigger() {
+        wordHandler.LineCounter(MainActivity.path);
+        animHandler.openAttach();
     }
 }

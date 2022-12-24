@@ -9,6 +9,57 @@
     tools:context=".MainActivity">
 
     <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/pageWord"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/homepage"
+        android:visibility="gone">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/bottomPanel_pW"
+            android:layout_width="0dp"
+            android:layout_height="90dp"
+            android:background="@drawable/palette"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent">
+
+            <Button
+                android:id="@+id/ButtonBack"
+                android:layout_width="55dp"
+                android:layout_height="35dp"
+                android:layout_marginStart="56dp"
+                android:layout_marginBottom="26dp"
+                android:background="@drawable/back"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="@+id/bottomPanel_pW"
+                tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck" />
+
+            <Button
+                android:id="@+id/ButtonClue"
+                android:layout_width="33dp"
+                android:layout_height="42dp"
+                android:layout_marginBottom="26dp"
+                android:background="@drawable/question"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/SwitchSide"
+                app:layout_constraintStart_toEndOf="@+id/ButtonBack"
+                tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck" />
+
+            <Button
+                android:id="@+id/SwitchSide"
+                android:layout_width="60dp"
+                android:layout_height="33dp"
+                android:layout_marginEnd="56dp"
+                android:layout_marginBottom="26dp"
+                android:background="@drawable/switchbutton"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="@+id/bottomPanel_pW"
+                tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/pageHome"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
@@ -18,10 +69,10 @@
             android:layout_width="285dp"
             android:layout_height="1dp"
             android:layout_marginTop="55dp"
-            app:layout_constraintEnd_toEndOf="@+id/panelListadder"
-            app:layout_constraintStart_toStartOf="@+id/panelListadder"
-            app:layout_constraintTop_toTopOf="@+id/panelListadder"
-            android:background="@drawable/attachframe"/>
+            android:background="@drawable/attachframe"
+            app:layout_constraintEnd_toEndOf="@+id/panelListadder_pH"
+            app:layout_constraintStart_toStartOf="@+id/panelListadder_pH"
+            app:layout_constraintTop_toTopOf="@+id/panelListadder_pH" />
 
         <ImageView
             android:id="@+id/TextWelcome"
@@ -64,12 +115,14 @@
             android:layout_width="110dp"
             android:layout_height="39dp"
             android:layout_marginStart="65dp"
+            android:layout_marginTop="-4dp"
             android:elevation="1dp"
+            android:fontFamily="serif"
             android:shadowColor="@color/black"
             android:text="@string/name"
             android:textAlignment="center"
             android:textColor="#C1BDBA"
-            android:textSize="16sp"
+            android:textSize="20sp"
             android:visibility="gone"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/ImageCurrentlist"
@@ -80,13 +133,14 @@
             android:id="@+id/TextLinecount"
             android:layout_width="173dp"
             android:layout_height="23dp"
-            android:layout_marginStart="24dp"
+            android:layout_marginStart="26dp"
             android:layout_marginTop="16dp"
             android:elevation="1dp"
+            android:fontFamily="serif"
             android:shadowColor="@color/black"
             android:text="Lines:"
             android:textColor="#C1BDBA"
-            android:textSize="16sp"
+            android:textSize="20sp"
             android:visibility="gone"
             app:layout_constraintStart_toEndOf="@+id/ImageCurrentlist"
             app:layout_constraintTop_toBottomOf="@+id/FrameAttach"
@@ -94,7 +148,7 @@
             tools:visibility="visible" />
 
         <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/bottomPanel"
+            android:id="@+id/bottomPanel_pH"
             android:layout_width="0dp"
             android:layout_height="86dp"
             android:background="@drawable/bottomframe"
@@ -178,7 +232,7 @@
 
 
         <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/panelListadder"
+            android:id="@+id/panelListadder_pH"
             android:layout_width="348.8dp"
             android:layout_height="67dp"
             android:layout_marginTop="55dp"
@@ -198,14 +252,14 @@
                 android:background="@drawable/addbutton"
                 android:contentDescription="@string/todo"
                 android:elevation="1dp"
-                app:layout_constraintBottom_toBottomOf="@+id/panelListadder"
-                app:layout_constraintStart_toStartOf="@+id/panelListadder"
+                app:layout_constraintBottom_toBottomOf="@+id/panelListadder_pH"
+                app:layout_constraintStart_toStartOf="@+id/panelListadder_pH"
                 tools:ignore="TouchTargetSizeCheck,SpeakableTextPresentCheck,ImageContrastCheck" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
         <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/midPanel"
+            android:id="@+id/midPanel_pH"
             android:layout_width="0dp"
             android:layout_height="370dp"
             android:background="@drawable/midframe"
@@ -229,9 +283,6 @@
         </androidx.constraintlayout.widget.ConstraintLayout>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
-
-
-
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
