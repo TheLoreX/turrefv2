@@ -72,7 +72,9 @@ public class AnimHandler {
             if(!toggleInfo) {
                 binding.midPanelPW.startAnimation(AnimationUtils.loadAnimation(activity,R.anim.infoin));
                 binding.ButtonSlider.startAnimation(AnimationUtils.loadAnimation(activity, R.anim.sliderfix));
-
+                ObjectAnimator animator = ObjectAnimator.ofFloat(binding.TouchButtonSlider, "translationY", -390);
+                animator.setDuration(550);
+                animator.start();
             }
             else {
 
