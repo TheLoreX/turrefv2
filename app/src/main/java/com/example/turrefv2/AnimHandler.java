@@ -2,6 +2,7 @@ package com.example.turrefv2;
 
 import android.animation.ObjectAnimator;
 import android.app.Activity;
+import android.util.Log;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
@@ -12,7 +13,7 @@ public class AnimHandler {
 
     ActivityMainBinding binding;
     Activity activity;
-
+    public static boolean toggleInfo;
 
     AnimHandler(ActivityMainBinding binding, Activity activity) {
         this.binding = binding;
@@ -53,20 +54,28 @@ public class AnimHandler {
     public void pageHandler(byte page, boolean reverse) {
         switch (page) {
             case 2:
-                if(!reverse) {
+                if (!reverse) {
                     binding.pageHome.startAnimation(AnimationUtils.loadAnimation(activity, R.anim.slide_out_left));
                     binding.pageWord.startAnimation(AnimationUtils.loadAnimation(activity, R.anim.slide_in_right));
                     binding.pageHome.setVisibility(View.GONE);
-                    binding.pageHome.setEnabled(false);
                     binding.pageWord.setVisibility(View.VISIBLE);
-                }
-                else {
+                } else {
                     binding.pageHome.startAnimation(AnimationUtils.loadAnimation(activity, R.anim.slide_in_left));
                     binding.pageWord.startAnimation(AnimationUtils.loadAnimation(activity, R.anim.slide_out_right));
                     binding.pageHome.setVisibility(View.VISIBLE);
                     binding.pageWord.setVisibility(View.GONE);
-                    moveToggle(binding.ButtonHome.getLeft()-58);
+                    moveToggle(binding.ButtonHome.getLeft() - 58);
                 }
         }
     }
+    public void toggleInfo() {
+            if(!toggleInfo) {
+                binding.midPanelPW.startAnimation(AnimationUtils.loadAnimation(activity,R.anim.infoin));
+                binding.ButtonSlider.startAnimation(AnimationUtils.loadAnimation(activity, R.anim.sliderfix));
+
+            }
+            else {
+
+            }
+        }
 }

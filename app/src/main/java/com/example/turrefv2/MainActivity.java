@@ -40,6 +40,9 @@ public class MainActivity extends AppCompatActivity {
         binding.ButtonAdd.setOnTouchListener(touchHandler);
         binding.ButtonBack.setOnClickListener(buttonHandler);
         binding.ButtonBack.setOnTouchListener(touchHandler);
+        binding.TouchButtonSlider.setOnClickListener(buttonHandler);
+        binding.TouchButtonSlider.setOnTouchListener(touchHandler);
+        binding.ButtonClue.setOnClickListener(buttonHandler);
         // executions
         pathHandler.onIntentResult();
         permissionHandler.getPermission();

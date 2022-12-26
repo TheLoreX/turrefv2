@@ -59,6 +59,8 @@ public class ButtonHandler extends AppCompatActivity implements View.OnClickList
             case R.id.ButtonBack:
                 animHandler.pageHandler((byte) 2, true);
                 break;
+            case R.id.TouchButtonSlider:
+                animHandler.toggleInfo();
             }
         }
 
