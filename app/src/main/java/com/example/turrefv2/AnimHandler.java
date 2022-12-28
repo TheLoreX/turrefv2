@@ -70,14 +70,18 @@ public class AnimHandler {
     }
     public void toggleInfo() {
             if(!toggleInfo) {
-                binding.midPanelPW.startAnimation(AnimationUtils.loadAnimation(activity,R.anim.infoin));
-                binding.ButtonSlider.startAnimation(AnimationUtils.loadAnimation(activity, R.anim.sliderfix));
-                ObjectAnimator animator = ObjectAnimator.ofFloat(binding.TouchButtonSlider, "translationY", -390);
-                animator.setDuration(550);
-                animator.start();
+                ObjectAnimator midPanelin = ObjectAnimator.ofFloat(binding.midPanelPW, "translationY", -390).setDuration(400);
+                midPanelin.start();
+                ObjectAnimator movePanel = ObjectAnimator.ofFloat(binding.wordshowPanelPW, "translationY", -80).setDuration(400);
+                movePanel.start();
+                toggleInfo = true;
             }
             else {
-
+                ObjectAnimator midPanelout = ObjectAnimator.ofFloat(binding.midPanelPW, "translationY", 0).setDuration(400);
+                midPanelout.start();
+                ObjectAnimator movePanel = ObjectAnimator.ofFloat(binding.wordshowPanelPW, "translationY", -0).setDuration(400);
+                movePanel.start();
+                toggleInfo = false;
             }
         }
 }

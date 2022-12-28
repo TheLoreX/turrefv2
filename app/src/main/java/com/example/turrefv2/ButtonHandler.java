@@ -49,15 +49,15 @@ public class ButtonHandler extends AppCompatActivity implements View.OnClickList
                 break;
             case R.id.ButtonAdd:
                 if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
-                    if(!Environment.isExternalStorageManager()) {
-                        permissionHandler.getBroadPermission(pathHandler);
-                    }
+                    if(!Environment.isExternalStorageManager()) { permissionHandler.getBroadPermission(pathHandler); }
                     else {pathHandler.pathReceiver(this);}
                 }
                 else {pathHandler.pathReceiver(this);}
                 break;
             case R.id.ButtonBack:
                 animHandler.pageHandler((byte) 2, true);
+                binding.midPanelPW.clearAnimation();
+                binding.wordshowPanelPW.clearAnimation();
                 break;
             case R.id.TouchButtonSlider:
                 animHandler.toggleInfo();

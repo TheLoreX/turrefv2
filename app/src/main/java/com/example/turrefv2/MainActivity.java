@@ -26,23 +26,30 @@ public class MainActivity extends AppCompatActivity {
         ButtonHandler buttonHandler = new ButtonHandler( binding, this, permissionHandler, pathHandler);
 
         // listeners
-        binding.ButtonHome.setOnClickListener(buttonHandler);
-        binding.ButtonHome.setOnTouchListener(touchHandler);
-        binding.ButtonList.setOnClickListener(buttonHandler);
-        binding.ButtonList.setOnTouchListener(touchHandler);
-        binding.ButtonPlay.setOnClickListener(buttonHandler);
-        binding.ButtonPlay.setOnTouchListener(touchHandler);
-        binding.ButtonInfo.setOnClickListener(buttonHandler);
-        binding.ButtonInfo.setOnTouchListener(touchHandler);
-        binding.ButtonSettings.setOnClickListener(buttonHandler);
-        binding.ButtonSettings.setOnTouchListener(touchHandler);
-        binding.ButtonAdd.setOnClickListener(buttonHandler);
-        binding.ButtonAdd.setOnTouchListener(touchHandler);
-        binding.ButtonBack.setOnClickListener(buttonHandler);
-        binding.ButtonBack.setOnTouchListener(touchHandler);
-        binding.TouchButtonSlider.setOnClickListener(buttonHandler);
-        binding.TouchButtonSlider.setOnTouchListener(touchHandler);
-        binding.ButtonClue.setOnClickListener(buttonHandler);
+            // homepage
+            binding.ButtonHome.setOnClickListener(buttonHandler);
+            binding.ButtonHome.setOnTouchListener(touchHandler);
+            binding.ButtonList.setOnClickListener(buttonHandler);
+            binding.ButtonList.setOnTouchListener(touchHandler);
+            binding.ButtonPlay.setOnClickListener(buttonHandler);
+            binding.ButtonPlay.setOnTouchListener(touchHandler);
+            binding.ButtonInfo.setOnClickListener(buttonHandler);
+            binding.ButtonInfo.setOnTouchListener(touchHandler);
+            binding.ButtonSettings.setOnClickListener(buttonHandler);
+            binding.ButtonSettings.setOnTouchListener(touchHandler);
+            binding.ButtonAdd.setOnClickListener(buttonHandler);
+            binding.ButtonAdd.setOnTouchListener(touchHandler);
+            // wordpage
+            binding.ButtonBack.setOnClickListener(buttonHandler);
+            binding.ButtonBack.setOnTouchListener(touchHandler);
+            binding.TouchButtonSlider.setOnClickListener(buttonHandler);
+            binding.TouchButtonSlider.setOnTouchListener(touchHandler);
+            binding.ButtonClue.setOnClickListener(buttonHandler);
+            binding.ButtonClue.setOnTouchListener(touchHandler);
+            binding.upperDisplay.setOnClickListener(buttonHandler);
+            binding.upperDisplay.setOnTouchListener(touchHandler);
+            binding.lowerDisplay.setOnClickListener(buttonHandler);
+            binding.lowerDisplay.setOnTouchListener(touchHandler);
         // executions
         pathHandler.onIntentResult();
         permissionHandler.getPermission();

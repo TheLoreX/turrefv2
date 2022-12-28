@@ -1,6 +1,7 @@
 package com.example.turrefv2;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.animation.AnimationUtils;
@@ -14,18 +15,31 @@ public class TouchHandler implements View.OnTouchListener {
 
     @Override
     public boolean onTouch(View view, MotionEvent motionEvent) {
-        switch (motionEvent.getAction()) {
-            case MotionEvent.ACTION_DOWN: {
-                view.startAnimation(AnimationUtils.loadAnimation(context,R.anim.pressin));
-                view.invalidate();
-                break;
+        boolean isSlight = false;
+        String isDisplay = String.valueOf(view).substring(String.valueOf(view).indexOf("/") + 1, String.valueOf(view).indexOf("}"));
+        if (isDisplay.equals("upperDisplay") || isDisplay.equals("lowerDisplay")) isSlight = true;
+            switch (motionEvent.getAction()) {
+                case MotionEvent.ACTION_DOWN: {
+                    if(!isSlight) {
+                        view.startAnimation(AnimationUtils.loadAnimation(context, R.anim.pressin));
+                    }
+                    else {
+                        view.startAnimation(AnimationUtils.loadAnimation(context, R.anim.slightpressin));
+                    }
+                    view.invalidate();
+                    break;
+                }
+                case MotionEvent.ACTION_UP: {
+                    if(!isSlight) {
+                        view.startAnimation(AnimationUtils.loadAnimation(context, R.anim.pressout));
+                    }
+                    else {
+                        view.startAnimation(AnimationUtils.loadAnimation(context, R.anim.slightpressout));
+                    }
+                    view.invalidate();
+                    break;
+                }
             }
-            case MotionEvent.ACTION_UP: {
-                view.startAnimation(AnimationUtils.loadAnimation(context,R.anim.pressout));
-                view.invalidate();
-                break;
-            }
-        }
         return false;
     }
 }
