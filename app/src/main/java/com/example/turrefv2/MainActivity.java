@@ -10,9 +10,6 @@ public class MainActivity extends AppCompatActivity {
 
     ActivityMainBinding binding;
 
-    public static String path;
-    public static int countOfLine;
-
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = ActivityMainBinding.inflate(getLayoutInflater());
@@ -44,12 +41,17 @@ public class MainActivity extends AppCompatActivity {
             binding.ButtonBack.setOnTouchListener(touchHandler);
             binding.TouchButtonSlider.setOnClickListener(buttonHandler);
             binding.TouchButtonSlider.setOnTouchListener(touchHandler);
+            binding.ButtonReplay.setOnClickListener(buttonHandler);
+            binding.ButtonReplay.setOnTouchListener(touchHandler);
             binding.ButtonClue.setOnClickListener(buttonHandler);
             binding.ButtonClue.setOnTouchListener(touchHandler);
-            binding.upperDisplay.setOnClickListener(buttonHandler);
-            binding.upperDisplay.setOnTouchListener(touchHandler);
-            binding.lowerDisplay.setOnClickListener(buttonHandler);
-            binding.lowerDisplay.setOnTouchListener(touchHandler);
+            binding.ButtonUpperDisplay.setOnClickListener(buttonHandler);
+            binding.ButtonUpperDisplay.setOnTouchListener(touchHandler);
+            binding.ButtonLowerDisplay.setOnClickListener(buttonHandler);
+            binding.ButtonLowerDisplay.setOnTouchListener(touchHandler);
+        //binding.SwitchSide.setOnClickListener(buttonHandler);
+          //  binding.SwitchSide.setOnTouchListener(touchHandler);
+
         // executions
         pathHandler.onIntentResult();
         permissionHandler.getPermission();

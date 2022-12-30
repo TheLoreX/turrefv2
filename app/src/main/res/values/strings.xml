@@ -1,6 +1,5 @@
 <resources>
     <string name="app_name">turrefv2</string>
     <string name="todo">TODO</string>
-    <string name="name">Name :</string>
     <string name="lines">Lines</string>
 </resources>

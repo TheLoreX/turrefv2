@@ -15,6 +15,7 @@ import androidx.appcompat.app.AppCompatActivity;
 public class PathHandler {
 
     public static ActivityResultLauncher<Intent> activityResultLauncher;
+    public static String path;
     AppCompatActivity compatActivity;
     ButtonHandler buttonHandler;
     Activity activity;
@@ -39,7 +40,7 @@ public class PathHandler {
             public void onActivityResult(ActivityResult result) {
                 if(result.getResultCode() == Activity.RESULT_OK) {
                     if (result.getData() != null) {
-                        MainActivity.path = "/" + result.getData().getData().getPath().substring(result.getData().getData().getPath().indexOf(":") + 1);
+                        path = "/" + result.getData().getData().getPath().substring(result.getData().getData().getPath().indexOf(":") + 1);
                         buttonHandler.attachTrigger();
                     }
                 }

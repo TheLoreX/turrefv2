@@ -2,7 +2,6 @@ package com.example.turrefv2;
 
 import android.animation.ObjectAnimator;
 import android.app.Activity;
-import android.util.Log;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
@@ -29,25 +28,30 @@ public class AnimHandler {
 
     public void openAttach() {
 
-        binding.TextFilename.setText(MainActivity.path.substring(1,MainActivity.path.indexOf(".")));
+        binding.TextFilename.setText(PathHandler.path.substring(1,PathHandler.path.indexOf(".")));
         Animation frameAttach = AnimationUtils.loadAnimation(activity, R.anim.attachin);
         binding.FrameAttach.startAnimation(frameAttach);
 
-        binding.ImageCurrentlist.setVisibility(View.VISIBLE);
+        binding.ViewCurrentlist.setVisibility(View.VISIBLE);
         Animation imageCurrentList = AnimationUtils.loadAnimation(activity, R.anim.fadein);
         imageCurrentList.setStartOffset(100);
-        binding.ImageCurrentlist.startAnimation(imageCurrentList);
+        binding.ViewCurrentlist.startAnimation(imageCurrentList);
 
         binding.TextFilename.setVisibility(View.VISIBLE);
         Animation textFilename = AnimationUtils.loadAnimation(activity, R.anim.fadein);
         textFilename.setStartOffset(200);
         binding.TextFilename.startAnimation(textFilename);
 
-        binding.TextLinecount.setText("Lines :    " + MainActivity.countOfLine);
+        binding.TextLinecount.setText(String.valueOf(LogicHandler.LineCount));
         binding.TextLinecount.setVisibility(View.VISIBLE);
-        Animation textLinecount = AnimationUtils.loadAnimation(activity, R.anim.fadein);
-        textFilename.setStartOffset(300);
-        binding.TextLinecount.startAnimation(textLinecount);
+        binding.TextLine.setVisibility(View.VISIBLE);
+        binding.TextLine.startAnimation(AnimationUtils.loadAnimation(activity, R.anim.fadein));
+        binding.TextLine.getAnimation().setStartOffset(300);
+        binding.TextLinecount.startAnimation(AnimationUtils.loadAnimation(activity, R.anim.fadein));
+        binding.TextLinecount.getAnimation().setStartOffset(300);
+        binding.ViewPole.setVisibility(View.VISIBLE);
+        binding.ViewPole.startAnimation(AnimationUtils.loadAnimation(activity,R.anim.fadein));
+        binding.ViewPole.getAnimation().setStartOffset(300);
 
     }
 

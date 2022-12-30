@@ -4,9 +4,8 @@ package com.example.turrefv2;
 import android.app.Activity;
 import android.os.Build;
 import android.os.Environment;
-import android.util.Log;
 import android.view.View;
-import android.view.animation.AnimationUtils;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -15,17 +14,21 @@ import com.example.turrefv2.databinding.ActivityMainBinding;
 public class ButtonHandler extends AppCompatActivity implements View.OnClickListener {
 
     ActivityMainBinding binding;
+    Activity activity;
     AnimHandler animHandler;
-    WordHandler wordHandler;
+    LogicHandler logicHandler;
+    LogicManagement logicManagement;
     PathHandler pathHandler;
     PermissionHandler permissionHandler;
 
     public ButtonHandler(ActivityMainBinding binding, Activity activity, PermissionHandler permissionHandler, PathHandler pathHandler) {
         this.binding = binding;
+        this.activity = activity;
         this.permissionHandler = permissionHandler;
         this.pathHandler = pathHandler;
         animHandler = new AnimHandler(binding, activity);
-        wordHandler = new WordHandler();
+        logicHandler = new LogicHandler();
+        logicManagement = new LogicManagement(binding, logicHandler);
     }
 
     @Override
@@ -38,8 +41,11 @@ public class ButtonHandler extends AppCompatActivity implements View.OnClickList
                 animHandler.moveToggle(binding.ButtonList.getLeft()-64);
                 break;
             case R.id.ButtonPlay:
-                animHandler.moveToggle(binding.ButtonPlay.getLeft()-66);
-                animHandler.pageHandler((byte) 2, false);
+                if(LogicHandler.isExist) {
+                    animHandler.pageHandler((byte) 2, false);
+                    logicManagement.printLogic(false);
+                }
+                else Toast.makeText(activity , "You haven't added any file yet", Toast.LENGTH_SHORT).show();
                 break;
             case R.id.ButtonInfo:
                 animHandler.moveToggle(binding.ButtonInfo.getLeft()-62);
@@ -49,23 +55,31 @@ public class ButtonHandler extends AppCompatActivity implements View.OnClickList
                 break;
             case R.id.ButtonAdd:
                 if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
-                    if(!Environment.isExternalStorageManager()) { permissionHandler.getBroadPermission(pathHandler); }
-                    else {pathHandler.pathReceiver(this);}
+                    if(!Environment.isExternalStorageManager()) permissionHandler.getBroadPermission(pathHandler);
+                    else pathHandler.pathReceiver(this);
                 }
-                else {pathHandler.pathReceiver(this);}
+                else pathHandler.pathReceiver(this);
                 break;
             case R.id.ButtonBack:
                 animHandler.pageHandler((byte) 2, true);
                 binding.midPanelPW.clearAnimation();
                 binding.wordshowPanelPW.clearAnimation();
                 break;
+            case R.id.ButtonReplay:
+                if (!LogicManagement.isInverse) logicManagement.printLogic(false);
+                else logicManagement.printLogic(true);
+                break;
+            case R.id.SwitchSide:
+                break;
             case R.id.TouchButtonSlider:
                 animHandler.toggleInfo();
+                break;
             }
         }
 
     public void attachTrigger() {
-        wordHandler.LineCounter(MainActivity.path);
+        logicHandler.isFileExist();
+        logicHandler.LineCounter();
         animHandler.openAttach();
     }
 }

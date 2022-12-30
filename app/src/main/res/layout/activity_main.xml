@@ -50,13 +50,15 @@
                 app:layout_constraintStart_toEndOf="@+id/ButtonBack"
                 tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck" />
 
-            <Button
+            <Switch
+
                 android:id="@+id/SwitchSide"
                 android:layout_width="60dp"
-                android:layout_height="33dp"
+                android:layout_height="30dp"
                 android:layout_marginEnd="56dp"
-                android:layout_marginBottom="26dp"
-                android:background="@drawable/switchbutton"
+                android:layout_marginBottom="27dp"
+                android:thumb="@drawable/customthumb"
+                android:track="@drawable/customtrack"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="@+id/bottomPanel_pW"
                 tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck" />
@@ -78,18 +80,19 @@
                 android:id="@+id/TouchButtonSlider"
                 android:layout_width="220dp"
                 android:layout_height="48dp"
-                android:layout_marginTop="-10dp"
+                android:layout_marginTop="-20dp"
                 android:clickable="true"
                 android:focusable="true"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                tools:ignore="SpeakableTextPresentCheck">
+                tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck">
 
                 <Button
                     android:id="@+id/ButtonSlider"
                     android:layout_width="200dp"
-                    android:layout_height="4dp"
+                    android:layout_height="2.5dp"
+                    android:layout_marginTop="13dp"
                     android:background="@drawable/midframeslider"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -110,26 +113,24 @@
             app:layout_constraintTop_toTopOf="parent">
 
             <Button
-                android:id="@+id/upperDisplay"
+                android:id="@+id/ButtonUpperDisplay"
                 android:layout_width="380dp"
                 android:layout_height="220dp"
                 android:layout_marginTop="30dp"
                 android:background="@drawable/frameleft"
-                android:text="Button"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/ButtonClue"
-                tools:ignore="TextContrastCheck" />
+                tools:ignore="TextContrastCheck,SpeakableTextPresentCheck" />
 
             <Button
-                android:id="@+id/lowerDisplay"
+                android:id="@+id/ButtonLowerDisplay"
                 android:layout_width="380dp"
                 android:layout_height="220dp"
                 android:layout_marginTop="40dp"
                 android:background="@drawable/frameright"
-                android:text="Button"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/upperDisplay"
-                tools:ignore="DuplicateSpeakableTextCheck,TextContrastCheck" />
+                app:layout_constraintTop_toBottomOf="@+id/ButtonUpperDisplay"
+                tools:ignore="DuplicateSpeakableTextCheck,TextContrastCheck,SpeakableTextPresentCheck" />
 
             <Button
                 android:id="@+id/ButtonClue"
@@ -141,6 +142,40 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 tools:ignore="SpeakableTextPresentCheck" />
+
+            <TextView
+                android:id="@+id/TextUpperDisplay"
+                android:layout_width="300dp"
+                android:layout_height="120dp"
+                android:elevation="20dp"
+                android:fontFamily="monospace"
+                android:gravity="center"
+                android:text="Tap to Show"
+                android:textColor="#5E5D5D"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="@+id/ButtonUpperDisplay"
+                app:layout_constraintEnd_toEndOf="@+id/ButtonUpperDisplay"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/ButtonUpperDisplay" />
+
+            <TextView
+                android:id="@+id/TextLowerDisplay"
+                android:layout_width="300dp"
+                android:layout_height="120dp"
+                android:elevation="20dp"
+                android:fontFamily="monospace"
+                android:gravity="center"
+                android:text="Tap to Show"
+                android:textColor="#5E5D5D"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="@+id/ButtonLowerDisplay"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="@+id/ButtonLowerDisplay"
+                app:layout_constraintTop_toTopOf="@+id/ButtonLowerDisplay"
+                app:layout_constraintVertical_bias="0.525" />
+
         </androidx.constraintlayout.widget.ConstraintLayout>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
@@ -149,6 +184,8 @@
         android:id="@+id/pageHome"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        tools:layout_editor_absoluteX="191dp"
+        tools:layout_editor_absoluteY="232dp"
         tools:visibility="gone">
 
         <View
@@ -186,7 +223,7 @@
             tools:ignore="ImageContrastCheck" />
 
         <View
-            android:id="@+id/ImageCurrentlist"
+            android:id="@+id/ViewCurrentlist"
             android:layout_width="110dp"
             android:layout_height="135dp"
             android:layout_marginStart="65dp"
@@ -194,6 +231,18 @@
             android:background="@drawable/notepadframe"
             android:visibility="gone"
             app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/FrameAttach"
+            tools:visibility="visible" />
+
+        <View
+            android:id="@+id/ViewPole"
+            android:layout_width="2.5dp"
+            android:layout_height="115dp"
+            android:layout_marginStart="85dp"
+            android:layout_marginTop="20dp"
+            android:background="@drawable/pole"
+            android:visibility="gone"
+            app:layout_constraintStart_toEndOf="@+id/ViewCurrentlist"
             app:layout_constraintTop_toTopOf="@+id/FrameAttach"
             tools:visibility="visible" />
 
@@ -206,30 +255,46 @@
             android:elevation="1dp"
             android:fontFamily="serif"
             android:shadowColor="@color/black"
-            android:text="@string/name"
             android:textAlignment="center"
             android:textColor="#C1BDBA"
             android:textSize="20sp"
             android:visibility="gone"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/ImageCurrentlist"
+            app:layout_constraintTop_toBottomOf="@+id/ViewCurrentlist"
+            tools:ignore="TextContrastCheck"
+            tools:visibility="visible" />
+
+        <TextView
+            android:id="@+id/TextLine"
+            android:layout_width="60dp"
+            android:layout_height="26dp"
+            android:layout_marginTop="22dp"
+            android:layout_marginEnd="10dp"
+            android:elevation="1dp"
+            android:fontFamily="serif"
+            android:shadowColor="@color/black"
+            android:text="@string/lines"
+            android:textColor="#C1BDBA"
+            android:textSize="20sp"
+            android:visibility="gone"
+            app:layout_constraintEnd_toStartOf="@+id/ViewPole"
+            app:layout_constraintTop_toBottomOf="@+id/FrameAttach"
             tools:ignore="TextContrastCheck"
             tools:visibility="visible" />
 
         <TextView
             android:id="@+id/TextLinecount"
-            android:layout_width="173dp"
-            android:layout_height="23dp"
+            android:layout_width="84dp"
+            android:layout_height="26dp"
             android:layout_marginStart="26dp"
-            android:layout_marginTop="16dp"
+            android:layout_marginTop="22dp"
             android:elevation="1dp"
             android:fontFamily="serif"
             android:shadowColor="@color/black"
-            android:text="Lines:"
             android:textColor="#C1BDBA"
             android:textSize="20sp"
             android:visibility="gone"
-            app:layout_constraintStart_toEndOf="@+id/ImageCurrentlist"
+            app:layout_constraintStart_toEndOf="@+id/ViewPole"
             app:layout_constraintTop_toBottomOf="@+id/FrameAttach"
             tools:ignore="TextContrastCheck"
             tools:visibility="visible" />
