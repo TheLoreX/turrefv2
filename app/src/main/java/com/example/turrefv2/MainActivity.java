@@ -21,6 +21,7 @@ public class MainActivity extends AppCompatActivity {
         PathHandler pathHandler = new PathHandler(this, this);
         PermissionHandler permissionHandler = new PermissionHandler(this, this);
         ButtonHandler buttonHandler = new ButtonHandler( binding, this, permissionHandler, pathHandler);
+        SwitchHandler switchHandler = new SwitchHandler();
 
         // listeners
             // homepage
@@ -49,6 +50,7 @@ public class MainActivity extends AppCompatActivity {
             binding.ButtonUpperDisplay.setOnTouchListener(touchHandler);
             binding.ButtonLowerDisplay.setOnClickListener(buttonHandler);
             binding.ButtonLowerDisplay.setOnTouchListener(touchHandler);
+            binding.SwitchSide.setOnCheckedChangeListener(switchHandler);
         //binding.SwitchSide.setOnClickListener(buttonHandler);
           //  binding.SwitchSide.setOnTouchListener(touchHandler);
 

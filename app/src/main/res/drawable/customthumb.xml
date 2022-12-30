@@ -5,10 +5,10 @@
         <shape android:shape="ring"
                android:useLevel="false"
                android:innerRadius="0dp"
-               android:thickness="8dp"
+               android:thickness="9dp"
             >
             <solid android:color="@color/transparent" />
-            <stroke android:width="3dp"
+            <stroke android:width="2.7dp"
                     android:color="#C2BEBB"></stroke>
             <size android:width="30dp" android:height="30dp" />
         </shape>
@@ -18,10 +18,10 @@
         <shape android:shape="ring"
             android:useLevel="false"
             android:innerRadius="0dp"
-            android:thickness="8dp"
+            android:thickness="9dp"
             >
             <solid android:color="@color/white" />
-            <stroke android:width="3dp"
+            <stroke android:width="2.7dp"
                 android:color="#C2BEBB"></stroke>
             <size android:width="30dp" android:height="30dp" />
         </shape>
