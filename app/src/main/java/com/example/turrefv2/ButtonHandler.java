@@ -21,38 +21,46 @@ public class ButtonHandler extends AppCompatActivity implements View.OnClickList
     PathHandler pathHandler;
     PermissionHandler permissionHandler;
 
-    public ButtonHandler(ActivityMainBinding binding, Activity activity, PermissionHandler permissionHandler, PathHandler pathHandler) {
+    public ButtonHandler(ActivityMainBinding binding, Activity activity, PermissionHandler permissionHandler, PathHandler pathHandler, LogicHandler logicHandler, LogicManagement logicManagement) {
         this.binding = binding;
         this.activity = activity;
         this.permissionHandler = permissionHandler;
         this.pathHandler = pathHandler;
+        this.logicHandler = logicHandler;
+        this.logicManagement = logicManagement;
         animHandler = new AnimHandler(binding, activity);
-        logicHandler = new LogicHandler();
-        logicManagement = new LogicManagement(binding, logicHandler);
+
     }
 
     @Override
     public void onClick(View view) {
         switch (view.getId()) {
+    //homepage
             case R.id.ButtonHome:
                 animHandler.moveToggle(binding.ButtonHome.getLeft()-58);
                 break;
+
             case R.id.ButtonList:
                 animHandler.moveToggle(binding.ButtonList.getLeft()-64);
                 break;
+
             case R.id.ButtonPlay:
                 if(LogicHandler.isExist) {
+                    binding.ButtonUpperDisplay.setEnabled(false);
                     animHandler.pageHandler((byte) 2, false);
-                    logicManagement.printLogic(false);
+                    logicManagement.beginLogic();
                 }
                 else Toast.makeText(activity , "You haven't added any file yet", Toast.LENGTH_SHORT).show();
                 break;
+
             case R.id.ButtonInfo:
                 animHandler.moveToggle(binding.ButtonInfo.getLeft()-62);
                 break;
+
             case R.id.ButtonSettings:
                 animHandler.moveToggle(binding.ButtonSettings.getLeft()-62);
                 break;
+
             case R.id.ButtonAdd:
                 if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
                     if(!Environment.isExternalStorageManager()) permissionHandler.getBroadPermission(pathHandler);
@@ -60,20 +68,29 @@ public class ButtonHandler extends AppCompatActivity implements View.OnClickList
                 }
                 else pathHandler.pathReceiver(this);
                 break;
+    //wordpage
             case R.id.ButtonBack:
                 animHandler.pageHandler((byte) 2, true);
                 binding.midPanelPW.clearAnimation();
                 binding.wordshowPanelPW.clearAnimation();
                 break;
+
             case R.id.ButtonReplay:
-                if (!LogicManagement.isInverse) logicManagement.printLogic(false);
-                else logicManagement.printLogic(true);
+                logicManagement.beginLogic();
                 break;
-            case R.id.SwitchSide:
+
+            case R.id.ButtonUpperDisplay:
+                logicManagement.endLogic();
                 break;
+
+            case R.id.ButtonLowerDisplay:
+                logicManagement.endLogic();
+                break;
+
             case R.id.TouchButtonSlider:
                 animHandler.toggleInfo();
                 break;
+
             }
         }
 

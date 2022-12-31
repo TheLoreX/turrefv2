@@ -20,8 +20,10 @@ public class MainActivity extends AppCompatActivity {
         TouchHandler touchHandler = new TouchHandler(this);
         PathHandler pathHandler = new PathHandler(this, this);
         PermissionHandler permissionHandler = new PermissionHandler(this, this);
-        ButtonHandler buttonHandler = new ButtonHandler( binding, this, permissionHandler, pathHandler);
-        SwitchHandler switchHandler = new SwitchHandler();
+        LogicHandler logicHandler = new LogicHandler();
+        LogicManagement logicManagement = new LogicManagement(binding , logicHandler);
+        ButtonHandler buttonHandler = new ButtonHandler( binding, this, permissionHandler, pathHandler, logicHandler, logicManagement);
+        SwitchHandler switchHandler = new SwitchHandler(binding, logicManagement);
 
         // listeners
             // homepage
