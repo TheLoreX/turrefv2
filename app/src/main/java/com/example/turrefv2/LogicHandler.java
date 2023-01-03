@@ -1,5 +1,7 @@
 package com.example.turrefv2;
 
+import android.util.Log;
+
 import com.example.turrefv2.databinding.ActivityMainBinding;
 
 public class LogicHandler {
@@ -14,18 +16,21 @@ public class LogicHandler {
 
     String Words;
     public static boolean isInverse, isRun, isRandom, wordRepetition, forbidRepetition;
+    public static int countSpin = 0;
 
     public void beginLogic(boolean isPlayButton) {
-
         if(isPlayButton) {
             if(!isRun) {
-                isRun = true;
+                binding.TextSpinCount.setText(String.valueOf(countSpin++));
                 Words = logicHandler.ReadManagement();
+                isRun = true;
             }
         }
         else {
+            binding.TextSpinCount.setText(String.valueOf(countSpin++));
             Words = logicHandler.ReadManagement();
         }
+
         if (isInverse) {
                 binding.TextUpperDisplay.setText("Tap to show");
                 binding.TextLowerDisplay.setText(Words.substring(Words.indexOf('=') + 1));

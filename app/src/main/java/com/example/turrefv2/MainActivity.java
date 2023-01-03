@@ -13,14 +13,12 @@ import com.example.turrefv2.databinding.ActivityMainBinding;
 public class MainActivity extends AppCompatActivity {
 
     ActivityMainBinding binding;
-    GestureDetector gestureDetector;
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         View view = binding.getRoot();
         setContentView(view);
-
 
         // class definitions
         TouchHandler touchHandler = new TouchHandler(this);
@@ -33,7 +31,6 @@ public class MainActivity extends AppCompatActivity {
         SwitchHandler switchHandler = new SwitchHandler(binding, logicHandler);
 
         // listeners
-            gestureDetector = new GestureDetector(this, touchHandler);
             // homepage
             binding.ButtonHome.setOnClickListener(buttonHandler);
             binding.ButtonHome.setOnTouchListener(touchHandler);

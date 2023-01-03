@@ -57,26 +57,28 @@ public class AnimHandler implements Runnable{
 
         binding.ViewCurrentlist.setVisibility(View.VISIBLE);
         Animation imageCurrentList = AnimationUtils.loadAnimation(activity, R.anim.fadein);
-        imageCurrentList.setStartOffset(100);
+        imageCurrentList.setStartOffset(300);
         binding.ViewCurrentlist.startAnimation(imageCurrentList);
 
         binding.TextFilename.setVisibility(View.VISIBLE);
         Animation textFilename = AnimationUtils.loadAnimation(activity, R.anim.fadein);
-        textFilename.setStartOffset(200);
+        textFilename.setStartOffset(300);
         binding.TextFilename.startAnimation(textFilename);
 
-        binding.TextLinecount.setText(String.valueOf(WordHandler.LineCount));
-        binding.TextLinecount.setVisibility(View.VISIBLE);
-        binding.TextWordCount.setText(String.valueOf(WordHandler.WordCount));
-        binding.TextWordCount.setVisibility(View.VISIBLE);
         binding.TextLine.setVisibility(View.VISIBLE);
         binding.TextLine.startAnimation(AnimationUtils.loadAnimation(activity, R.anim.fadein));
         binding.TextLine.getAnimation().setStartOffset(300);
         binding.TextWord.setVisibility(View.VISIBLE);
         binding.TextWord.startAnimation(AnimationUtils.loadAnimation(activity, R.anim.fadein));
         binding.TextWord.getAnimation().setStartOffset(300);
+        binding.TextLinecount.setText(String.valueOf(WordHandler.LineCount));
+        binding.TextLinecount.setVisibility(View.VISIBLE);
         binding.TextLinecount.startAnimation(AnimationUtils.loadAnimation(activity, R.anim.fadein));
         binding.TextLinecount.getAnimation().setStartOffset(300);
+        binding.TextWordCount.setText(String.valueOf(WordHandler.WordCount));
+        binding.TextWordCount.setVisibility(View.VISIBLE);
+        binding.TextWordCount.startAnimation(AnimationUtils.loadAnimation(activity, R.anim.fadein));
+        binding.TextWordCount.getAnimation().setStartOffset(300);
         binding.ViewPole.setVisibility(View.VISIBLE);
         binding.ViewPole.startAnimation(AnimationUtils.loadAnimation(activity,R.anim.fadein));
         binding.ViewPole.getAnimation().setStartOffset(300);
@@ -125,12 +127,15 @@ public class AnimHandler implements Runnable{
                 break;
         }
     }
+
     public void toggleInfo() {
             if(!toggleInfo) {
                 ObjectAnimator midPanelin = ObjectAnimator.ofFloat(binding.midPanelPW, "translationY", -390).setDuration(400);
                 midPanelin.start();
                 ObjectAnimator movePanel = ObjectAnimator.ofFloat(binding.wordshowPanelPW, "translationY", -80).setDuration(400);
                 movePanel.start();
+                binding.TextSpinCount.animate().withStartAction(this).alphaBy(0).alpha(1).setDuration(400).start();
+                binding.TextSpinCapacity.animate().withStartAction(this).alphaBy(0).alpha(1).setDuration(400).start();
                 toggleInfo = true;
             }
             else {
@@ -138,6 +143,8 @@ public class AnimHandler implements Runnable{
                 midPanelout.start();
                 ObjectAnimator movePanel = ObjectAnimator.ofFloat(binding.wordshowPanelPW, "translationY", -0).setDuration(400);
                 movePanel.start();
+                binding.TextSpinCount.animate().withEndAction(this).alphaBy(1).alpha(0).setDuration(400).start();
+                binding.TextSpinCapacity.animate().withEndAction(this).alphaBy(1).alpha(0).setDuration(400).start();
                 toggleInfo = false;
             }
         }
@@ -165,6 +172,15 @@ public class AnimHandler implements Runnable{
                     binding.ButtonInfoRandomMode.setEnabled(true);
                 }
                 break;
+            case R.id.TouchButtonSlider:
+                if (!toggleInfo) {
+                    binding.TextSpinCount.setVisibility(View.VISIBLE);
+                    binding.TextSpinCapacity.setVisibility(View.VISIBLE);
+                }
+                else {
+                    binding.TextSpinCount.setVisibility(View.GONE);
+                    binding.TextSpinCapacity.setVisibility(View.GONE);
+                }
         }
     }
 

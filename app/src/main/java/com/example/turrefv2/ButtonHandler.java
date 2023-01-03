@@ -5,6 +5,8 @@ import android.app.Activity;
 import android.os.Build;
 import android.os.Environment;
 import android.util.Log;
+import android.view.GestureDetector;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Toast;
 
@@ -73,6 +75,7 @@ public class ButtonHandler implements View.OnClickListener {
                     else pathHandler.pathReceiver(animHandler, wordHandler);
                 }
                 else pathHandler.pathReceiver(animHandler, wordHandler);
+                LogicHandler.countSpin = 0;
                 break;
 
         //wordpage
@@ -88,6 +91,8 @@ public class ButtonHandler implements View.OnClickListener {
 
             case R.id.ButtonUpperDisplay:
                 logicHandler.endLogic();
+                binding.TextSpinCount.setText("2000");
+                binding.TextSpinCapacity.setText("\\10000");
                 break;
 
             case R.id.ButtonLowerDisplay:
@@ -96,6 +101,7 @@ public class ButtonHandler implements View.OnClickListener {
 
             case R.id.TouchButtonSlider:
                 animHandler.toggleInfo();
+                binding.TextSpinCapacity.setText("\\" + WordHandler.LineCount);
                 break;
 
         //settingspage
@@ -109,4 +115,5 @@ public class ButtonHandler implements View.OnClickListener {
             }
 
         }
+
 }

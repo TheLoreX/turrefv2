@@ -322,6 +322,7 @@
             android:id="@+id/midPanel_pW"
             android:layout_width="0dp"
             android:layout_height="260dp"
+            android:layout_marginBottom="-155dp"
             android:background="@drawable/midframe_pw"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -344,7 +345,7 @@
                     android:id="@+id/ButtonSlider"
                     android:layout_width="200dp"
                     android:layout_height="2.5dp"
-                    android:layout_marginTop="13dp"
+                    android:layout_marginTop="15dp"
                     android:background="@drawable/midframeslider"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -352,6 +353,39 @@
                     app:layout_constraintTop_toTopOf="parent"
                     tools:ignore="TouchTargetSizeCheck,SpeakableTextPresentCheck" />
             </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <TextView
+                android:id="@+id/TextSpinCount"
+                android:layout_width="90dp"
+                android:layout_height="25dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginEnd="50dp"
+                android:elevation="1dp"
+                android:fontFamily="@font/anonymous_pro_bold"
+                android:shadowColor="@color/black"
+                android:textAlignment="textEnd"
+                android:textColor="#C1BDBA"
+                android:textSize="26sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:ignore="TextContrastCheck" />
+
+            <TextView
+                android:id="@+id/TextSpinCapacity"
+                android:layout_width="70dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="90dp"
+                android:layout_marginBottom="-15dp"
+                android:elevation="1dp"
+                android:fontFamily="@font/anonymous_pro_bold"
+                android:shadowColor="@color/black"
+                android:textAlignment="viewStart"
+                android:textColor="#C1BDBA"
+                android:textSize="16sp"
+                app:layout_constraintBottom_toTopOf="@+id/TextSpinCount"
+                app:layout_constraintStart_toStartOf="@+id/TextSpinCount"
+                tools:ignore="TextContrastCheck" />
+
         </androidx.constraintlayout.widget.ConstraintLayout>
 
         <androidx.constraintlayout.widget.ConstraintLayout
@@ -382,8 +416,7 @@
                 android:background="@drawable/frameright"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/ButtonUpperDisplay"
-                tools:ignore="DuplicateSpeakableTextCheck,TextContrastCheck,SpeakableTextPresentCheck"
-                tools:visibility="gone" />
+                tools:ignore="DuplicateSpeakableTextCheck,TextContrastCheck,SpeakableTextPresentCheck" />
 
             <Button
                 android:id="@+id/ButtonClue"
@@ -424,8 +457,7 @@
                 app:layout_constraintBottom_toBottomOf="@+id/ButtonLowerDisplay"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="@+id/ButtonLowerDisplay"
-                app:layout_constraintTop_toTopOf="@+id/ButtonLowerDisplay"
-                app:layout_constraintVertical_bias="0.525" />
+                app:layout_constraintTop_toTopOf="@+id/ButtonLowerDisplay" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -480,6 +512,7 @@
             android:layout_marginStart="65dp"
             android:layout_marginTop="10dp"
             android:background="@drawable/notepadframe"
+            android:visibility="gone"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="@+id/FrameAttach" />
 
@@ -490,6 +523,7 @@
             android:layout_marginStart="89dp"
             android:layout_marginTop="20dp"
             android:background="@drawable/pole"
+            android:visibility="gone"
             app:layout_constraintStart_toEndOf="@+id/ViewCurrentlist"
             app:layout_constraintTop_toTopOf="@+id/FrameAttach" />
 
@@ -518,9 +552,10 @@
             android:elevation="1dp"
             android:fontFamily="serif"
             android:shadowColor="@color/black"
-            android:text="Word"
+            android:text="Words"
             android:textColor="#C1BDBA"
             android:textSize="20sp"
+            android:visibility="gone"
             app:layout_constraintEnd_toStartOf="@+id/ViewPole"
             app:layout_constraintTop_toBottomOf="@+id/TextLine"
             tools:ignore="TextContrastCheck" />
@@ -537,6 +572,7 @@
             android:text="@string/lines"
             android:textColor="#C1BDBA"
             android:textSize="20sp"
+            android:visibility="gone"
             app:layout_constraintEnd_toStartOf="@+id/ViewPole"
             app:layout_constraintTop_toBottomOf="@+id/FrameAttach"
             tools:ignore="TextContrastCheck" />
@@ -552,6 +588,7 @@
             android:shadowColor="@color/black"
             android:textColor="#C1BDBA"
             android:textSize="20sp"
+            android:visibility="gone"
             app:layout_constraintStart_toEndOf="@+id/ViewPole"
             app:layout_constraintTop_toBottomOf="@+id/FrameAttach"
             tools:ignore="TextContrastCheck" />
@@ -568,6 +605,7 @@
             android:shadowColor="@color/black"
             android:textColor="#C1BDBA"
             android:textSize="20sp"
+            android:visibility="gone"
             app:layout_constraintStart_toEndOf="@+id/ViewPole"
             app:layout_constraintTop_toBottomOf="@+id/TextLinecount"
             tools:ignore="TextContrastCheck" />

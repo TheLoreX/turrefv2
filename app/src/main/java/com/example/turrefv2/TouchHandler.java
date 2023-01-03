@@ -1,14 +1,16 @@
 package com.example.turrefv2;
 
+import android.app.Activity;
 import android.content.Context;
 import android.util.Log;
 import android.view.GestureDetector;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.animation.AnimationUtils;
+import android.widget.Switch;
 import android.widget.Toast;
 
-public class TouchHandler implements View.OnTouchListener   {
+public class TouchHandler extends Activity implements View.OnTouchListener {
 
     Context context;
     public TouchHandler(Context context) {
@@ -44,6 +46,5 @@ public class TouchHandler implements View.OnTouchListener   {
             }
         return false;
     }
-
 
 }
