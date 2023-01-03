@@ -2,11 +2,13 @@ package com.example.turrefv2;
 
 import android.content.Context;
 import android.util.Log;
+import android.view.GestureDetector;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.animation.AnimationUtils;
+import android.widget.Toast;
 
-public class TouchHandler implements View.OnTouchListener {
+public class TouchHandler implements View.OnTouchListener   {
 
     Context context;
     public TouchHandler(Context context) {
@@ -17,7 +19,7 @@ public class TouchHandler implements View.OnTouchListener {
     public boolean onTouch(View view, MotionEvent motionEvent) {
         boolean isSlight = false;
         String isDisplay = String.valueOf(view).substring(String.valueOf(view).indexOf("/") + 1, String.valueOf(view).indexOf("}"));
-        if (isDisplay.equals("ButtonUpperDisplay") || isDisplay.equals("ButtonLowerDisplay")) isSlight = true;
+        if (isDisplay.equals("ButtonUpperDisplay") || isDisplay.equals("ButtonLowerDisplay")) {isSlight = true;}
             switch (motionEvent.getAction()) {
                 case MotionEvent.ACTION_DOWN: {
                     if(!isSlight) {
@@ -42,4 +44,6 @@ public class TouchHandler implements View.OnTouchListener {
             }
         return false;
     }
+
+
 }

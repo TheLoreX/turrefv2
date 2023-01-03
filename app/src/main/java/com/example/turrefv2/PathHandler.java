@@ -14,19 +14,23 @@ import androidx.appcompat.app.AppCompatActivity;
 
 public class PathHandler {
 
-    public static ActivityResultLauncher<Intent> activityResultLauncher;
-    public static String path;
     AppCompatActivity compatActivity;
     ButtonHandler buttonHandler;
     Activity activity;
+    AnimHandler animHandler;
+    WordHandler wordHandler;
 
     public PathHandler(Activity activity,AppCompatActivity compatActivity) {
         this.activity = activity;
         this.compatActivity = compatActivity;
     }
 
-    public void pathReceiver(ButtonHandler buttonHandler) {
-        this.buttonHandler = buttonHandler;
+    public static ActivityResultLauncher<Intent> activityResultLauncher;
+    public static String path;
+
+    public void pathReceiver(AnimHandler animHandler, WordHandler wordHandler) {
+        this.wordHandler = wordHandler;
+        this.animHandler = animHandler;
         Intent intent = new Intent(Intent.ACTION_OPEN_DOCUMENT);
         intent.addCategory(Intent.CATEGORY_OPENABLE);
         intent.setDataAndType(Uri.parse(Environment.getExternalStorageDirectory().getPath()), "text/plain");
@@ -41,7 +45,10 @@ public class PathHandler {
                 if(result.getResultCode() == Activity.RESULT_OK) {
                     if (result.getData() != null) {
                         path = "/" + result.getData().getData().getPath().substring(result.getData().getData().getPath().indexOf(":") + 1);
-                        buttonHandler.attachTrigger();
+                        wordHandler.isFileExist();
+                        wordHandler.LineCounter();
+                        wordHandler.WordCounter();
+                        animHandler.openAttach();
                     }
                 }
             }

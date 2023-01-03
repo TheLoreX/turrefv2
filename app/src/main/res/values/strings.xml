@@ -2,4 +2,7 @@
     <string name="app_name">turrefv2</string>
     <string name="todo">TODO</string>
     <string name="lines">Lines</string>
+    <string name="random_mode">Random Mode</string>
+    <string name="settings">Settings</string>
+    <string name="on">on</string>
 </resources>

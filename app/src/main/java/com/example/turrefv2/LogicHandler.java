@@ -1,117 +1,64 @@
 package com.example.turrefv2;
 
-import android.os.Environment;
-
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.util.HashMap;
-import java.util.Random;
+import com.example.turrefv2.databinding.ActivityMainBinding;
 
 public class LogicHandler {
 
-    public static HashMap<Integer, Reg> Registry = new HashMap<>();
-    public static boolean isExist;
-    public static int LineCount, Queue;
-    File readFile;
+    ActivityMainBinding binding;
+    WordHandler logicHandler;
 
-    public void isFileExist() {
-        readFile = new File(Environment.getExternalStorageDirectory(), PathHandler.path);
-        if(readFile.exists()) isExist = true;
-        else isExist = false;
+    public LogicHandler(ActivityMainBinding binding, WordHandler logicHandler) {
+        this.binding = binding;
+        this.logicHandler = logicHandler;
     }
 
-    public void LineCounter() {
-        try {
-        LineCount = 0;
-        String readLine;
-        BufferedReader reader = new BufferedReader(new InputStreamReader(new FileInputStream(readFile), "UTF-8"));
-        while ((readLine = reader.readLine()) != null && readLine.length() > 0) {
-            LineCount++;
-        }
-        reader.close();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
+    String Words;
+    public static boolean isInverse, isRun, isRandom, wordRepetition, forbidRepetition;
 
-    public String ReadManagement() {
-        int selectedLine;
+    public void beginLogic(boolean isPlayButton) {
 
-        selectedLine = RepetitionPreventer(5);
-        String Words = LineReader(selectedLine);
-
-        return Words;
-    }
-
-    public String LineReader(int chosenLine) {
-
-        String readLine = null;
-        try {
-            BufferedReader reader = new BufferedReader(new InputStreamReader(new FileInputStream(readFile), "UTF-8"));
-
-            for (int i = 0; (readLine = reader.readLine()) != null; i++) {
-                if (i == chosenLine) {
-                    break;
-                }
-            }
-            reader.close();
-        }catch (IOException e) {
-            e.printStackTrace();
-        }
-
-        return readLine;
-    }
-
-    public int RepetitionPreventer(int Repetition) {
-
-        Random rand = new Random();
-        int selectedLine;
-        if(Registry.size() != 0) {
-            bounds:
-            while(true) {
-                selectedLine = rand.nextInt(LineCount);
-                for(int i = 0; i < Registry.size(); i++) {
-                    if(selectedLine == Registry.get(i).Num) {
-                        break;
-                    }
-                    else {
-                        if(i == Registry.size() - 1) {
-                            if(Queue == Repetition - 1) {
-                                Queue = 0;
-                            }
-                            else {
-                                Queue++;
-                            }
-                            break bounds;
-                        }
-                    }
-                }
-            }
-           Registry.put(Queue, new Reg(selectedLine,0));
-
-            for(int i = 0; i < Registry.size(); i++) {
-                Registry.put(i, new Reg(Registry.get(i).Num,Registry.get(i).Roll + 1));
-
-                if(Registry.get(i).Roll >= Repetition) {
-                    Queue = i - 1;
-                }
+        if(isPlayButton) {
+            if(!isRun) {
+                isRun = true;
+                Words = logicHandler.ReadManagement();
             }
         }
         else {
-            Registry.put(Queue, new Reg(selectedLine = rand.nextInt(LineCount),1));
+            Words = logicHandler.ReadManagement();
+        }
+        if (isInverse) {
+                binding.TextUpperDisplay.setText("Tap to show");
+                binding.TextLowerDisplay.setText(Words.substring(Words.indexOf('=') + 1));
+            }
+        else {
+                binding.TextLowerDisplay.setText("Tap to show");
+                binding.TextUpperDisplay.setText(Words.substring(0, Words.indexOf('=')));
         }
 
-        return selectedLine;
     }
 
-    public class Reg {
-        int Num, Roll;
-        Reg(int Num, int Roll) {
-            this.Num = Num;
-            this.Roll = Roll;
+    public void endLogic() {
+
+        if(isInverse) {
+            binding.TextUpperDisplay.setText(Words.substring(0, Words.indexOf('=')));
+        }
+        else {
+            binding.TextLowerDisplay.setText(Words.substring(Words.indexOf('=') + 1));
+        }
+    }
+
+    public void switchDisplay() {
+        if(isInverse) {
+            binding.ButtonLowerDisplay.setEnabled(false);
+            binding.TextLowerDisplay.setText(Words.substring(Words.indexOf('=') + 1));
+            binding.ButtonUpperDisplay.setEnabled(true);
+            binding.TextUpperDisplay.setText("Tap to show");
+        }
+        else {
+            binding.ButtonUpperDisplay.setEnabled(false);
+            binding.TextUpperDisplay.setText(Words.substring(0, Words.indexOf('=')));
+            binding.ButtonLowerDisplay.setEnabled(true);
+            binding.TextLowerDisplay.setText("Tap to show");
         }
     }
 
