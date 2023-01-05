@@ -1,22 +1,18 @@
 package com.example.turrefv2;
 
 
-import android.app.Activity;
+import android.content.Context;
 import android.os.Build;
 import android.os.Environment;
 import android.util.Log;
-import android.view.GestureDetector;
-import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Toast;
-
-import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.turrefv2.databinding.ActivityMainBinding;
 
 public class ButtonHandler implements View.OnClickListener {
 
-    Activity activity;
+    Context context;
     ActivityMainBinding binding;
     AnimHandler animHandler;
     WordHandler wordHandler;
@@ -25,14 +21,14 @@ public class ButtonHandler implements View.OnClickListener {
     PermissionHandler permissionHandler;
 
 
-    public ButtonHandler(ActivityMainBinding binding, Activity activity, PermissionHandler permissionHandler, PathHandler pathHandler, WordHandler wordHandler, LogicHandler logicHandler) {
+    public ButtonHandler(ActivityMainBinding binding, Context context, PermissionHandler permissionHandler, PathHandler pathHandler, WordHandler wordHandler, LogicHandler logicHandler) {
         this.binding = binding;
-        this.activity = activity;
-        this.permissionHandler = permissionHandler;
+        this.context = context;
         this.pathHandler = pathHandler;
         this.wordHandler = wordHandler;
         this.logicHandler = logicHandler;
-        animHandler = new AnimHandler(binding, activity);
+        this.permissionHandler = permissionHandler;
+        animHandler = new AnimHandler(binding, context);
     }
 
     public static View clickedView;
@@ -56,8 +52,13 @@ public class ButtonHandler implements View.OnClickListener {
                     if(!LogicHandler.isRun) binding.ButtonUpperDisplay.setEnabled(false);
                     animHandler.pageHandler((byte) 2, false);
                     logicHandler.beginLogic(true);
+
+                    binding.TextSpinCapacity.setText("\\" + WordHandler.LineCount);
+                    binding.TextListName.setText("List: " + PathHandler.path.substring(1,PathHandler.path.indexOf('.')));
+                    if(LogicHandler.isRandom) binding.TextSpinType.setText("Mode: Random");
+                    else binding.TextSpinType.setText("Mode: Sequential");
                 }
-                else Toast.makeText(activity , "You haven't added any file yet", Toast.LENGTH_SHORT).show();
+                else Toast.makeText(context , "You haven't added any file yet", Toast.LENGTH_SHORT).show();
                 break;
 
             case R.id.ButtonInfo:
@@ -88,11 +89,16 @@ public class ButtonHandler implements View.OnClickListener {
             case R.id.ButtonReplay:
                 logicHandler.beginLogic(false);
                 break;
-
+            case R.id.ButtonClue:
+                if(!LogicHandler.isInverse) {
+                    Toast.makeText(context, "Clue : "+ logicHandler.getWords().substring(logicHandler.getWords().indexOf("=") + 2, logicHandler.getWords().indexOf("=") + 2 + LogicHandler.countClue),Toast.LENGTH_SHORT).show();
+                }
+                else {
+                    Toast.makeText(context, "Clue : "+ logicHandler.getWords().substring(0, LogicHandler.countClue),Toast.LENGTH_SHORT).show();
+                }
+                break;
             case R.id.ButtonUpperDisplay:
                 logicHandler.endLogic();
-                binding.TextSpinCount.setText("2000");
-                binding.TextSpinCapacity.setText("\\10000");
                 break;
 
             case R.id.ButtonLowerDisplay:
@@ -101,7 +107,15 @@ public class ButtonHandler implements View.OnClickListener {
 
             case R.id.TouchButtonSlider:
                 animHandler.toggleInfo();
-                binding.TextSpinCapacity.setText("\\" + WordHandler.LineCount);
+                break;
+
+            case R.id.ButtonReset:
+                WordHandler.selectedLine = 0;
+                WordHandler.repetitionList.clear();
+                LogicHandler.countSpin = 0;
+                binding.TextSpinCount.setText(String.valueOf(LogicHandler.countSpin));
+                logicHandler.beginLogic(false);
+                Toast.makeText(context, "List was reset", Toast.LENGTH_SHORT).show();
                 break;
 
         //settingspage
@@ -111,6 +125,10 @@ public class ButtonHandler implements View.OnClickListener {
 
             case R.id.ButtonInfoRepetition:
                 animHandler.openInfoBoxes((byte) 1);
+                break;
+
+            case R.id.ButtonInfoClue:
+                animHandler.openInfoBoxes((byte) 2);
                 break;
             }
 

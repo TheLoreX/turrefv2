@@ -2,6 +2,8 @@ package com.example.turrefv2;
 
 import android.animation.ObjectAnimator;
 import android.app.Activity;
+import android.content.Context;
+import android.util.Log;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
@@ -13,11 +15,11 @@ import com.example.turrefv2.databinding.ActivityMainBinding;
 public class AnimHandler implements Runnable{
 
     ActivityMainBinding binding;
-    Activity activity;
+    Context context;
 
-    AnimHandler(ActivityMainBinding binding, Activity activity) {
+    AnimHandler(ActivityMainBinding binding, Context context) {
         this.binding = binding;
-        this.activity = activity;
+        this.context = context;
     }
 
     public static boolean toggleInfo;
@@ -30,7 +32,7 @@ public class AnimHandler implements Runnable{
                     binding.InfoBoxRandomMode.animate().withStartAction(this).setDuration(500).scaleX(300).scaleY(100).start();
                 }
                 else {
-                    binding.InfoBoxRandomMode.animate().withEndAction(this).setDuration(500).scaleX(0).scaleY(0);
+                    binding.InfoBoxRandomMode.animate().withEndAction(this).setDuration(500).scaleX(0).scaleY(0).start();
                 }
                 break;
             case 1:
@@ -38,8 +40,17 @@ public class AnimHandler implements Runnable{
                     binding.InfoBoxRepetitionMode.animate().withStartAction(this).setDuration(500).scaleX(300).scaleY(130).start();
                 }
                 else {
-                    binding.InfoBoxRepetitionMode.animate().withEndAction(this).setDuration(500).scaleX(0).scaleY(0);
+                    binding.InfoBoxRepetitionMode.animate().withEndAction(this).setDuration(500).scaleX(0).scaleY(0).start();
                 }
+                break;
+            case 2:
+                if (binding.InfoBoxClue.getVisibility() != View.VISIBLE) {
+                    binding.InfoBoxClue.animate().withStartAction(this).setDuration(500).scaleX(300).scaleY(85).start();
+                }
+                else {
+                    binding.InfoBoxClue.animate().withEndAction(this).setDuration(500).scaleX(0).scaleY(0).start();
+                }
+                break;
         }
     }
 
@@ -53,35 +64,35 @@ public class AnimHandler implements Runnable{
     public void openAttach() {
 
         binding.TextFilename.setText(PathHandler.path.substring(1,PathHandler.path.indexOf(".")));
-        binding.FrameAttach.startAnimation(AnimationUtils.loadAnimation(activity, R.anim.attachin));
+        binding.FrameAttach.startAnimation(AnimationUtils.loadAnimation(context, R.anim.attachin));
 
         binding.ViewCurrentlist.setVisibility(View.VISIBLE);
-        Animation imageCurrentList = AnimationUtils.loadAnimation(activity, R.anim.fadein);
+        Animation imageCurrentList = AnimationUtils.loadAnimation(context, R.anim.fadein);
         imageCurrentList.setStartOffset(300);
         binding.ViewCurrentlist.startAnimation(imageCurrentList);
 
         binding.TextFilename.setVisibility(View.VISIBLE);
-        Animation textFilename = AnimationUtils.loadAnimation(activity, R.anim.fadein);
-        textFilename.setStartOffset(300);
+        Animation textFilename = AnimationUtils.loadAnimation(context, R.anim.fadein);
+        textFilename.setStartOffset(500);
         binding.TextFilename.startAnimation(textFilename);
 
         binding.TextLine.setVisibility(View.VISIBLE);
-        binding.TextLine.startAnimation(AnimationUtils.loadAnimation(activity, R.anim.fadein));
-        binding.TextLine.getAnimation().setStartOffset(300);
+        binding.TextLine.startAnimation(AnimationUtils.loadAnimation(context, R.anim.fadein));
+        binding.TextLine.getAnimation().setStartOffset(700);
         binding.TextWord.setVisibility(View.VISIBLE);
-        binding.TextWord.startAnimation(AnimationUtils.loadAnimation(activity, R.anim.fadein));
-        binding.TextWord.getAnimation().setStartOffset(300);
+        binding.TextWord.startAnimation(AnimationUtils.loadAnimation(context, R.anim.fadein));
+        binding.TextWord.getAnimation().setStartOffset(1100);
         binding.TextLinecount.setText(String.valueOf(WordHandler.LineCount));
         binding.TextLinecount.setVisibility(View.VISIBLE);
-        binding.TextLinecount.startAnimation(AnimationUtils.loadAnimation(activity, R.anim.fadein));
-        binding.TextLinecount.getAnimation().setStartOffset(300);
+        binding.TextLinecount.startAnimation(AnimationUtils.loadAnimation(context, R.anim.fadein));
+        binding.TextLinecount.getAnimation().setStartOffset(900);
         binding.TextWordCount.setText(String.valueOf(WordHandler.WordCount));
         binding.TextWordCount.setVisibility(View.VISIBLE);
-        binding.TextWordCount.startAnimation(AnimationUtils.loadAnimation(activity, R.anim.fadein));
-        binding.TextWordCount.getAnimation().setStartOffset(300);
+        binding.TextWordCount.startAnimation(AnimationUtils.loadAnimation(context, R.anim.fadein));
+        binding.TextWordCount.getAnimation().setStartOffset(1300);
         binding.ViewPole.setVisibility(View.VISIBLE);
-        binding.ViewPole.startAnimation(AnimationUtils.loadAnimation(activity,R.anim.fadein));
-        binding.ViewPole.getAnimation().setStartOffset(300);
+        binding.ViewPole.startAnimation(AnimationUtils.loadAnimation(context,R.anim.fadein));
+        binding.ViewPole.getAnimation().setStartOffset(500);
 
     }
 
@@ -89,8 +100,8 @@ public class AnimHandler implements Runnable{
         switch (page) {
             case 0:
                 if(currentPage != binding.pageHome) {
-                    currentPage.startAnimation(AnimationUtils.loadAnimation(activity, R.anim.slide_out_right));
-                    binding.pageHome.startAnimation(AnimationUtils.loadAnimation(activity, R.anim.slide_in_left));
+                    currentPage.startAnimation(AnimationUtils.loadAnimation(context, R.anim.slide_out_right));
+                    binding.pageHome.startAnimation(AnimationUtils.loadAnimation(context, R.anim.slide_in_left));
                     currentPage.setVisibility(View.GONE);
                     binding.pageHome.setVisibility(View.VISIBLE);
                     currentPage = binding.pageHome;
@@ -98,17 +109,17 @@ public class AnimHandler implements Runnable{
                 break;
             case 2:
                 if (!back) {
-                    currentPage.startAnimation(AnimationUtils.loadAnimation(activity, R.anim.slide_out_left));
-                    binding.palette.startAnimation(AnimationUtils.loadAnimation(activity, R.anim.slide_out_left));
-                    binding.pageWord.startAnimation(AnimationUtils.loadAnimation(activity, R.anim.slide_in_right));
+                    currentPage.startAnimation(AnimationUtils.loadAnimation(context, R.anim.slide_out_left));
+                    binding.palette.startAnimation(AnimationUtils.loadAnimation(context, R.anim.slide_out_left));
+                    binding.pageWord.startAnimation(AnimationUtils.loadAnimation(context, R.anim.slide_in_right));
                     currentPage.setVisibility(View.GONE);
                     binding.pageWord.setVisibility(View.VISIBLE);
                     binding.palette.setVisibility(View.GONE);
                     currentPage = binding.pageWord;
                 } else {
-                    binding.pageHome.startAnimation(AnimationUtils.loadAnimation(activity, R.anim.slide_in_left));
-                    binding.palette.startAnimation(AnimationUtils.loadAnimation(activity, R.anim.slide_in_left));
-                    currentPage.startAnimation(AnimationUtils.loadAnimation(activity, R.anim.slide_out_right));
+                    binding.pageHome.startAnimation(AnimationUtils.loadAnimation(context, R.anim.slide_in_left));
+                    binding.palette.startAnimation(AnimationUtils.loadAnimation(context, R.anim.slide_in_left));
+                    currentPage.startAnimation(AnimationUtils.loadAnimation(context, R.anim.slide_out_right));
                     binding.pageHome.setVisibility(View.VISIBLE);
                     currentPage.setVisibility(View.GONE);
                     binding.palette.setVisibility(View.VISIBLE);
@@ -118,8 +129,8 @@ public class AnimHandler implements Runnable{
                 break;
             case 4:
                 if(currentPage != binding.pageSettings) {
-                    currentPage.startAnimation(AnimationUtils.loadAnimation(activity, R.anim.slide_out_left));
-                    binding.pageSettings.startAnimation(AnimationUtils.loadAnimation(activity, R.anim.slide_in_right));
+                    currentPage.startAnimation(AnimationUtils.loadAnimation(context, R.anim.slide_out_left));
+                    binding.pageSettings.startAnimation(AnimationUtils.loadAnimation(context, R.anim.slide_in_right));
                     currentPage.setVisibility(View.GONE);
                     binding.pageSettings.setVisibility(View.VISIBLE);
                     currentPage = binding.pageSettings;
@@ -156,22 +167,39 @@ public class AnimHandler implements Runnable{
                 if (binding.InfoBoxRandomMode.getVisibility() != View.VISIBLE) {
                     binding.InfoBoxRandomMode.setVisibility(View.VISIBLE);
                     binding.ButtonInfoRepetition.setEnabled(false);
+                    binding.ButtonClue.setEnabled(false);
                 }
                 else {
                     binding.InfoBoxRandomMode.setVisibility(View.GONE);
                     binding.ButtonInfoRepetition.setEnabled(true);
+                    binding.ButtonClue.setEnabled(true);
                 }
                 break;
             case R.id.ButtonInfoRepetition:
                 if (binding.InfoBoxRepetitionMode.getVisibility() != View.VISIBLE) {
                     binding.InfoBoxRepetitionMode.setVisibility(View.VISIBLE);
                     binding.ButtonInfoRandomMode.setEnabled(false);
+                    binding.ButtonClue.setEnabled(false);
                 }
                 else {
                     binding.InfoBoxRepetitionMode.setVisibility(View.GONE);
                     binding.ButtonInfoRandomMode.setEnabled(true);
+                    binding.ButtonClue.setEnabled(true);
                 }
                 break;
+            case R.id.ButtonInfoClue:
+                if (binding.InfoBoxClue.getVisibility() != View.VISIBLE){
+                    binding.InfoBoxClue.setVisibility(View.VISIBLE);
+                    binding.ButtonInfoRandomMode.setEnabled(false);
+                    binding.ButtonInfoRepetition.setEnabled(false);
+                }
+                else {
+                    binding.InfoBoxClue.setVisibility(View.GONE);
+                    binding.ButtonInfoRandomMode.setEnabled(true);
+                    binding.ButtonInfoRepetition.setEnabled(true);
+                }
+                break;
+
             case R.id.TouchButtonSlider:
                 if (!toggleInfo) {
                     binding.TextSpinCount.setVisibility(View.VISIBLE);
@@ -181,6 +209,7 @@ public class AnimHandler implements Runnable{
                     binding.TextSpinCount.setVisibility(View.GONE);
                     binding.TextSpinCapacity.setVisibility(View.GONE);
                 }
+                break;
         }
     }
 

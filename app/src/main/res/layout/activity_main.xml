@@ -12,7 +12,8 @@
         android:id="@+id/pageSettings"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:visibility="gone">
+        android:visibility="gone"
+        tools:visibility="visible">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/settingsPanel_pS"
@@ -203,7 +204,7 @@
                     android:transformPivotY="0dp"
                     android:visibility="gone"
                     app:layout_constraintStart_toEndOf="@id/ButtonInfoRepetition"
-                    app:layout_constraintTop_toTopOf="parent" />
+                    app:layout_constraintTop_toTopOf="@id/TextRepetition" />
 
                 <Button
                     android:id="@+id/ButtonInfoRepetition"
@@ -258,6 +259,79 @@
 
 
             </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/settingsClue"
+                android:layout_width="0dp"
+                android:layout_height="140dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/settingsRepetition">
+
+                <EditText
+                    android:id="@+id/EditClue"
+                    android:layout_width="56dp"
+                    android:layout_height="30dp"
+                    android:layout_marginTop="10dp"
+                    android:background="@drawable/customtrack"
+                    android:ems="10"
+                    android:gravity="center"
+                    android:hint="type.."
+                    android:imeOptions="actionDone"
+                    android:inputType="number"
+                    android:maxLength="9"
+                    android:paddingStart="10dp"
+                    android:paddingEnd="10dp"
+                    android:paddingBottom="2dp"
+                    android:textColor="#C1BDBA"
+                    android:textColorHint="#C1BDBA"
+                    android:textCursorDrawable="?android:attr/textCursorDrawable"
+                    android:textSize="16sp"
+                    app:layout_constraintStart_toStartOf="@+id/TextClue"
+                    app:layout_constraintTop_toBottomOf="@+id/TextClue"
+                    tools:ignore="TouchTargetSizeCheck" />
+
+                <TextView
+                    android:id="@+id/InfoBoxClue"
+                    android:layout_width="1dp"
+                    android:layout_height="1dp"
+                    android:background="@drawable/infoframeclue"
+                    android:elevation="1dp"
+                    android:transformPivotX="0dp"
+                    android:transformPivotY="0dp"
+                    android:visibility="gone"
+                    app:layout_constraintStart_toEndOf="@+id/ButtonInfoClue"
+                    app:layout_constraintTop_toTopOf="@id/TextClue" />
+
+                <Button
+                    android:id="@+id/ButtonInfoClue"
+                    android:layout_width="32dp"
+                    android:layout_height="32dp"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="4dp"
+                    android:background="@drawable/settingsinfo"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck" />
+
+                <TextView
+                    android:id="@+id/TextClue"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="14dp"
+                    android:elevation="0dp"
+                    android:fontFamily="@font/anonymous_pro_bold"
+                    android:gravity="center_horizontal"
+                    android:text="Clue"
+                    android:textColor="#C2BEBB"
+                    android:textCursorDrawable="?android:attr/textCursorDrawable"
+                    android:textSize="34sp"
+                    app:layout_constraintStart_toEndOf="@+id/ButtonInfoClue"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:ignore="TextContrastCheck" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -268,8 +342,7 @@
         android:background="@drawable/page"
         android:visibility="gone"
         tools:layout_editor_absoluteX="16dp"
-        tools:layout_editor_absoluteY="27dp"
-        tools:visibility="visible">
+        tools:layout_editor_absoluteY="27dp">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/bottomPanel_pW"
@@ -328,6 +401,52 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent">
+
+            <Button
+                android:id="@+id/ButtonReset"
+                android:layout_width="60dp"
+                android:layout_height="32dp"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/customtrack"
+                android:fontFamily="@font/anonymous_pro_bold"
+                android:shadowColor="#000000"
+                android:text="Reset"
+                android:textColor="#C1BDBA"
+                app:layout_constraintStart_toStartOf="@+id/TextSpinType"
+                app:layout_constraintTop_toBottomOf="@+id/TextSpinType"
+                tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck" />
+
+            <TextView
+                android:id="@+id/TextSpinType"
+                android:layout_width="230dp"
+                android:layout_height="30dp"
+                android:layout_marginStart="24dp"
+                android:layout_marginTop="7dp"
+                android:elevation="1dp"
+                android:fontFamily="@font/anonymous_pro_bold"
+                android:shadowColor="@color/black"
+                android:textAlignment="textStart"
+                android:textColor="#C1BDBA"
+                android:textSize="26sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/TextListName"
+                tools:ignore="TextContrastCheck" />
+
+            <TextView
+                android:id="@+id/TextListName"
+                android:layout_width="230dp"
+                android:layout_height="30dp"
+                android:layout_marginStart="24dp"
+                android:layout_marginTop="20dp"
+                android:elevation="1dp"
+                android:fontFamily="@font/anonymous_pro_bold"
+                android:shadowColor="@color/black"
+                android:textAlignment="textStart"
+                android:textColor="#C1BDBA"
+                android:textSize="26sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:ignore="TextContrastCheck" />
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/TouchButtonSlider"
@@ -545,7 +664,7 @@
 
         <TextView
             android:id="@+id/TextWord"
-            android:layout_width="60dp"
+            android:layout_width="65dp"
             android:layout_height="26dp"
             android:layout_marginTop="8dp"
             android:layout_marginEnd="10dp"

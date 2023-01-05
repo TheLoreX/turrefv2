@@ -9,9 +9,11 @@ public class SwitchHandler implements CompoundButton.OnCheckedChangeListener {
 
     ActivityMainBinding binding;
     LogicHandler logicHandler;
+    DataHandler dataHandler;
 
-    public SwitchHandler(ActivityMainBinding binding, LogicHandler logicHandler) {
+    public SwitchHandler(ActivityMainBinding binding, LogicHandler logicHandler, DataHandler dataHandler) {
         this.binding = binding;
+        this.dataHandler = dataHandler;
         this.logicHandler = logicHandler;
     }
 
@@ -34,12 +36,14 @@ public class SwitchHandler implements CompoundButton.OnCheckedChangeListener {
                 if(b) {
                     binding.CaseRandomMode.setText("on");
                     LogicHandler.isRandom = true;
+                    dataHandler.store("random", "true");
                 }
                 else{
                     binding.CaseRandomMode.setText("off");
                     LogicHandler.isRandom = false;
                     WordHandler.selectedLine = -1;
                     WordHandler.repetitionList.clear();
+                    dataHandler.store("random", "false");
                 }
                 break;
 
@@ -50,13 +54,16 @@ public class SwitchHandler implements CompoundButton.OnCheckedChangeListener {
                     binding.SwitchRepetitionLimit.setVisibility(View.VISIBLE);
                     binding.CaseRepetitionLimit.setVisibility(View.VISIBLE);
                     binding.EditRepetition.setVisibility(View.VISIBLE);
+                    dataHandler.store("caseRepetition", "true");
                 }
                 else{
                     LogicHandler.wordRepetition = false;
+                    binding.SwitchRepetitionLimit.setChecked(false);
                     binding.CaseRepetitionMode.setText("off");
                     binding.SwitchRepetitionLimit.setVisibility(View.GONE);
                     binding.CaseRepetitionLimit.setVisibility(View.GONE);
                     binding.EditRepetition.setVisibility(View.GONE);
+                    dataHandler.store("caseRepetition", "false");
                 }
                 break;
 
@@ -65,11 +72,13 @@ public class SwitchHandler implements CompoundButton.OnCheckedChangeListener {
                     LogicHandler.forbidRepetition = true;
                     binding.EditRepetition.setVisibility(View.GONE);
                     binding.CaseRepetitionLimit.setText("repetition forbidden");
+                    dataHandler.store("maxRepetition","true");
                 }
                 else {
                     LogicHandler.forbidRepetition = false;
                     binding.EditRepetition.setVisibility(View.VISIBLE);
                     binding.CaseRepetitionLimit.setText("repetition allowed");
+                    dataHandler.store("maxRepetition","false");
                 }
         }
     }

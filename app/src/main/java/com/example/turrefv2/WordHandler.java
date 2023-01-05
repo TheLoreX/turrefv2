@@ -14,7 +14,7 @@ import java.util.Random;
 public class WordHandler {
 
     public static HashMap<Integer, Register> repetitionList = new HashMap<>();
-    public static int LineCount, WordCount ,Queue, selectedLine, repetitionAmount;
+    public static int LineCount, WordCount, Queue, selectedLine, repetitionAmount;
     public static boolean isExist;
     File readFile;
 
@@ -69,6 +69,10 @@ public class WordHandler {
         }
         else {
             selectedLine++;
+            if(selectedLine >= LineCount) {
+                selectedLine = 0;
+                LogicHandler.countSpin = 0;
+            }
         }
 
         return LineReader(selectedLine);

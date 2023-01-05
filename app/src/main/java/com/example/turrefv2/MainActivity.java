@@ -4,11 +4,15 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.gesture.Gesture;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.GestureDetector;
 import android.view.MotionEvent;
 import android.view.View;
 
 import com.example.turrefv2.databinding.ActivityMainBinding;
+
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -22,13 +26,15 @@ public class MainActivity extends AppCompatActivity {
 
         // class definitions
         TouchHandler touchHandler = new TouchHandler(this);
-        PathHandler pathHandler = new PathHandler(this, this);
+        PathHandler pathHandler = new PathHandler(this);
         PermissionHandler permissionHandler = new PermissionHandler(this, this);
         WordHandler wordHandler = new WordHandler();
         LogicHandler logicHandler = new LogicHandler(binding , wordHandler);
-        EditorHandler editorHandler = new EditorHandler(binding);
+        DataHandler dataHandler = new DataHandler(this);
+        EditorHandler editorHandler = new EditorHandler(binding, dataHandler);
+        SwitchHandler switchHandler = new SwitchHandler(binding, logicHandler, dataHandler);
         ButtonHandler buttonHandler = new ButtonHandler(binding, this, permissionHandler, pathHandler, wordHandler, logicHandler);
-        SwitchHandler switchHandler = new SwitchHandler(binding, logicHandler);
+
 
         // listeners
             // homepage
@@ -44,6 +50,7 @@ public class MainActivity extends AppCompatActivity {
             binding.ButtonSettings.setOnTouchListener(touchHandler);
             binding.ButtonAdd.setOnClickListener(buttonHandler);
             binding.ButtonAdd.setOnTouchListener(touchHandler);
+
             // wordpage
             binding.ButtonBack.setOnClickListener(buttonHandler);
             binding.ButtonBack.setOnTouchListener(touchHandler);
@@ -58,6 +65,8 @@ public class MainActivity extends AppCompatActivity {
             binding.ButtonLowerDisplay.setOnClickListener(buttonHandler);
             binding.ButtonLowerDisplay.setOnTouchListener(touchHandler);
             binding.SwitchSide.setOnCheckedChangeListener(switchHandler);
+            binding.ButtonReset.setOnClickListener(buttonHandler);
+            binding.ButtonReset.setOnTouchListener(touchHandler);
 
             // settingspage
             binding.SwitchRandomMode.setOnCheckedChangeListener(switchHandler);
@@ -67,15 +76,49 @@ public class MainActivity extends AppCompatActivity {
             binding.ButtonInfoRandomMode.setOnTouchListener(touchHandler);
             binding.ButtonInfoRepetition.setOnClickListener(buttonHandler);
             binding.ButtonInfoRepetition.setOnTouchListener(touchHandler);
+            binding.ButtonInfoClue.setOnClickListener(buttonHandler);
+            binding.ButtonInfoClue.setOnTouchListener(touchHandler);
             binding.EditRepetition.setOnEditorActionListener(editorHandler);
+            binding.EditClue.setOnEditorActionListener(editorHandler);
 
 
         // executions
+        reloadSettings(dataHandler);
         pathHandler.onIntentResult();
         permissionHandler.getPermission();
         AnimHandler.currentPage = binding.pageHome;
         LogicHandler.isRandom = true;
         LogicHandler.wordRepetition = true;
+    }
+
+    private void reloadSettings(DataHandler dataHandler) {
+        String[] settings = {"random", "caseRepetition", "countRepetition", "maxRepetition", "clue"};
+        for (int i = 0; i < settings.length; i++) {
+            String var = dataHandler.load(settings[i]);
+            switch (i) {
+                case 0:
+                    LogicHandler.isRandom = Boolean.parseBoolean(var);
+                    binding.SwitchRandomMode.setChecked(Boolean.parseBoolean(var));
+                    break;
+                case 1:
+                    LogicHandler.wordRepetition = Boolean.parseBoolean(var);
+                    binding.SwitchRepetition.setChecked(Boolean.parseBoolean(var));
+                    break;
+                case 2:
+                    WordHandler.repetitionAmount = Integer.parseInt(var);
+                    binding.EditRepetition.setHint(var);
+                    break;
+                case 3:
+                    LogicHandler.forbidRepetition = Boolean.parseBoolean(var);
+                    binding.SwitchRepetitionLimit.setChecked(Boolean.parseBoolean(var));
+                    break;
+                case 4:
+                    LogicHandler.countClue = Integer.parseInt(var);
+                    binding.EditClue.setHint(var);
+                    break;
+
+            }
+        }
     }
 }
 

@@ -15,13 +15,10 @@ import androidx.appcompat.app.AppCompatActivity;
 public class PathHandler {
 
     AppCompatActivity compatActivity;
-    ButtonHandler buttonHandler;
-    Activity activity;
     AnimHandler animHandler;
     WordHandler wordHandler;
 
-    public PathHandler(Activity activity,AppCompatActivity compatActivity) {
-        this.activity = activity;
+    public PathHandler(AppCompatActivity compatActivity) {
         this.compatActivity = compatActivity;
     }
 
