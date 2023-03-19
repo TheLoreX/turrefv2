@@ -12,8 +12,7 @@
         android:id="@+id/pageSettings"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:visibility="gone"
-        tools:visibility="visible">
+        android:visibility="gone">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/settingsPanel_pS"
@@ -587,8 +586,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         tools:layout_editor_absoluteX="191dp"
-        tools:layout_editor_absoluteY="232dp"
-        tools:visibility="gone">
+        tools:layout_editor_absoluteY="232dp">
 
         <View
             android:id="@+id/FrameAttach"
@@ -633,7 +631,8 @@
             android:background="@drawable/notepadframe"
             android:visibility="gone"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/FrameAttach" />
+            app:layout_constraintTop_toTopOf="@+id/FrameAttach"
+            tools:visibility="visible" />
 
         <View
             android:id="@+id/ViewPole"
@@ -644,23 +643,26 @@
             android:background="@drawable/pole"
             android:visibility="gone"
             app:layout_constraintStart_toEndOf="@+id/ViewCurrentlist"
-            app:layout_constraintTop_toTopOf="@+id/FrameAttach" />
+            app:layout_constraintTop_toTopOf="@+id/FrameAttach"
+            tools:visibility="visible" />
 
         <TextView
             android:id="@+id/TextFilename"
             android:layout_width="110dp"
-            android:layout_height="39dp"
+            android:layout_height="45dp"
             android:layout_marginStart="65dp"
             android:layout_marginTop="-4dp"
             android:elevation="1dp"
             android:fontFamily="serif"
+            android:gravity="center"
             android:shadowColor="@color/black"
             android:textAlignment="center"
             android:textColor="#C1BDBA"
             android:textSize="20sp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/ViewCurrentlist"
-            tools:ignore="TextContrastCheck" />
+            tools:ignore="TextContrastCheck"
+            tools:visibility="visible" />
 
         <TextView
             android:id="@+id/TextWord"
@@ -677,7 +679,8 @@
             android:visibility="gone"
             app:layout_constraintEnd_toStartOf="@+id/ViewPole"
             app:layout_constraintTop_toBottomOf="@+id/TextLine"
-            tools:ignore="TextContrastCheck" />
+            tools:ignore="TextContrastCheck"
+            tools:visibility="visible" />
 
         <TextView
             android:id="@+id/TextLine"
@@ -694,7 +697,8 @@
             android:visibility="gone"
             app:layout_constraintEnd_toStartOf="@+id/ViewPole"
             app:layout_constraintTop_toBottomOf="@+id/FrameAttach"
-            tools:ignore="TextContrastCheck" />
+            tools:ignore="TextContrastCheck"
+            tools:visibility="visible" />
 
         <TextView
             android:id="@+id/TextLinecount"
@@ -710,7 +714,8 @@
             android:visibility="gone"
             app:layout_constraintStart_toEndOf="@+id/ViewPole"
             app:layout_constraintTop_toBottomOf="@+id/FrameAttach"
-            tools:ignore="TextContrastCheck" />
+            tools:ignore="TextContrastCheck"
+            tools:visibility="visible" />
 
 
         <TextView
@@ -727,7 +732,8 @@
             android:visibility="gone"
             app:layout_constraintStart_toEndOf="@+id/ViewPole"
             app:layout_constraintTop_toBottomOf="@+id/TextLinecount"
-            tools:ignore="TextContrastCheck" />
+            tools:ignore="TextContrastCheck"
+            tools:visibility="visible" />
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/listadderPanel_pH"
@@ -790,8 +796,7 @@
         android:elevation="1dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        tools:visibility="gone">
+        app:layout_constraintStart_toStartOf="parent">
 
         <Button
             android:id="@+id/ButtonHome"

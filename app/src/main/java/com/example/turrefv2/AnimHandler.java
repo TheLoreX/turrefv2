@@ -12,6 +12,8 @@ import androidx.constraintlayout.widget.ConstraintLayout;
 
 import com.example.turrefv2.databinding.ActivityMainBinding;
 
+import java.nio.file.Path;
+
 public class AnimHandler implements Runnable{
 
     ActivityMainBinding binding;
@@ -63,7 +65,7 @@ public class AnimHandler implements Runnable{
 
     public void openAttach() {
 
-        binding.TextFilename.setText(PathHandler.path.substring(1,PathHandler.path.indexOf(".")));
+        binding.TextFilename.setText(PathHandler.path.substring(PathHandler.path.lastIndexOf("/") + 1,PathHandler.path.indexOf(".")));
         binding.FrameAttach.startAnimation(AnimationUtils.loadAnimation(context, R.anim.attachin));
 
         binding.ViewCurrentlist.setVisibility(View.VISIBLE);

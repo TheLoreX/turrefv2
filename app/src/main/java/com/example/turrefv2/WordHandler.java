@@ -63,7 +63,7 @@ public class WordHandler {
 
         if(LogicHandler.isRandom && LogicHandler.wordRepetition) {
             if(LogicHandler.forbidRepetition)
-                selectedLine = RepetitionPreventer(LineCount);
+                selectedLine = RepetitionPreventer(LineCount-1);
             else
                 selectedLine = RepetitionPreventer(repetitionAmount);
         }

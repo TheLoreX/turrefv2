@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">turrefv2</string>
+    <string name="app_name">Turref</string>
     <string name="todo">TODO</string>
     <string name="lines">Lines</string>
     <string name="random_mode">Random Mode</string>
