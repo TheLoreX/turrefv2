@@ -1,4 +1,4 @@
-package com.example.turrefv2;
+package com.example.turrefv2.logic;
 
 import com.example.turrefv2.databinding.ActivityMainBinding;
 

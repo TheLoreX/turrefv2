@@ -1,4 +1,4 @@
-package com.example.turrefv2;
+package com.example.turrefv2.action;
 
 import android.app.Activity;
 import android.content.Context;
@@ -9,6 +9,8 @@ import android.view.View;
 import android.view.animation.AnimationUtils;
 import android.widget.Switch;
 import android.widget.Toast;
+
+import com.example.turrefv2.R;
 
 public class TouchHandler extends Activity implements View.OnTouchListener {
 

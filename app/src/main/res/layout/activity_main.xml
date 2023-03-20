@@ -631,8 +631,7 @@
             android:background="@drawable/notepadframe"
             android:visibility="gone"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/FrameAttach"
-            tools:visibility="visible" />
+            app:layout_constraintTop_toTopOf="@+id/FrameAttach" />
 
         <View
             android:id="@+id/ViewPole"
@@ -643,8 +642,7 @@
             android:background="@drawable/pole"
             android:visibility="gone"
             app:layout_constraintStart_toEndOf="@+id/ViewCurrentlist"
-            app:layout_constraintTop_toTopOf="@+id/FrameAttach"
-            tools:visibility="visible" />
+            app:layout_constraintTop_toTopOf="@+id/FrameAttach" />
 
         <TextView
             android:id="@+id/TextFilename"
@@ -661,8 +659,7 @@
             android:textSize="20sp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/ViewCurrentlist"
-            tools:ignore="TextContrastCheck"
-            tools:visibility="visible" />
+            tools:ignore="TextContrastCheck" />
 
         <TextView
             android:id="@+id/TextWord"
@@ -679,8 +676,7 @@
             android:visibility="gone"
             app:layout_constraintEnd_toStartOf="@+id/ViewPole"
             app:layout_constraintTop_toBottomOf="@+id/TextLine"
-            tools:ignore="TextContrastCheck"
-            tools:visibility="visible" />
+            tools:ignore="TextContrastCheck" />
 
         <TextView
             android:id="@+id/TextLine"
@@ -697,8 +693,7 @@
             android:visibility="gone"
             app:layout_constraintEnd_toStartOf="@+id/ViewPole"
             app:layout_constraintTop_toBottomOf="@+id/FrameAttach"
-            tools:ignore="TextContrastCheck"
-            tools:visibility="visible" />
+            tools:ignore="TextContrastCheck" />
 
         <TextView
             android:id="@+id/TextLinecount"
@@ -714,8 +709,7 @@
             android:visibility="gone"
             app:layout_constraintStart_toEndOf="@+id/ViewPole"
             app:layout_constraintTop_toBottomOf="@+id/FrameAttach"
-            tools:ignore="TextContrastCheck"
-            tools:visibility="visible" />
+            tools:ignore="TextContrastCheck" />
 
 
         <TextView
@@ -732,8 +726,7 @@
             android:visibility="gone"
             app:layout_constraintStart_toEndOf="@+id/ViewPole"
             app:layout_constraintTop_toBottomOf="@+id/TextLinecount"
-            tools:ignore="TextContrastCheck"
-            tools:visibility="visible" />
+            tools:ignore="TextContrastCheck" />
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/listadderPanel_pH"
@@ -784,6 +777,7 @@
                 app:layout_constraintHorizontal_bias="0.497"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
+
         </androidx.constraintlayout.widget.ConstraintLayout>
 
     </androidx.constraintlayout.widget.ConstraintLayout>

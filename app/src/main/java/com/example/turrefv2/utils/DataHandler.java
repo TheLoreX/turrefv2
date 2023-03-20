@@ -1,4 +1,4 @@
-package com.example.turrefv2;
+package com.example.turrefv2.utils;
 
 import android.content.Context;
 import android.util.Log;

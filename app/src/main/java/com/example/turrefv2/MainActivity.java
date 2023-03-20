@@ -2,17 +2,20 @@ package com.example.turrefv2;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.gesture.Gesture;
 import android.os.Bundle;
-import android.util.Log;
-import android.view.GestureDetector;
-import android.view.MotionEvent;
 import android.view.View;
 
+import com.example.turrefv2.action.AnimHandler;
+import com.example.turrefv2.action.ButtonHandler;
+import com.example.turrefv2.action.SwitchHandler;
+import com.example.turrefv2.action.TouchHandler;
+import com.example.turrefv2.component.EditText;
 import com.example.turrefv2.databinding.ActivityMainBinding;
-
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
+import com.example.turrefv2.logic.LogicHandler;
+import com.example.turrefv2.logic.PathHandler;
+import com.example.turrefv2.logic.WordHandler;
+import com.example.turrefv2.utils.DataHandler;
+import com.example.turrefv2.utils.PermissionHandler;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -31,7 +34,7 @@ public class MainActivity extends AppCompatActivity {
         WordHandler wordHandler = new WordHandler();
         LogicHandler logicHandler = new LogicHandler(binding , wordHandler);
         DataHandler dataHandler = new DataHandler(this);
-        EditorHandler editorHandler = new EditorHandler(binding, dataHandler);
+        EditText editorHandler = new EditText(binding, dataHandler);
         SwitchHandler switchHandler = new SwitchHandler(binding, logicHandler, dataHandler);
         ButtonHandler buttonHandler = new ButtonHandler(binding, this, permissionHandler, pathHandler, wordHandler, logicHandler);
 

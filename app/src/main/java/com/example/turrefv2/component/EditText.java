@@ -1,18 +1,22 @@
-package com.example.turrefv2;
+package com.example.turrefv2.component;
 
 
 import android.view.KeyEvent;
 import android.view.inputmethod.EditorInfo;
 import android.widget.TextView;
 
+import com.example.turrefv2.R;
 import com.example.turrefv2.databinding.ActivityMainBinding;
+import com.example.turrefv2.logic.LogicHandler;
+import com.example.turrefv2.logic.WordHandler;
+import com.example.turrefv2.utils.DataHandler;
 
-public class EditorHandler implements TextView.OnEditorActionListener {
+public class EditText implements TextView.OnEditorActionListener {
 
     ActivityMainBinding binding;
     DataHandler dataHandler;
 
-    EditorHandler(ActivityMainBinding binding, DataHandler dataHandler) {
+    public EditText(ActivityMainBinding binding, DataHandler dataHandler) {
         this.binding = binding;
         this.dataHandler = dataHandler;
     }

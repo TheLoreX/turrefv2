@@ -1,27 +1,25 @@
-package com.example.turrefv2;
+package com.example.turrefv2.utils;
 
 import android.Manifest;
 import android.app.Activity;
 import android.app.AlertDialog;
-import android.app.Dialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Build;
-import android.os.Environment;
 import android.provider.Settings;
-import android.util.EventLog;
-import android.util.Log;
 
 import androidx.appcompat.app.AppCompatActivity;
+
+import com.example.turrefv2.logic.PathHandler;
 
 public class PermissionHandler {
 
     AppCompatActivity compatActivity;
     Activity activity;
 
-    PermissionHandler(AppCompatActivity compatActivity, Activity activity) {
+    public PermissionHandler(AppCompatActivity compatActivity, Activity activity) {
         this.compatActivity = compatActivity;
         this.activity = activity;
     }

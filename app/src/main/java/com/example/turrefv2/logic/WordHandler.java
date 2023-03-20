@@ -1,7 +1,6 @@
-package com.example.turrefv2;
+package com.example.turrefv2.logic;
 
 import android.os.Environment;
-import android.util.Log;
 
 import java.io.BufferedReader;
 import java.io.File;

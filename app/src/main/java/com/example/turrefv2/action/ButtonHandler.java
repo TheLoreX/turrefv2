@@ -1,13 +1,17 @@
-package com.example.turrefv2;
+package com.example.turrefv2.action;
 
 
 import android.content.Context;
 import android.os.Build;
 import android.os.Environment;
-import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
+import com.example.turrefv2.logic.LogicHandler;
+import com.example.turrefv2.logic.PathHandler;
+import com.example.turrefv2.utils.PermissionHandler;
+import com.example.turrefv2.R;
+import com.example.turrefv2.logic.WordHandler;
 import com.example.turrefv2.databinding.ActivityMainBinding;
 
 public class ButtonHandler implements View.OnClickListener {

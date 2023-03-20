@@ -1,25 +1,24 @@
-package com.example.turrefv2;
+package com.example.turrefv2.action;
 
 import android.animation.ObjectAnimator;
-import android.app.Activity;
 import android.content.Context;
-import android.util.Log;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 
 import androidx.constraintlayout.widget.ConstraintLayout;
 
+import com.example.turrefv2.logic.PathHandler;
+import com.example.turrefv2.R;
+import com.example.turrefv2.logic.WordHandler;
 import com.example.turrefv2.databinding.ActivityMainBinding;
-
-import java.nio.file.Path;
 
 public class AnimHandler implements Runnable{
 
     ActivityMainBinding binding;
     Context context;
 
-    AnimHandler(ActivityMainBinding binding, Context context) {
+    public AnimHandler(ActivityMainBinding binding, Context context) {
         this.binding = binding;
         this.context = context;
     }

@@ -1,4 +1,4 @@
-package com.example.turrefv2;
+package com.example.turrefv2.logic;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -11,6 +11,9 @@ import androidx.activity.result.ActivityResultCallback;
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.appcompat.app.AppCompatActivity;
+
+import com.example.turrefv2.action.AnimHandler;
+import com.example.turrefv2.logic.WordHandler;
 
 public class PathHandler {
 
