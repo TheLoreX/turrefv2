@@ -44,7 +44,6 @@ public class PathHandler {
             public void onActivityResult(ActivityResult result) {
                 if(result.getResultCode() == Activity.RESULT_OK) {
                     if (result.getData() != null) {
-                        Log.d("TTST", result.getData().getData().getPath());
                         path = "/" + result.getData().getData().getPath().substring(result.getData().getData().getPath().indexOf(":") + 1);
                         wordHandler.isFileExist();
                         wordHandler.LineCounter();

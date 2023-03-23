@@ -56,7 +56,6 @@ public class ButtonHandler implements View.OnClickListener {
                     if(!LogicHandler.isRun) binding.ButtonUpperDisplay.setEnabled(false);
                     animHandler.pageHandler((byte) 2, false);
                     logicHandler.beginLogic(true);
-
                     binding.TextSpinCapacity.setText("\\" + WordHandler.LineCount);
                     binding.TextListName.setText("List: " + PathHandler.path.substring(1,PathHandler.path.indexOf('.')));
                     if(LogicHandler.isRandom) binding.TextSpinType.setText("Mode: Random");
@@ -76,10 +75,15 @@ public class ButtonHandler implements View.OnClickListener {
 
             case R.id.ButtonAdd:
                 if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
-                    if(!Environment.isExternalStorageManager()) permissionHandler.getBroadPermission(pathHandler);
-                    else pathHandler.pathReceiver(animHandler, wordHandler);
+                    if(!Environment.isExternalStorageManager()) {
+                        permissionHandler.getBroadPermission(pathHandler);
+                    }
+                    else {
+                        pathHandler.pathReceiver(animHandler, wordHandler); }
                 }
-                else pathHandler.pathReceiver(animHandler, wordHandler);
+                else {
+                    pathHandler.pathReceiver(animHandler, wordHandler);
+                }
                 LogicHandler.countSpin = 0;
                 break;
 

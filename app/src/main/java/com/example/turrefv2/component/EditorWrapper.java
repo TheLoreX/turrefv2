@@ -9,14 +9,14 @@ import com.example.turrefv2.R;
 import com.example.turrefv2.databinding.ActivityMainBinding;
 import com.example.turrefv2.logic.LogicHandler;
 import com.example.turrefv2.logic.WordHandler;
-import com.example.turrefv2.utils.DataHandler;
+import com.example.turrefv2.utils.MinorDataHandler;
 
-public class EditText implements TextView.OnEditorActionListener {
+public class EditorWrapper implements TextView.OnEditorActionListener {
 
     ActivityMainBinding binding;
-    DataHandler dataHandler;
+    MinorDataHandler dataHandler;
 
-    public EditText(ActivityMainBinding binding, DataHandler dataHandler) {
+    public EditorWrapper(ActivityMainBinding binding, MinorDataHandler dataHandler) {
         this.binding = binding;
         this.dataHandler = dataHandler;
     }
@@ -33,7 +33,7 @@ public class EditText implements TextView.OnEditorActionListener {
                         WordHandler.repetitionAmount = Integer.parseInt(String.valueOf(binding.EditRepetition.getText()));
                     }
                     binding.EditRepetition.setHint(String.valueOf(WordHandler.repetitionAmount));
-                    dataHandler.store("countRepetition",String.valueOf(WordHandler.repetitionAmount));
+                    dataHandler.storeMinorData("repetitionAmount",String.valueOf(WordHandler.repetitionAmount));
 
                 }
                 break;
@@ -45,7 +45,7 @@ public class EditText implements TextView.OnEditorActionListener {
                         LogicHandler.countClue = Integer.parseInt(String.valueOf(binding.EditClue.getText()));
                     }
                     binding.EditClue.setHint(String.valueOf(LogicHandler.countClue));
-                    dataHandler.store("clue",String.valueOf(LogicHandler.countClue));
+                    dataHandler.storeMinorData("countClue",String.valueOf(LogicHandler.countClue));
                 }
         }
 

@@ -3,24 +3,26 @@ package com.example.turrefv2.action;
 import android.animation.ObjectAnimator;
 import android.content.Context;
 import android.view.View;
-import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 
 import androidx.constraintlayout.widget.ConstraintLayout;
 
 import com.example.turrefv2.logic.PathHandler;
 import com.example.turrefv2.R;
+import com.example.turrefv2.logic.RecentListManager;
 import com.example.turrefv2.logic.WordHandler;
 import com.example.turrefv2.databinding.ActivityMainBinding;
 
 public class AnimHandler implements Runnable{
 
     ActivityMainBinding binding;
+    RecentListManager recentListManager;
     Context context;
 
     public AnimHandler(ActivityMainBinding binding, Context context) {
         this.binding = binding;
         this.context = context;
+        recentListManager = new RecentListManager(binding, context);
     }
 
     public static boolean toggleInfo;
@@ -65,18 +67,15 @@ public class AnimHandler implements Runnable{
     public void openAttach() {
 
         binding.TextFilename.setText(PathHandler.path.substring(PathHandler.path.lastIndexOf("/") + 1,PathHandler.path.indexOf(".")));
+        recentListManager.setList(); //sets the Recent List Members
+
         binding.FrameAttach.startAnimation(AnimationUtils.loadAnimation(context, R.anim.attachin));
-
         binding.ViewCurrentlist.setVisibility(View.VISIBLE);
-        Animation imageCurrentList = AnimationUtils.loadAnimation(context, R.anim.fadein);
-        imageCurrentList.setStartOffset(300);
-        binding.ViewCurrentlist.startAnimation(imageCurrentList);
-
+        binding.ViewCurrentlist.startAnimation(AnimationUtils.loadAnimation(context, R.anim.fadein));
+        binding.ViewCurrentlist.getAnimation().setStartOffset(300);
         binding.TextFilename.setVisibility(View.VISIBLE);
-        Animation textFilename = AnimationUtils.loadAnimation(context, R.anim.fadein);
-        textFilename.setStartOffset(500);
-        binding.TextFilename.startAnimation(textFilename);
-
+        binding.TextFilename.startAnimation(AnimationUtils.loadAnimation(context, R.anim.fadein));
+        binding.TextFilename.getAnimation().setStartOffset(500);
         binding.TextLine.setVisibility(View.VISIBLE);
         binding.TextLine.startAnimation(AnimationUtils.loadAnimation(context, R.anim.fadein));
         binding.TextLine.getAnimation().setStartOffset(700);
