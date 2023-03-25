@@ -28,22 +28,8 @@ public class RecentListManager {
 
     public void setList()  {
         recList = loadList();
-
-        if (recList.size() > 1) {
-            for (int i = recList.size() - 1; i > 0; i--) {
-                recList.set(i, recList.get(i - 1));
-            }
             storeList();
         }
-        else {
-            if (recList.size() == 1) {
-                //recList.add(recList.get(0));
-                //recList.set(0, PathHandler.path);
-            }
-            storeList();
-        }
-
-    }
 
     private void storeList() {
         recList.add(0,PathHandler.path);
@@ -59,14 +45,13 @@ public class RecentListManager {
         for (int i = 0; i < storedRecList.getAll().size() && i < 4; i++) {
             cloneRecList.add(i, storedRecList.getString(String.valueOf(i), null));
         }
-        Log.d("TTST/LoadedRec", storedRecList.getAll().size() + " : " + storedRecList.getAll());
         return cloneRecList;
     }
 
     public void showRecycler() {
         recList = loadList();
         setRecyclerAdapter();
-        storedRecList.edit().clear().apply();
+        //storedRecList.edit().clear().apply();
     }
 
     private void setRecyclerAdapter() {
