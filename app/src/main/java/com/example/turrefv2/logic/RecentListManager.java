@@ -10,7 +10,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import com.example.turrefv2.component.RecyclerAdapter;
 import com.example.turrefv2.databinding.ActivityMainBinding;
 
-import java.util.BitSet;
+import java.util.ArrayList;
 
 public class RecentListManager {
 
@@ -24,38 +24,55 @@ public class RecentListManager {
         storedRecList = context.getSharedPreferences("StoredRecentLists", Context.MODE_PRIVATE);
     }
 
-    private String[] recList;
+    private ArrayList<String> recList;
 
     public void setList()  {
         recList = loadList();
-        if (WordHandler.isExist) {
-            for (int i = recList.length - 1; i > 0; i--) {
-                recList[i] = recList[i - 1];
+
+        if (recList.size() > 1) {
+            for (int i = recList.size() - 1; i > 0; i--) {
+                recList.set(i, recList.get(i - 1));
             }
             storeList();
-            setRecyclerAdapter();
         }
+        else {
+            if (recList.size() == 1) {
+                //recList.add(recList.get(0));
+                //recList.set(0, PathHandler.path);
+            }
+            storeList();
+        }
+
     }
 
     private void storeList() {
-        recList[0] = PathHandler.path;
-        for (int i = 0; i < recList.length; i++) {
-            storedRecList.edit().putString(String.valueOf(i), recList[i]).apply();
+        recList.add(0,PathHandler.path);
+        for (int i = 0; i < recList.size() && i < 4; i++) {
+            storedRecList.edit().putString(String.valueOf(i), recList.get(i)).apply();
         }
+        Log.d("TTST/StoredRec", storedRecList.getAll().size() + " : " + storedRecList.getAll());
     }
 
-    private String[] loadList() {
-        String[] cloneRecList = new String[4];
-        for (int i = 0; i < storedRecList.getAll().size(); i++) {
-            cloneRecList[i] = storedRecList.getString(String.valueOf(i), null);
+    private ArrayList<String> loadList() {
+
+        ArrayList<String> cloneRecList = new ArrayList<String>();
+        for (int i = 0; i < storedRecList.getAll().size() && i < 4; i++) {
+            cloneRecList.add(i, storedRecList.getString(String.valueOf(i), null));
         }
+        Log.d("TTST/LoadedRec", storedRecList.getAll().size() + " : " + storedRecList.getAll());
         return cloneRecList;
+    }
+
+    public void showRecycler() {
+        recList = loadList();
+        setRecyclerAdapter();
+        storedRecList.edit().clear().apply();
     }
 
     private void setRecyclerAdapter() {
         binding.rtest.setLayoutManager(new LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false));
         binding.rtest.setItemAnimator(new DefaultItemAnimator());
-        binding.rtest.setAdapter(new RecyclerAdapter());
+        binding.rtest.setAdapter(new RecyclerAdapter(recList.size()));
     }
 
 

@@ -49,6 +49,7 @@ public class PathHandler {
                         wordHandler.LineCounter();
                         wordHandler.WordCounter();
                         animHandler.openAttach();
+                        animHandler.setRecentList();
                     }
                 }
             }

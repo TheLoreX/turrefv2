@@ -7,22 +7,21 @@ import android.view.animation.AnimationUtils;
 
 import androidx.constraintlayout.widget.ConstraintLayout;
 
+import com.example.turrefv2.logic.LogicHandler;
 import com.example.turrefv2.logic.PathHandler;
 import com.example.turrefv2.R;
 import com.example.turrefv2.logic.RecentListManager;
 import com.example.turrefv2.logic.WordHandler;
 import com.example.turrefv2.databinding.ActivityMainBinding;
 
-public class AnimHandler implements Runnable{
+public class AnimHandler implements Runnable {
 
     ActivityMainBinding binding;
-    RecentListManager recentListManager;
     Context context;
 
     public AnimHandler(ActivityMainBinding binding, Context context) {
         this.binding = binding;
         this.context = context;
-        recentListManager = new RecentListManager(binding, context);
     }
 
     public static boolean toggleInfo;
@@ -67,7 +66,6 @@ public class AnimHandler implements Runnable{
     public void openAttach() {
 
         binding.TextFilename.setText(PathHandler.path.substring(PathHandler.path.lastIndexOf("/") + 1,PathHandler.path.indexOf(".")));
-        recentListManager.setList(); //sets the Recent List Members
 
         binding.FrameAttach.startAnimation(AnimationUtils.loadAnimation(context, R.anim.attachin));
         binding.ViewCurrentlist.setVisibility(View.VISIBLE);
@@ -94,6 +92,13 @@ public class AnimHandler implements Runnable{
         binding.ViewPole.startAnimation(AnimationUtils.loadAnimation(context,R.anim.fadein));
         binding.ViewPole.getAnimation().setStartOffset(500);
 
+    }
+
+    //sets the Recent List Members
+    public void setRecentList() {
+        if (WordHandler.isExist) {
+            new RecentListManager(binding, context).setList();
+        }
     }
 
     public void pageHandler(byte page, boolean back) {

@@ -12,9 +12,11 @@ import com.example.turrefv2.action.ButtonHandler;
 import com.example.turrefv2.action.SwitchHandler;
 import com.example.turrefv2.action.TouchHandler;
 import com.example.turrefv2.component.EditorWrapper;
+import com.example.turrefv2.component.RecyclerAdapter;
 import com.example.turrefv2.databinding.ActivityMainBinding;
 import com.example.turrefv2.logic.LogicHandler;
 import com.example.turrefv2.logic.PathHandler;
+import com.example.turrefv2.logic.RecentListManager;
 import com.example.turrefv2.logic.WordHandler;
 import com.example.turrefv2.utils.MinorDataHandler;
 import com.example.turrefv2.utils.PermissionHandler;
@@ -44,6 +46,7 @@ public class MainActivity extends AppCompatActivity {
         EditorWrapper editorWrapper = new EditorWrapper(binding, dataHandler);
         SwitchHandler switchHandler = new SwitchHandler(binding, logicHandler, dataHandler);
         ButtonHandler buttonHandler = new ButtonHandler(binding, this, permissionHandler, pathHandler, wordHandler, logicHandler);
+        RecentListManager recentListManager = new RecentListManager(binding, this);
 
         // listeners
             // homepage
@@ -94,6 +97,7 @@ public class MainActivity extends AppCompatActivity {
         preloadSettings();
         pathHandler.onIntentResult();
         permissionHandler.getPermission();
+        recentListManager.showRecycler();
         AnimHandler.currentPage = binding.pageHome;
 
     }
