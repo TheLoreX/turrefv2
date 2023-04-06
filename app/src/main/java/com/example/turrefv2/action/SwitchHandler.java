@@ -3,7 +3,7 @@ package com.example.turrefv2.action;
 import android.view.View;
 import android.widget.CompoundButton;
 
-import com.example.turrefv2.utils.MinorDataHandler;
+import com.example.turrefv2.utils.SettingsManager;
 import com.example.turrefv2.logic.LogicHandler;
 import com.example.turrefv2.R;
 import com.example.turrefv2.logic.WordHandler;
@@ -13,11 +13,11 @@ public class SwitchHandler implements CompoundButton.OnCheckedChangeListener {
 
     ActivityMainBinding binding;
     LogicHandler logicHandler;
-    MinorDataHandler dataHandler;
+    SettingsManager settingsManager;
 
-    public SwitchHandler(ActivityMainBinding binding, LogicHandler logicHandler, MinorDataHandler dataHandler) {
+    public SwitchHandler(ActivityMainBinding binding, LogicHandler logicHandler, SettingsManager dataHandler) {
         this.binding = binding;
-        this.dataHandler = dataHandler;
+        this.settingsManager = dataHandler;
         this.logicHandler = logicHandler;
     }
 
@@ -40,34 +40,34 @@ public class SwitchHandler implements CompoundButton.OnCheckedChangeListener {
                 if(b) {
                     binding.CaseRandomMode.setText("on");
                     LogicHandler.isRandom = true;
-                    dataHandler.storeMinorData("isRandom","true");
+                    settingsManager.storeSettings("isRandom","true");
                 }
                 else{
                     binding.CaseRandomMode.setText("off");
                     LogicHandler.isRandom = false;
                     WordHandler.selectedLine = -1;
                     WordHandler.repetitionList.clear();
-                    dataHandler.storeMinorData("isRandom","false");
+                    settingsManager.storeSettings("isRandom","false");
                 }
                 break;
 
             case R.id.SwitchRepetition:
                 if (b){
-                    LogicHandler.wordRepetition = true;
+                    LogicHandler.allowRepetition = true;
                     binding.CaseRepetitionMode.setText("on");
                     binding.SwitchRepetitionLimit.setVisibility(View.VISIBLE);
                     binding.CaseRepetitionLimit.setVisibility(View.VISIBLE);
                     binding.EditRepetition.setVisibility(View.VISIBLE);
-                    dataHandler.storeMinorData("wordRepetition","true");
+                    settingsManager.storeSettings("wordRepetition","true");
                 }
                 else{
-                    LogicHandler.wordRepetition = false;
+                    LogicHandler.allowRepetition = false;
                     binding.SwitchRepetitionLimit.setChecked(false);
                     binding.CaseRepetitionMode.setText("off");
                     binding.SwitchRepetitionLimit.setVisibility(View.GONE);
                     binding.CaseRepetitionLimit.setVisibility(View.GONE);
                     binding.EditRepetition.setVisibility(View.GONE);
-                    dataHandler.storeMinorData("wordRepetition","false");
+                    settingsManager.storeSettings("wordRepetition","false");
                 }
                 break;
 
@@ -76,13 +76,13 @@ public class SwitchHandler implements CompoundButton.OnCheckedChangeListener {
                     LogicHandler.forbidRepetition = true;
                     binding.EditRepetition.setVisibility(View.GONE);
                     binding.CaseRepetitionLimit.setText("repetition forbidden");
-                    dataHandler.storeMinorData("forbidRepetition","true");
+                    settingsManager.storeSettings("forbidRepetition","true");
                 }
                 else {
                     LogicHandler.forbidRepetition = false;
                     binding.EditRepetition.setVisibility(View.VISIBLE);
                     binding.CaseRepetitionLimit.setText("repetition allowed");
-                    dataHandler.storeMinorData("forbidRepetition","false");
+                    settingsManager.storeSettings("forbidRepetition","false");
                 }
         }
     }

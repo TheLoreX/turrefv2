@@ -18,13 +18,15 @@ public class AnimHandler implements Runnable {
 
     ActivityMainBinding binding;
     Context context;
+    WordHandler wordHandler;
 
-    public AnimHandler(ActivityMainBinding binding, Context context) {
+    public AnimHandler(ActivityMainBinding binding, Context context, WordHandler wordHandler) {
         this.binding = binding;
         this.context = context;
+        this.wordHandler = wordHandler;
     }
 
-    public static boolean toggleInfo;
+    public static boolean toggleInfo, isTolerance, isAttachOn;
     public static ConstraintLayout currentPage;
 
     public void openInfoBoxes(byte sort) {
@@ -65,40 +67,63 @@ public class AnimHandler implements Runnable {
 
     public void openAttach() {
 
+        wordHandler.isFileExist();
+        wordHandler.WordCounter();
+        wordHandler.LineCounter();
+        binding.attachPanelPH.setVisibility(View.VISIBLE);
         binding.TextFilename.setText(PathHandler.path.substring(PathHandler.path.lastIndexOf("/") + 1,PathHandler.path.indexOf(".")));
-
         binding.FrameAttach.startAnimation(AnimationUtils.loadAnimation(context, R.anim.attachin));
-        binding.ViewCurrentlist.setVisibility(View.VISIBLE);
         binding.ViewCurrentlist.startAnimation(AnimationUtils.loadAnimation(context, R.anim.fadein));
         binding.ViewCurrentlist.getAnimation().setStartOffset(300);
-        binding.TextFilename.setVisibility(View.VISIBLE);
         binding.TextFilename.startAnimation(AnimationUtils.loadAnimation(context, R.anim.fadein));
         binding.TextFilename.getAnimation().setStartOffset(500);
-        binding.TextLine.setVisibility(View.VISIBLE);
-        binding.TextLine.startAnimation(AnimationUtils.loadAnimation(context, R.anim.fadein));
-        binding.TextLine.getAnimation().setStartOffset(700);
-        binding.TextWord.setVisibility(View.VISIBLE);
-        binding.TextWord.startAnimation(AnimationUtils.loadAnimation(context, R.anim.fadein));
-        binding.TextWord.getAnimation().setStartOffset(1100);
-        binding.TextLinecount.setText(String.valueOf(WordHandler.LineCount));
-        binding.TextLinecount.setVisibility(View.VISIBLE);
-        binding.TextLinecount.startAnimation(AnimationUtils.loadAnimation(context, R.anim.fadein));
-        binding.TextLinecount.getAnimation().setStartOffset(900);
-        binding.TextWordCount.setText(String.valueOf(WordHandler.WordCount));
-        binding.TextWordCount.setVisibility(View.VISIBLE);
-        binding.TextWordCount.startAnimation(AnimationUtils.loadAnimation(context, R.anim.fadein));
-        binding.TextWordCount.getAnimation().setStartOffset(1300);
-        binding.ViewPole.setVisibility(View.VISIBLE);
         binding.ViewPole.startAnimation(AnimationUtils.loadAnimation(context,R.anim.fadein));
         binding.ViewPole.getAnimation().setStartOffset(500);
+        binding.TextWord.startAnimation(AnimationUtils.loadAnimation(context, R.anim.fadein));
+        binding.TextWord.getAnimation().setStartOffset(700);
+        binding.TextWordCount.startAnimation(AnimationUtils.loadAnimation(context, R.anim.fadein));
+        binding.TextWordCount.getAnimation().setStartOffset(900);
+        binding.TextLine.startAnimation(AnimationUtils.loadAnimation(context, R.anim.fadein));
+        binding.TextLine.getAnimation().setStartOffset(1100);
+        binding.TextLinecount.setText(String.valueOf(WordHandler.LineCount));
+        binding.TextLinecount.startAnimation(AnimationUtils.loadAnimation(context, R.anim.fadein));
+        binding.TextLinecount.getAnimation().setStartOffset(1300);
+        binding.TextWordCount.setText(String.valueOf(WordHandler.WordCount));
+        isAttachOn = true;
 
     }
 
     //sets the Recent List Members
     public void setRecentList() {
         if (WordHandler.isExist) {
-            new RecentListManager(binding, context).setList();
+            new RecentListManager(binding, context, this).setList();
         }
+    }
+
+    public void changeFileFromRecList(String path) {
+
+        isTolerance = true;
+        PathHandler.path = path;
+        wordHandler.isFileExist();
+        wordHandler.WordCounter();
+        wordHandler.LineCounter();
+
+        if (isAttachOn) {
+            binding.ViewCurrentlist.startAnimation(AnimationUtils.loadAnimation(context, R.anim.bounce));
+            binding.TextWordCount.startAnimation(AnimationUtils.loadAnimation(context, R.anim.fadein));
+            binding.TextWordCount.getAnimation().setStartOffset(400);
+            binding.TextWordCount.setText(String.valueOf(WordHandler.WordCount));
+            binding.TextLinecount.startAnimation(AnimationUtils.loadAnimation(context, R.anim.fadein));
+            binding.TextLinecount.getAnimation().setStartOffset(600);
+            binding.TextLinecount.setText(String.valueOf(WordHandler.LineCount));
+            binding.TextFilename.startAnimation(AnimationUtils.loadAnimation(context, R.anim.fadein));
+            binding.TextFilename.getAnimation().setStartOffset(800);
+            binding.TextFilename.setText(path.substring(path.lastIndexOf("/") + 1, path.indexOf(".")));
+        }
+        else {
+            openAttach();
+        }
+
     }
 
     public void pageHandler(byte page, boolean back) {
@@ -117,6 +142,9 @@ public class AnimHandler implements Runnable {
                     currentPage.startAnimation(AnimationUtils.loadAnimation(context, R.anim.slide_out_left));
                     binding.palette.startAnimation(AnimationUtils.loadAnimation(context, R.anim.slide_out_left));
                     binding.pageWord.startAnimation(AnimationUtils.loadAnimation(context, R.anim.slide_in_right));
+                    binding.TextSpinType.setText("Mode: " + ((LogicHandler.isRandom) ? "Random" : "Sequential"));
+                    binding.TextSpinCapacity.setText("\\" + WordHandler.LineCount);
+                    binding.TextListName.setText("List: " + PathHandler.path.substring(PathHandler.path.lastIndexOf("/") + 1,PathHandler.path.indexOf(".")));
                     currentPage.setVisibility(View.GONE);
                     binding.pageWord.setVisibility(View.VISIBLE);
                     binding.palette.setVisibility(View.GONE);

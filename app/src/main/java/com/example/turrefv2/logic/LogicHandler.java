@@ -1,32 +1,33 @@
 package com.example.turrefv2.logic;
 
+import com.example.turrefv2.action.AnimHandler;
 import com.example.turrefv2.databinding.ActivityMainBinding;
 
 public class LogicHandler {
 
     ActivityMainBinding binding;
-    WordHandler logicHandler;
+    WordHandler wordHandler;
 
-    public LogicHandler(ActivityMainBinding binding, WordHandler logicHandler) {
+    public LogicHandler(ActivityMainBinding binding, WordHandler wordHandler) {
         this.binding = binding;
-        this.logicHandler = logicHandler;
+        this.wordHandler = wordHandler;
     }
 
-    String Words;
-    public static boolean isInverse, isRun, isRandom, wordRepetition, forbidRepetition;
+    public static boolean hasBegun, isInverse, isRandom, allowRepetition, forbidRepetition;
     public static int countSpin = 0, countClue = 1 ;
+    public String Words;
 
     public void beginLogic(boolean isPlayButton) {
-        if(isPlayButton) {
-            if(!isRun) {
+        if(isPlayButton || AnimHandler.isTolerance) {
+            if(!(hasBegun = true) || AnimHandler.isTolerance) {
                 binding.TextSpinCount.setText(String.valueOf(countSpin++));
-                Words = logicHandler.ReadManagement();
-                isRun = true;
+                Words = wordHandler.ReadManagement();
+                AnimHandler.isTolerance = false;
             }
         }
         else {
             binding.TextSpinCount.setText(String.valueOf(countSpin++));
-            Words = logicHandler.ReadManagement();
+            Words = wordHandler.ReadManagement();
         }
 
         if (isInverse) {
@@ -40,18 +41,14 @@ public class LogicHandler {
 
     }
 
-    public void endLogic() {
 
+    public void endLogic() {
         if(isInverse) {
             binding.TextUpperDisplay.setText(Words.substring(0, Words.indexOf('=')));
         }
         else {
             binding.TextLowerDisplay.setText(Words.substring(Words.indexOf('=') + 1));
         }
-    }
-
-    public String getWords() {
-        return Words;
     }
 
     public void switchDisplay() {

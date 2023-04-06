@@ -4,6 +4,7 @@ package com.example.turrefv2.action;
 import android.content.Context;
 import android.os.Build;
 import android.os.Environment;
+import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
@@ -16,23 +17,22 @@ import com.example.turrefv2.databinding.ActivityMainBinding;
 
 public class ButtonHandler implements View.OnClickListener {
 
-    Context context;
     ActivityMainBinding binding;
+    Context context;
     AnimHandler animHandler;
     WordHandler wordHandler;
     LogicHandler logicHandler;
     PathHandler pathHandler;
     PermissionHandler permissionHandler;
 
-
-    public ButtonHandler(ActivityMainBinding binding, Context context, PermissionHandler permissionHandler, PathHandler pathHandler, WordHandler wordHandler, LogicHandler logicHandler) {
+    public ButtonHandler(ActivityMainBinding binding, Context context, AnimHandler animHandler, PermissionHandler permissionHandler, PathHandler pathHandler, WordHandler wordHandler, LogicHandler logicHandler) {
         this.binding = binding;
         this.context = context;
         this.pathHandler = pathHandler;
         this.wordHandler = wordHandler;
         this.logicHandler = logicHandler;
         this.permissionHandler = permissionHandler;
-        animHandler = new AnimHandler(binding, context);
+        this.animHandler = animHandler;
     }
 
     public static View clickedView;
@@ -53,13 +53,8 @@ public class ButtonHandler implements View.OnClickListener {
 
             case R.id.ButtonPlay:
                 if(WordHandler.isExist) {
-                    if(!LogicHandler.isRun) binding.ButtonUpperDisplay.setEnabled(false);
                     animHandler.pageHandler((byte) 2, false);
                     logicHandler.beginLogic(true);
-                    binding.TextSpinCapacity.setText("\\" + WordHandler.LineCount);
-                    binding.TextListName.setText("List: " + PathHandler.path.substring(1,PathHandler.path.indexOf('.')));
-                    if(LogicHandler.isRandom) binding.TextSpinType.setText("Mode: Random");
-                    else binding.TextSpinType.setText("Mode: Sequential");
                 }
                 else Toast.makeText(context , "You haven't added any file yet", Toast.LENGTH_SHORT).show();
                 break;
@@ -79,12 +74,14 @@ public class ButtonHandler implements View.OnClickListener {
                         permissionHandler.getBroadPermission(pathHandler);
                     }
                     else {
-                        pathHandler.pathReceiver(animHandler, wordHandler); }
+                        pathHandler.pathReceiver();
+                    }
                 }
                 else {
-                    pathHandler.pathReceiver(animHandler, wordHandler);
+                    pathHandler.pathReceiver();
                 }
                 LogicHandler.countSpin = 0;
+                AnimHandler.isTolerance = true;
                 break;
 
         //wordpage
@@ -97,18 +94,18 @@ public class ButtonHandler implements View.OnClickListener {
             case R.id.ButtonReplay:
                 logicHandler.beginLogic(false);
                 break;
+
             case R.id.ButtonClue:
+                String[] separatedWords = logicHandler.Words.split("=");
                 if(!LogicHandler.isInverse) {
-                    Toast.makeText(context, "Clue : "+ logicHandler.getWords().substring(logicHandler.getWords().indexOf("=") + 2, logicHandler.getWords().indexOf("=") + 2 + LogicHandler.countClue),Toast.LENGTH_SHORT).show();
+                    Toast.makeText(context, "Clue: " + (separatedWords[1] = separatedWords[1].trim()).substring(0, logicHandler.countClue > separatedWords[1].length() ? separatedWords[1].length() : logicHandler.countClue), Toast.LENGTH_SHORT).show();
                 }
                 else {
-                    Toast.makeText(context, "Clue : "+ logicHandler.getWords().substring(0, LogicHandler.countClue),Toast.LENGTH_SHORT).show();
+                    Toast.makeText(context, "Clue: " + (separatedWords[0] = separatedWords[0].trim()).substring(0, logicHandler.countClue > separatedWords[0].length() ? separatedWords[0].length() : logicHandler.countClue), Toast.LENGTH_SHORT).show();
                 }
                 break;
-            case R.id.ButtonUpperDisplay:
-                logicHandler.endLogic();
-                break;
 
+            case R.id.ButtonUpperDisplay:
             case R.id.ButtonLowerDisplay:
                 logicHandler.endLogic();
                 break;
@@ -123,7 +120,7 @@ public class ButtonHandler implements View.OnClickListener {
                 LogicHandler.countSpin = 0;
                 binding.TextSpinCount.setText(String.valueOf(LogicHandler.countSpin));
                 logicHandler.beginLogic(false);
-                Toast.makeText(context, "List was reset", Toast.LENGTH_SHORT).show();
+                Toast.makeText(context, "The list has been reset", Toast.LENGTH_SHORT).show();
                 break;
 
         //settingspage

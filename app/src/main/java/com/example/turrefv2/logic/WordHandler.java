@@ -15,7 +15,7 @@ public class WordHandler {
     public static HashMap<Integer, Register> repetitionList = new HashMap<>();
     public static int LineCount, WordCount, Queue, selectedLine, repetitionAmount;
     public static boolean isExist;
-    File readFile;
+    public static File readFile;
 
     public void isFileExist() {
 
@@ -60,7 +60,7 @@ public class WordHandler {
 
     public String ReadManagement() {
 
-        if(LogicHandler.isRandom && LogicHandler.wordRepetition) {
+        if(LogicHandler.isRandom && LogicHandler.allowRepetition) {
             if(LogicHandler.forbidRepetition)
                 selectedLine = RepetitionPreventer(LineCount-1);
             else

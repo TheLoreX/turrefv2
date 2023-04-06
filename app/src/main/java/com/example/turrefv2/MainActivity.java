@@ -2,7 +2,6 @@ package com.example.turrefv2;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
@@ -12,19 +11,17 @@ import com.example.turrefv2.action.ButtonHandler;
 import com.example.turrefv2.action.SwitchHandler;
 import com.example.turrefv2.action.TouchHandler;
 import com.example.turrefv2.component.EditorWrapper;
-import com.example.turrefv2.component.RecyclerAdapter;
 import com.example.turrefv2.databinding.ActivityMainBinding;
 import com.example.turrefv2.logic.LogicHandler;
 import com.example.turrefv2.logic.PathHandler;
 import com.example.turrefv2.logic.RecentListManager;
 import com.example.turrefv2.logic.WordHandler;
-import com.example.turrefv2.utils.MinorDataHandler;
+import com.example.turrefv2.utils.SettingsManager;
 import com.example.turrefv2.utils.PermissionHandler;
 
 public class MainActivity extends AppCompatActivity {
 
     ActivityMainBinding binding;
-    SharedPreferences storedVariables;
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -32,21 +29,18 @@ public class MainActivity extends AppCompatActivity {
         View view = binding.getRoot();
         setContentView(view);
 
-        // pre executions
-        storedVariables = getSharedPreferences("StoredVariables", Context.MODE_PRIVATE);
-
-
         // class definitions
         TouchHandler touchHandler = new TouchHandler(this);
-        PathHandler pathHandler = new PathHandler(this);
         PermissionHandler permissionHandler = new PermissionHandler(this, this);
         WordHandler wordHandler = new WordHandler();
         LogicHandler logicHandler = new LogicHandler(binding , wordHandler);
-        MinorDataHandler dataHandler = new MinorDataHandler(this, storedVariables);
-        EditorWrapper editorWrapper = new EditorWrapper(binding, dataHandler);
-        SwitchHandler switchHandler = new SwitchHandler(binding, logicHandler, dataHandler);
-        ButtonHandler buttonHandler = new ButtonHandler(binding, this, permissionHandler, pathHandler, wordHandler, logicHandler);
-        RecentListManager recentListManager = new RecentListManager(binding, this);
+        SettingsManager settingsManager = new SettingsManager(binding, this);
+        EditorWrapper editorWrapper = new EditorWrapper(binding, settingsManager);
+        SwitchHandler switchHandler = new SwitchHandler(binding, logicHandler, settingsManager);
+        AnimHandler animHandler = new AnimHandler(binding, this, wordHandler);
+        PathHandler pathHandler = new PathHandler(this, animHandler, wordHandler);
+        ButtonHandler buttonHandler = new ButtonHandler(binding, this, animHandler, permissionHandler, pathHandler, wordHandler, logicHandler);
+        RecentListManager recentListManager = new RecentListManager(binding, this, animHandler);
 
         // listeners
             // homepage
@@ -94,31 +88,14 @@ public class MainActivity extends AppCompatActivity {
             binding.EditClue.setOnEditorActionListener(editorWrapper);
 
         // executions
-        preloadSettings();
+        settingsManager.loadSettings();
         pathHandler.onIntentResult();
         permissionHandler.getPermission();
-        recentListManager.showRecycler();
+        recentListManager.initiateRecycler();
         AnimHandler.currentPage = binding.pageHome;
 
     }
 
 
-    private void preloadSettings() {
-
-            LogicHandler.isRandom = Boolean.parseBoolean(storedVariables.getString("isRandom", "true"));
-            binding.SwitchRandomMode.setChecked(Boolean.parseBoolean(storedVariables.getString("isRandom", "true")));
-
-            LogicHandler.wordRepetition = Boolean.parseBoolean(storedVariables.getString("wordRepetition", "true"));
-            binding.SwitchRepetition.setChecked(Boolean.parseBoolean(storedVariables.getString("wordRepetition", "true")));
-
-            LogicHandler.forbidRepetition = Boolean.parseBoolean(storedVariables.getString("forbidRepetition", "false"));
-            binding.SwitchRepetitionLimit.setChecked(Boolean.parseBoolean(storedVariables.getString("forbidRepetition", "false")));
-
-            LogicHandler.countClue = Integer.parseInt(storedVariables.getString("countClue", "1"));
-            binding.EditClue.setHint(String.valueOf(storedVariables.getString("countClue", "1")));
-
-            WordHandler.repetitionAmount = Integer.parseInt(storedVariables.getString("repetitionAmount", "1"));
-            binding.EditRepetition.setHint(String.valueOf(storedVariables.getString("repetitionAmount", "1")));
-    }
 }
 

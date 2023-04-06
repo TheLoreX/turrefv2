@@ -21,16 +21,16 @@ public class PathHandler {
     AnimHandler animHandler;
     WordHandler wordHandler;
 
-    public PathHandler(AppCompatActivity compatActivity) {
+    public PathHandler(AppCompatActivity compatActivity, AnimHandler animHandler, WordHandler wordHandler) {
         this.compatActivity = compatActivity;
+        this.animHandler = animHandler;
+        this.wordHandler = wordHandler;
     }
 
-    public static ActivityResultLauncher<Intent> activityResultLauncher;
+    public ActivityResultLauncher<Intent> activityResultLauncher;
     public static String path;
 
-    public void pathReceiver(AnimHandler animHandler, WordHandler wordHandler) {
-        this.wordHandler = wordHandler;
-        this.animHandler = animHandler;
+    public void pathReceiver() {
         Intent intent = new Intent(Intent.ACTION_OPEN_DOCUMENT);
         intent.addCategory(Intent.CATEGORY_OPENABLE);
         intent.setDataAndType(Uri.parse(Environment.getExternalStorageDirectory().getPath()), "text/plain");
@@ -45,9 +45,6 @@ public class PathHandler {
                 if(result.getResultCode() == Activity.RESULT_OK) {
                     if (result.getData() != null) {
                         path = "/" + result.getData().getData().getPath().substring(result.getData().getData().getPath().indexOf(":") + 1);
-                        wordHandler.isFileExist();
-                        wordHandler.LineCounter();
-                        wordHandler.WordCounter();
                         animHandler.openAttach();
                         animHandler.setRecentList();
                     }

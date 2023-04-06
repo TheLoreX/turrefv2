@@ -35,6 +35,7 @@ public class TouchHandler extends Activity implements View.OnTouchListener {
                     view.invalidate();
                     break;
                 }
+                case MotionEvent.ACTION_CANCEL:
                 case MotionEvent.ACTION_UP: {
                     if(!isSlight) {
                         view.startAnimation(AnimationUtils.loadAnimation(context, R.anim.pressout));
@@ -45,6 +46,7 @@ public class TouchHandler extends Activity implements View.OnTouchListener {
                     view.invalidate();
                     break;
                 }
+
             }
         return false;
     }

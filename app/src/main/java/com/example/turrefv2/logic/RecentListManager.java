@@ -2,12 +2,12 @@ package com.example.turrefv2.logic;
 
 import android.content.Context;
 import android.content.SharedPreferences;
-import android.util.Log;
 
 import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
-import com.example.turrefv2.component.RecyclerAdapter;
+import com.example.turrefv2.action.AnimHandler;
+import com.example.turrefv2.component.RecentListAdapter;
 import com.example.turrefv2.databinding.ActivityMainBinding;
 
 import java.util.ArrayList;
@@ -16,12 +16,20 @@ public class RecentListManager {
 
     Context context;
     ActivityMainBinding binding;
+    AnimHandler animHandler;
     SharedPreferences storedRecList;
 
-    public RecentListManager(ActivityMainBinding binding,Context context) {
+    public RecentListManager(ActivityMainBinding binding, Context context, AnimHandler animHandler) {
         this.context = context;
         this.binding = binding;
+        this.animHandler = animHandler;
         storedRecList = context.getSharedPreferences("StoredRecentLists", Context.MODE_PRIVATE);
+    }
+
+    public void initiateRecycler() {
+        recList = loadList();
+        setRecyclerAdapter();
+        //storedRecList.edit().clear().apply();
     }
 
     private ArrayList<String> recList;
@@ -29,14 +37,21 @@ public class RecentListManager {
     public void setList()  {
         recList = loadList();
             storeList();
-        }
+            setRecyclerAdapter();
+    }
 
     private void storeList() {
-        recList.add(0,PathHandler.path);
+
+        if (!recList.contains(PathHandler.path)) {
+            if (recList.size() > 3) {
+                recList.remove(3);
+            }
+            recList.add(0, PathHandler.path);
+        }
+
         for (int i = 0; i < recList.size() && i < 4; i++) {
             storedRecList.edit().putString(String.valueOf(i), recList.get(i)).apply();
         }
-        Log.d("TTST/StoredRec", storedRecList.getAll().size() + " : " + storedRecList.getAll());
     }
 
     private ArrayList<String> loadList() {
@@ -48,16 +63,10 @@ public class RecentListManager {
         return cloneRecList;
     }
 
-    public void showRecycler() {
-        recList = loadList();
-        setRecyclerAdapter();
-        //storedRecList.edit().clear().apply();
-    }
-
     private void setRecyclerAdapter() {
-        binding.rtest.setLayoutManager(new LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false));
-        binding.rtest.setItemAnimator(new DefaultItemAnimator());
-        binding.rtest.setAdapter(new RecyclerAdapter(recList.size()));
+        binding.RecyclerViewRecentList.setLayoutManager(new LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false));
+        binding.RecyclerViewRecentList.setItemAnimator(new DefaultItemAnimator());
+        binding.RecyclerViewRecentList.setAdapter(new RecentListAdapter(context, animHandler, recList, binding));
     }
 
 
