@@ -13,7 +13,6 @@ import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.turrefv2.action.AnimHandler;
-import com.example.turrefv2.logic.WordHandler;
 
 public class PathHandler {
 
@@ -29,6 +28,7 @@ public class PathHandler {
 
     public ActivityResultLauncher<Intent> activityResultLauncher;
     public static String path;
+    public static boolean isGlobal;
 
     public void pathReceiver() {
         Intent intent = new Intent(Intent.ACTION_OPEN_DOCUMENT);
@@ -43,14 +43,21 @@ public class PathHandler {
             @Override
             public void onActivityResult(ActivityResult result) {
                 if(result.getResultCode() == Activity.RESULT_OK) {
-                    if (result.getData() != null) {
-                        path = "/" + result.getData().getData().getPath().substring(result.getData().getData().getPath().indexOf(":") + 1);
+                    if(result.getData() != null) {
+                        if (result.getData().getData().getPath().contains("com.microsoft.skydrive.content.metadata")) {
+                            path = result.getData().getData().toString();
+                            isGlobal = true;
+
+                        }
+                        else {
+                            path = "/" + result.getData().getData().getPath().substring(result.getData().getData().getPath().indexOf(":") + 1);
+                            isGlobal = false;
+                        }
                         animHandler.openAttach();
-                        animHandler.setRecentList();
+                        //animHandler.setRecentList();
                     }
                 }
             }
         });
     }
-
 }

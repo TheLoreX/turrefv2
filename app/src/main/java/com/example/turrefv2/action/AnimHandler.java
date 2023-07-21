@@ -2,6 +2,7 @@ package com.example.turrefv2.action;
 
 import android.animation.ObjectAnimator;
 import android.content.Context;
+import android.util.Log;
 import android.view.View;
 import android.view.animation.AnimationUtils;
 
@@ -67,11 +68,11 @@ public class AnimHandler implements Runnable {
 
     public void openAttach() {
 
-        wordHandler.isFileExist();
+        wordHandler.isDataExist();
         wordHandler.WordCounter();
         wordHandler.LineCounter();
         binding.attachPanelPH.setVisibility(View.VISIBLE);
-        binding.TextFilename.setText(PathHandler.path.substring(PathHandler.path.lastIndexOf("/") + 1,PathHandler.path.indexOf(".")));
+        //binding.TextFilename.setText(PathHandler.path.substring(PathHandler.path.lastIndexOf("/") + 1,PathHandler.path.indexOf(".")));
         binding.FrameAttach.startAnimation(AnimationUtils.loadAnimation(context, R.anim.attachin));
         binding.ViewCurrentlist.startAnimation(AnimationUtils.loadAnimation(context, R.anim.fadein));
         binding.ViewCurrentlist.getAnimation().setStartOffset(300);
@@ -104,7 +105,7 @@ public class AnimHandler implements Runnable {
 
         isTolerance = true;
         PathHandler.path = path;
-        wordHandler.isFileExist();
+        wordHandler.isDataExist();
         wordHandler.WordCounter();
         wordHandler.LineCounter();
 
@@ -144,7 +145,7 @@ public class AnimHandler implements Runnable {
                     binding.pageWord.startAnimation(AnimationUtils.loadAnimation(context, R.anim.slide_in_right));
                     binding.TextSpinType.setText("Mode: " + ((LogicHandler.isRandom) ? "Random" : "Sequential"));
                     binding.TextSpinCapacity.setText("\\" + WordHandler.LineCount);
-                    binding.TextListName.setText("List: " + PathHandler.path.substring(PathHandler.path.lastIndexOf("/") + 1,PathHandler.path.indexOf(".")));
+                    //binding.TextListName.setText("List: " + PathHandler.path.substring(PathHandler.path.lastIndexOf("/") + 1,PathHandler.path.indexOf(".")));
                     currentPage.setVisibility(View.GONE);
                     binding.pageWord.setVisibility(View.VISIBLE);
                     binding.palette.setVisibility(View.GONE);

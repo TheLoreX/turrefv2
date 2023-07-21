@@ -32,7 +32,7 @@ public class MainActivity extends AppCompatActivity {
         // class definitions
         TouchHandler touchHandler = new TouchHandler(this);
         PermissionHandler permissionHandler = new PermissionHandler(this, this);
-        WordHandler wordHandler = new WordHandler();
+        WordHandler wordHandler = new WordHandler(this);
         LogicHandler logicHandler = new LogicHandler(binding , wordHandler);
         SettingsManager settingsManager = new SettingsManager(binding, this);
         EditorWrapper editorWrapper = new EditorWrapper(binding, settingsManager);
@@ -91,7 +91,7 @@ public class MainActivity extends AppCompatActivity {
         settingsManager.loadSettings();
         pathHandler.onIntentResult();
         permissionHandler.getPermission();
-        recentListManager.initiateRecycler();
+        //recentListManager.initiateRecycler();
         AnimHandler.currentPage = binding.pageHome;
 
     }

@@ -1,11 +1,15 @@
 package com.example.turrefv2.logic;
 
+import android.content.Context;
+import android.net.Uri;
 import android.os.Environment;
+import android.util.Log;
 
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.HashMap;
 import java.util.Random;
@@ -16,19 +20,37 @@ public class WordHandler {
     public static int LineCount, WordCount, Queue, selectedLine, repetitionAmount;
     public static boolean isExist;
     public static File readFile;
+    public static Uri readLink;
 
-    public void isFileExist() {
+    Context context;
+    public WordHandler(Context context) {
+        this.context = context;
+    }
 
-        readFile = new File(Environment.getExternalStorageDirectory(), PathHandler.path);
-        if(readFile.exists()) isExist = true;
-        else isExist = false;
+    public void isDataExist() {
+
+        if(PathHandler.isGlobal) {
+            readLink = Uri.parse(PathHandler.path);
+            isExist = true;
+        }
+        else {
+            readFile = new File(Environment.getExternalStorageDirectory(), PathHandler.path);
+            if (readFile.exists()) isExist = true;
+            else isExist = false;
+        }
     }
 
     public void WordCounter() {
         WordCount = 0;
         String readLine;
         try {
-            BufferedReader reader = new BufferedReader(new InputStreamReader(new FileInputStream(readFile), "UTF-8"));
+            BufferedReader reader;
+            if (PathHandler.isGlobal) {
+                reader = new BufferedReader(new InputStreamReader(context.getContentResolver().openInputStream(readLink), "UTF-8"));
+            }
+            else {
+                reader = new BufferedReader(new InputStreamReader(new FileInputStream(readFile), "UTF-8"));
+            }
             while ((readLine = reader.readLine()) != null && readLine.length() > 0) {
                 readLine = readLine.replace('=', ' ');
                 String[] readWords = readLine.split("\\s+");
@@ -47,7 +69,13 @@ public class WordHandler {
         LineCount = 0;
         String readLine;
         try {
-            BufferedReader reader = new BufferedReader(new InputStreamReader(new FileInputStream(readFile), "UTF-8"));
+            BufferedReader reader;
+            if (PathHandler.isGlobal) {
+                reader = new BufferedReader(new InputStreamReader(context.getContentResolver().openInputStream(readLink), "UTF-8"));
+            }
+            else {
+                reader = new BufferedReader(new InputStreamReader(new FileInputStream(readFile), "UTF-8"));
+            }
             while ((readLine = reader.readLine()) != null && readLine.length() > 0) {
                 LineCount++;
             }
@@ -73,7 +101,6 @@ public class WordHandler {
                 LogicHandler.countSpin = 0;
             }
         }
-
         return LineReader(selectedLine);
     }
 
@@ -81,8 +108,13 @@ public class WordHandler {
 
         String readLine = null;
         try {
-            BufferedReader reader = new BufferedReader(new InputStreamReader(new FileInputStream(readFile), "UTF-8"));
-
+            BufferedReader reader;
+            if (PathHandler.isGlobal) {
+                reader = new BufferedReader(new InputStreamReader(context.getContentResolver().openInputStream(readLink), "UTF-8"));
+            }
+            else {
+                reader = new BufferedReader(new InputStreamReader(new FileInputStream(readFile), "UTF-8"));
+            }
             for (int i = 0; (readLine = reader.readLine()) != null; i++) {
                 if (i == chosenLine) {
                     break;
@@ -92,7 +124,6 @@ public class WordHandler {
         }catch (IOException e) {
             e.printStackTrace();
         }
-
         return readLine;
     }
 
