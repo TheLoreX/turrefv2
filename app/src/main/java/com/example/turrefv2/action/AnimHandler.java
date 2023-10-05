@@ -68,7 +68,6 @@ public class AnimHandler implements Runnable {
 
     public void openAttach() {
 
-        wordHandler.isDataExist();
         wordHandler.WordCounter();
         wordHandler.LineCounter();
         binding.attachPanelPH.setVisibility(View.VISIBLE);

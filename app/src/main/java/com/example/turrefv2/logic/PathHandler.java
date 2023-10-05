@@ -28,7 +28,7 @@ public class PathHandler {
 
     public ActivityResultLauncher<Intent> activityResultLauncher;
     public static String path;
-    public static boolean isGlobal;
+    public static boolean isFileGlobal;
 
     public void pathReceiver() {
         Intent intent = new Intent(Intent.ACTION_OPEN_DOCUMENT);
@@ -44,16 +44,18 @@ public class PathHandler {
             public void onActivityResult(ActivityResult result) {
                 if(result.getResultCode() == Activity.RESULT_OK) {
                     if(result.getData() != null) {
+                        // Checks whether the file is on cloud
                         if (result.getData().getData().getPath().contains("com.microsoft.skydrive.content.metadata")) {
                             path = result.getData().getData().toString();
-                            isGlobal = true;
+                            isFileGlobal = true;
 
                         }
                         else {
                             path = "/" + result.getData().getData().getPath().substring(result.getData().getData().getPath().indexOf(":") + 1);
-                            isGlobal = false;
+                            isFileGlobal = false;
                         }
                         animHandler.openAttach();
+                        wordHandler.isDataExist();
                         //animHandler.setRecentList();
                     }
                 }

@@ -1,42 +1,60 @@
 package com.example.turrefv2.logic;
 
+import android.content.ContentResolver;
 import android.content.Context;
+import android.database.Cursor;
 import android.net.Uri;
 import android.os.Environment;
+import android.provider.MediaStore;
 import android.util.Log;
 
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
-import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.HashMap;
 import java.util.Random;
 
 public class WordHandler {
 
-    public static HashMap<Integer, Register> repetitionList = new HashMap<>();
-    public static int LineCount, WordCount, Queue, selectedLine, repetitionAmount;
-    public static boolean isExist;
-    public static File readFile;
-    public static Uri readLink;
-
-    Context context;
+    private Context context;
     public WordHandler(Context context) {
         this.context = context;
     }
 
+    public static HashMap<Integer, Register> repetitionList = new HashMap<>();
+    public static int LineCount, WordCount, Queue, selectedLine, repetitionAmount;
+    public static boolean isExist;
+    public String dataName;
+    private File readFile;
+    private Uri readLink;
     public void isDataExist() {
-
-        if(PathHandler.isGlobal) {
+        if(PathHandler.isFileGlobal) {
             readLink = Uri.parse(PathHandler.path);
+            DataNameRetriever();
             isExist = true;
         }
         else {
             readFile = new File(Environment.getExternalStorageDirectory(), PathHandler.path);
-            if (readFile.exists()) isExist = true;
-            else isExist = false;
+            dataName = PathHandler.path.substring(PathHandler.path.lastIndexOf("/") + 1,PathHandler.path.indexOf("."));
+            isExist = readFile.exists();
+        }
+    }
+
+    private String DataNameRetriever() {
+        if (readLink.getScheme().equals(ContentResolver.SCHEME_CONTENT)) {
+            Cursor cursor = context.getApplicationContext().getContentResolver().query(readLink,
+                    new String[]{MediaStore.MediaColumns.DISPLAY_NAME},
+                    null,
+                    null,
+                    null);
+            if (cursor != null) {
+                cursor.moveToFirst();
+                dataName = cursor.getString(cursor.getColumnIndexOrThrow(MediaStore.MediaColumns.DISPLAY_NAME));
+                cursor.close();
+            }
+            Log.d("TTST/Dataname:", dataName);
         }
     }
 
@@ -45,7 +63,7 @@ public class WordHandler {
         String readLine;
         try {
             BufferedReader reader;
-            if (PathHandler.isGlobal) {
+            if (PathHandler.isFileGlobal) {
                 reader = new BufferedReader(new InputStreamReader(context.getContentResolver().openInputStream(readLink), "UTF-8"));
             }
             else {
@@ -70,7 +88,7 @@ public class WordHandler {
         String readLine;
         try {
             BufferedReader reader;
-            if (PathHandler.isGlobal) {
+            if (PathHandler.isFileGlobal) {
                 reader = new BufferedReader(new InputStreamReader(context.getContentResolver().openInputStream(readLink), "UTF-8"));
             }
             else {
@@ -109,7 +127,7 @@ public class WordHandler {
         String readLine = null;
         try {
             BufferedReader reader;
-            if (PathHandler.isGlobal) {
+            if (PathHandler.isFileGlobal) {
                 reader = new BufferedReader(new InputStreamReader(context.getContentResolver().openInputStream(readLink), "UTF-8"));
             }
             else {
