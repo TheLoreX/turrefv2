@@ -26,9 +26,10 @@ public class WordHandler {
     public static HashMap<Integer, Register> repetitionList = new HashMap<>();
     public static int LineCount, WordCount, Queue, selectedLine, repetitionAmount;
     public static boolean isExist;
-    public String dataName;
+    public static String dataName;
     private File readFile;
     private Uri readLink;
+
     public void isDataExist() {
         if(PathHandler.isFileGlobal) {
             readLink = Uri.parse(PathHandler.path);
@@ -42,7 +43,8 @@ public class WordHandler {
         }
     }
 
-    private String DataNameRetriever() {
+    private void DataNameRetriever() {
+        Log.d("TTST/Check", "*");
         if (readLink.getScheme().equals(ContentResolver.SCHEME_CONTENT)) {
             Cursor cursor = context.getApplicationContext().getContentResolver().query(readLink,
                     new String[]{MediaStore.MediaColumns.DISPLAY_NAME},
@@ -51,10 +53,9 @@ public class WordHandler {
                     null);
             if (cursor != null) {
                 cursor.moveToFirst();
-                dataName = cursor.getString(cursor.getColumnIndexOrThrow(MediaStore.MediaColumns.DISPLAY_NAME));
+                dataName = cursor.getString(cursor.getColumnIndexOrThrow(MediaStore.MediaColumns.DISPLAY_NAME)).replace(".txt", "");
                 cursor.close();
             }
-            Log.d("TTST/Dataname:", dataName);
         }
     }
 

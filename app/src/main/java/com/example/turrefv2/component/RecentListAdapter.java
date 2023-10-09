@@ -1,7 +1,6 @@
 package com.example.turrefv2.component;
 
 import android.content.Context;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -54,7 +53,8 @@ public class RecentListAdapter extends RecyclerView.Adapter<RecentListAdapter.Vi
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        holder.Tag.setText(recList.get(position).substring(recList.get(position).lastIndexOf("/") + 1, recList.get(position).indexOf(".")));
+        holder.Tag.setText(recList.get(position));
+        //holder.Tag.setText(recList.get(position).substring(recList.get(position).lastIndexOf("/") + 1, recList.get(position).indexOf(".")));
         holder.Notepad.setOnTouchListener(new TouchHandler(context));
         holder.Notepad.setOnClickListener(new View.OnClickListener() {
             @Override

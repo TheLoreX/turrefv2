@@ -54,9 +54,11 @@ public class PathHandler {
                             path = "/" + result.getData().getData().getPath().substring(result.getData().getData().getPath().indexOf(":") + 1);
                             isFileGlobal = false;
                         }
-                        animHandler.openAttach();
                         wordHandler.isDataExist();
-                        //animHandler.setRecentList();
+                        wordHandler.LineCounter();
+                        wordHandler.WordCounter();
+                        animHandler.openAttach();
+                        animHandler.setRecentList();
                     }
                 }
             }

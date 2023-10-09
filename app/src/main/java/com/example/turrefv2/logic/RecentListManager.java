@@ -2,6 +2,7 @@ package com.example.turrefv2.logic;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.util.Log;
 
 import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -11,6 +12,7 @@ import com.example.turrefv2.component.RecentListAdapter;
 import com.example.turrefv2.databinding.ActivityMainBinding;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class RecentListManager {
 
@@ -18,6 +20,7 @@ public class RecentListManager {
     ActivityMainBinding binding;
     AnimHandler animHandler;
     SharedPreferences storedRecList;
+    HashMap<String, String> testMap = new HashMap<>();
 
     public RecentListManager(ActivityMainBinding binding, Context context, AnimHandler animHandler) {
         this.context = context;
@@ -35,9 +38,11 @@ public class RecentListManager {
     private ArrayList<String> recList;
 
     public void setList()  {
+        Log.d("TTST/SharedFiles", loadList().toString());
         recList = loadList();
-            storeList();
-            setRecyclerAdapter();
+        storeList();
+        setRecyclerAdapter();
+
     }
 
     private void storeList() {
@@ -68,6 +73,5 @@ public class RecentListManager {
         binding.RecyclerViewRecentList.setItemAnimator(new DefaultItemAnimator());
         binding.RecyclerViewRecentList.setAdapter(new RecentListAdapter(context, animHandler, recList, binding));
     }
-
 
 }

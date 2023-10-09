@@ -2,7 +2,6 @@ package com.example.turrefv2;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 
@@ -41,7 +40,6 @@ public class MainActivity extends AppCompatActivity {
         PathHandler pathHandler = new PathHandler(this, animHandler, wordHandler);
         ButtonHandler buttonHandler = new ButtonHandler(binding, this, animHandler, permissionHandler, pathHandler, wordHandler, logicHandler);
         RecentListManager recentListManager = new RecentListManager(binding, this, animHandler);
-
         // listeners
             // homepage
             binding.ButtonHome.setOnClickListener(buttonHandler);
@@ -91,11 +89,10 @@ public class MainActivity extends AppCompatActivity {
         settingsManager.loadSettings();
         pathHandler.onIntentResult();
         permissionHandler.getPermission();
-        //recentListManager.initiateRecycler();
+        recentListManager.initiateRecycler();
         AnimHandler.currentPage = binding.pageHome;
 
+
     }
-
-
 }
 
