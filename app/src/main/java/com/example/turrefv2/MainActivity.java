@@ -1,9 +1,11 @@
 package com.example.turrefv2;
 
-import androidx.appcompat.app.AppCompatActivity;
-
+import android.content.ContentResolver;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.turrefv2.action.AnimHandler;
 import com.example.turrefv2.action.ButtonHandler;
@@ -11,15 +13,18 @@ import com.example.turrefv2.action.SwitchHandler;
 import com.example.turrefv2.action.TouchHandler;
 import com.example.turrefv2.component.EditorWrapper;
 import com.example.turrefv2.databinding.ActivityMainBinding;
+import com.example.turrefv2.logic.DataHandler;
+import com.example.turrefv2.logic.FileManager;
 import com.example.turrefv2.logic.LogicHandler;
 import com.example.turrefv2.logic.PathHandler;
 import com.example.turrefv2.logic.RecentListManager;
 import com.example.turrefv2.logic.WordHandler;
-import com.example.turrefv2.utils.SettingsManager;
 import com.example.turrefv2.utils.PermissionHandler;
+import com.example.turrefv2.utils.SettingsManager;
 
 public class MainActivity extends AppCompatActivity {
 
+    public static String appName = "Turref";
     ActivityMainBinding binding;
 
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,15 +36,17 @@ public class MainActivity extends AppCompatActivity {
         // class definitions
         TouchHandler touchHandler = new TouchHandler(this);
         PermissionHandler permissionHandler = new PermissionHandler(this, this);
-        WordHandler wordHandler = new WordHandler(this);
+        FileManager fileManager = new FileManager(this);
+        WordHandler wordHandler = new WordHandler(this, fileManager);
         LogicHandler logicHandler = new LogicHandler(binding , wordHandler);
         SettingsManager settingsManager = new SettingsManager(binding, this);
         EditorWrapper editorWrapper = new EditorWrapper(binding, settingsManager);
         SwitchHandler switchHandler = new SwitchHandler(binding, logicHandler, settingsManager);
-        AnimHandler animHandler = new AnimHandler(binding, this, wordHandler);
-        PathHandler pathHandler = new PathHandler(this, animHandler, wordHandler);
-        ButtonHandler buttonHandler = new ButtonHandler(binding, this, animHandler, permissionHandler, pathHandler, wordHandler, logicHandler);
-        RecentListManager recentListManager = new RecentListManager(binding, this, animHandler);
+        DataHandler dataHandler = new DataHandler();
+        AnimHandler animHandler = new AnimHandler(binding, this, wordHandler, dataHandler, fileManager);
+        PathHandler pathHandler = new PathHandler(this, animHandler);
+        ButtonHandler buttonHandler = new ButtonHandler(binding, this, animHandler, permissionHandler, pathHandler, wordHandler, logicHandler, dataHandler);
+        RecentListManager recentListManager = new RecentListManager(binding, this, animHandler, dataHandler);
         // listeners
             // homepage
             binding.ButtonHome.setOnClickListener(buttonHandler);
@@ -91,8 +98,6 @@ public class MainActivity extends AppCompatActivity {
         permissionHandler.getPermission();
         recentListManager.initiateRecycler();
         AnimHandler.currentPage = binding.pageHome;
-
-
     }
 }
 

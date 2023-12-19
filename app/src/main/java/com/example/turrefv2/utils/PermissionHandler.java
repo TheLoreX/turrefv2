@@ -3,7 +3,6 @@ package com.example.turrefv2.utils;
 import android.Manifest;
 import android.app.Activity;
 import android.app.Dialog;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Color;
@@ -63,8 +62,8 @@ public class PermissionHandler {
                 dialog.cancel();
             }
         });
-        dialog.findViewById(R.id.ButtonPositive).setOnTouchListener(touchHandler);
 
+        dialog.findViewById(R.id.ButtonPositive).setOnTouchListener(touchHandler);
         dialog.findViewById(R.id.ButtonNegative).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

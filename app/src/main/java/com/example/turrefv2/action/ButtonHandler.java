@@ -8,12 +8,14 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
+import com.example.turrefv2.R;
+import com.example.turrefv2.databinding.ActivityMainBinding;
+import com.example.turrefv2.logic.DataHandler;
+import com.example.turrefv2.logic.FileManager;
 import com.example.turrefv2.logic.LogicHandler;
 import com.example.turrefv2.logic.PathHandler;
-import com.example.turrefv2.utils.PermissionHandler;
-import com.example.turrefv2.R;
 import com.example.turrefv2.logic.WordHandler;
-import com.example.turrefv2.databinding.ActivityMainBinding;
+import com.example.turrefv2.utils.PermissionHandler;
 
 public class ButtonHandler implements View.OnClickListener {
 
@@ -24,8 +26,9 @@ public class ButtonHandler implements View.OnClickListener {
     LogicHandler logicHandler;
     PathHandler pathHandler;
     PermissionHandler permissionHandler;
+    DataHandler dataHandler;
 
-    public ButtonHandler(ActivityMainBinding binding, Context context, AnimHandler animHandler, PermissionHandler permissionHandler, PathHandler pathHandler, WordHandler wordHandler, LogicHandler logicHandler) {
+    public ButtonHandler(ActivityMainBinding binding, Context context, AnimHandler animHandler, PermissionHandler permissionHandler, PathHandler pathHandler, WordHandler wordHandler, LogicHandler logicHandler, DataHandler dataHandler) {
         this.binding = binding;
         this.context = context;
         this.pathHandler = pathHandler;
@@ -33,6 +36,7 @@ public class ButtonHandler implements View.OnClickListener {
         this.logicHandler = logicHandler;
         this.permissionHandler = permissionHandler;
         this.animHandler = animHandler;
+        this.dataHandler = dataHandler;
     }
 
     public static View clickedView;
@@ -52,7 +56,7 @@ public class ButtonHandler implements View.OnClickListener {
                 break;
 
             case R.id.ButtonPlay:
-                if(WordHandler.isExist) {
+                if(FileManager.isFileExist) {
                     animHandler.pageHandler((byte) 2, false);
                     logicHandler.beginLogic(true);
                 }
@@ -80,6 +84,9 @@ public class ButtonHandler implements View.OnClickListener {
                 else {
                     pathHandler.pathReceiver();
                 }
+
+                dataHandler.createMainDir();
+                dataHandler.createRecentListDir();
                 LogicHandler.countSpin = 0;
                 AnimHandler.isTolerance = true;
                 break;
@@ -95,7 +102,7 @@ public class ButtonHandler implements View.OnClickListener {
                 logicHandler.beginLogic(false);
                 break;
 
-            case R.id.ButtonClue:
+            case R.id.ButtonReturn:
                 String[] separatedWords = logicHandler.Words.split("=");
                 if(!LogicHandler.isInverse) {
                     Toast.makeText(context, "Clue: " + (separatedWords[1] = separatedWords[1].trim()).substring(0, logicHandler.countClue > separatedWords[1].length() ? separatedWords[1].length() : logicHandler.countClue), Toast.LENGTH_SHORT).show();

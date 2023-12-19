@@ -3,11 +3,11 @@ package com.example.turrefv2.action;
 import android.view.View;
 import android.widget.CompoundButton;
 
-import com.example.turrefv2.utils.SettingsManager;
-import com.example.turrefv2.logic.LogicHandler;
 import com.example.turrefv2.R;
-import com.example.turrefv2.logic.WordHandler;
 import com.example.turrefv2.databinding.ActivityMainBinding;
+import com.example.turrefv2.logic.LogicHandler;
+import com.example.turrefv2.logic.WordHandler;
+import com.example.turrefv2.utils.SettingsManager;
 
 public class SwitchHandler implements CompoundButton.OnCheckedChangeListener {
 

@@ -342,7 +342,8 @@
         android:background="@drawable/page"
         android:visibility="gone"
         tools:layout_editor_absoluteX="16dp"
-        tools:layout_editor_absoluteY="27dp">
+        tools:layout_editor_absoluteY="27dp"
+        tools:visibility="visible">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/bottomPanel_pW"
@@ -439,13 +440,13 @@
                 android:layout_marginStart="24dp"
                 android:layout_marginTop="20dp"
                 android:elevation="1dp"
+                android:ellipsize="end"
                 android:fontFamily="@font/anonymous_pro_bold"
+                android:maxLines="1"
                 android:shadowColor="@color/black"
                 android:textAlignment="textStart"
                 android:textColor="#C1BDBA"
                 android:textSize="26sp"
-                android:ellipsize="end"
-                android:maxLines="1"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 tools:ignore="TextContrastCheck" />
@@ -527,7 +528,7 @@
                 android:background="@drawable/frameleft"
                 android:enabled="false"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/ButtonClue"
+                app:layout_constraintTop_toBottomOf="@id/upperPanel_pW"
                 tools:ignore="TextContrastCheck,SpeakableTextPresentCheck" />
 
             <Button
@@ -539,17 +540,6 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/ButtonUpperDisplay"
                 tools:ignore="DuplicateSpeakableTextCheck,TextContrastCheck,SpeakableTextPresentCheck" />
-
-            <Button
-                android:id="@+id/ButtonClue"
-                android:layout_width="80dp"
-                android:layout_height="80dp"
-                android:background="@drawable/clue"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.498"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                tools:ignore="SpeakableTextPresentCheck" />
 
             <TextView
                 android:id="@+id/TextUpperDisplay"
@@ -581,6 +571,38 @@
                 app:layout_constraintStart_toStartOf="@+id/ButtonLowerDisplay"
                 app:layout_constraintTop_toTopOf="@+id/ButtonLowerDisplay" />
 
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/upperPanel_pW"
+                android:layout_width="200dp"
+                android:layout_height="80dp"
+                android:background="@drawable/upperframe"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <Button
+                    android:id="@+id/ButtonReturn"
+                    android:layout_width="48dp"
+                    android:layout_height="48dp"
+                    android:layout_marginStart="40dp"
+                    android:background="@drawable/returnicon"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:ignore="SpeakableTextPresentCheck" />
+
+                <Button
+                    android:id="@+id/ButtonClue"
+                    android:layout_width="48dp"
+                    android:layout_height="48dp"
+                    android:layout_marginEnd="40dp"
+                    android:background="@drawable/clue"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:ignore="SpeakableTextPresentCheck" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
         </androidx.constraintlayout.widget.ConstraintLayout>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
@@ -590,7 +612,8 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         tools:layout_editor_absoluteX="191dp"
-        tools:layout_editor_absoluteY="232dp">
+        tools:layout_editor_absoluteY="232dp"
+        tools:visibility="gone">
 
         <ImageView
             android:id="@+id/ITextWelcome"
@@ -645,14 +668,14 @@
                 android:layout_height="45dp"
                 android:layout_marginTop="-10dp"
                 android:elevation="1dp"
+                android:ellipsize="end"
                 android:fontFamily="serif"
                 android:gravity="center"
+                android:maxLines="1"
                 android:shadowColor="@color/black"
                 android:textAlignment="center"
                 android:textColor="#C1BDBA"
                 android:textSize="20sp"
-                android:ellipsize="end"
-                android:maxLines="1"
                 app:layout_constraintStart_toStartOf="@+id/ViewCurrentlist"
                 app:layout_constraintTop_toBottomOf="@+id/ViewCurrentlist"
                 tools:ignore="TextContrastCheck" />

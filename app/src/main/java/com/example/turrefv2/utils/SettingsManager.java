@@ -4,12 +4,13 @@ import android.content.Context;
 import android.content.SharedPreferences;
 
 import com.example.turrefv2.databinding.ActivityMainBinding;
+import com.example.turrefv2.logic.DataHandler;
 import com.example.turrefv2.logic.LogicHandler;
 import com.example.turrefv2.logic.WordHandler;
 
 public class SettingsManager {
 
-    SharedPreferences storedVariables;
+    private static SharedPreferences storedVariables;
     ActivityMainBinding binding;
     Context context;
 
@@ -19,11 +20,13 @@ public class SettingsManager {
         storedVariables = context.getSharedPreferences("StoredVariables", Context.MODE_PRIVATE);
     }
 
-    public void storeSettings(String Key, String Value) {
+    public static void storeSettings(String Key, String Value) {
         SharedPreferences.Editor valueEditor = storedVariables.edit();
         valueEditor.putString(Key, Value);
         valueEditor.apply();
+
     }
+
 
     public void loadSettings() {
 
@@ -41,6 +44,9 @@ public class SettingsManager {
 
         WordHandler.repetitionAmount = Integer.parseInt(storedVariables.getString("repetitionAmount", "1"));
         binding.EditRepetition.setHint(String.valueOf(storedVariables.getString("repetitionAmount", "1")));
+
+        DataHandler.mainDirPath = storedVariables.getString("mainDirPath", null);
+        DataHandler.recentDirPath = storedVariables.getString("recentDirPath", null);
     }
 
 

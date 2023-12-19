@@ -1,6 +1,7 @@
 package com.example.turrefv2.component;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,7 +15,10 @@ import com.example.turrefv2.R;
 import com.example.turrefv2.action.AnimHandler;
 import com.example.turrefv2.action.TouchHandler;
 import com.example.turrefv2.databinding.ActivityMainBinding;
+import com.example.turrefv2.logic.DataHandler;
+import com.example.turrefv2.logic.FileManager;
 
+import java.io.File;
 import java.util.ArrayList;
 
 public class RecentListAdapter extends RecyclerView.Adapter<RecentListAdapter.ViewHolder> {
@@ -22,10 +26,10 @@ public class RecentListAdapter extends RecyclerView.Adapter<RecentListAdapter.Vi
     Context context;
     ActivityMainBinding binding;
     AnimHandler animHandler;
-    ArrayList<String> recList;
+    ArrayList<String[]> recentList;
 
-    public RecentListAdapter(Context context, AnimHandler animHandler, ArrayList<String> recList, ActivityMainBinding binding) {
-        this.recList = recList;
+    public RecentListAdapter(ActivityMainBinding binding ,Context context, AnimHandler animHandler, ArrayList<String[]> recentList) {
+        this.recentList = recentList;
         this.context = context;
         this.binding = binding;
         this.animHandler = animHandler;
@@ -53,27 +57,29 @@ public class RecentListAdapter extends RecyclerView.Adapter<RecentListAdapter.Vi
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        holder.Tag.setText(recList.get(position));
-        //holder.Tag.setText(recList.get(position).substring(recList.get(position).lastIndexOf("/") + 1, recList.get(position).indexOf(".")));
+        holder.Tag.setText(recentList.get(position)[0]);
+        FileManager.fileName = recentList.get(position)[0];
         holder.Notepad.setOnTouchListener(new TouchHandler(context));
         holder.Notepad.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                buttonClickListener.onButtonClick(recList.get(holder.getAbsoluteAdapterPosition()));
+                buttonClickListener.onButtonClick(recentList.get(holder.getAbsoluteAdapterPosition())[0]);
+                Log.d("TTST/click", holder.getAbsoluteAdapterPosition() + " " + recentList.get(holder.getAbsoluteAdapterPosition())[0]);
             }
         });
     }
 
     private ButtonClickListener buttonClickListener = new ButtonClickListener() {
         @Override
-        public void onButtonClick(String path) {
-            animHandler.changeFileFromRecList(path);
+        public void onButtonClick(String fileName) {
+            animHandler.changeFileFromRecList(DataHandler.recentDirPath + File.separator + fileName + ".txt");
+            Log.d("TTST/click", " " + DataHandler.recentDirPath + File.separator + fileName + ".txt");
         }
     };
 
     @Override
     public int getItemCount() {
-        return recList.size();
+        return recentList.size();
     }
 
 }
