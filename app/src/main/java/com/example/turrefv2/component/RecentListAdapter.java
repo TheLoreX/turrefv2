@@ -1,7 +1,6 @@
 package com.example.turrefv2.component;
 
 import android.content.Context;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -64,7 +63,6 @@ public class RecentListAdapter extends RecyclerView.Adapter<RecentListAdapter.Vi
             @Override
             public void onClick(View v) {
                 buttonClickListener.onButtonClick(recentList.get(holder.getAbsoluteAdapterPosition())[0]);
-                Log.d("TTST/click", holder.getAbsoluteAdapterPosition() + " " + recentList.get(holder.getAbsoluteAdapterPosition())[0]);
             }
         });
     }
@@ -72,8 +70,7 @@ public class RecentListAdapter extends RecyclerView.Adapter<RecentListAdapter.Vi
     private ButtonClickListener buttonClickListener = new ButtonClickListener() {
         @Override
         public void onButtonClick(String fileName) {
-            animHandler.changeFileFromRecList(DataHandler.recentDirPath + File.separator + fileName + ".txt");
-            Log.d("TTST/click", " " + DataHandler.recentDirPath + File.separator + fileName + ".txt");
+            animHandler.changeFileFromRecentList(DataHandler.recentDirPath + File.separator + fileName + ".txt");
         }
     };
 

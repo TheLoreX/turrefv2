@@ -52,8 +52,7 @@ public class RecentListManager {
 
         if (!isPathMatching()) {
             if (recentList.size() > 3) {
-                File lastFile = new File(DataHandler.recentDirPath + File.separator+ recentList.get(3)[0]);
-                if (lastFile.exists()) lastFile.delete();
+                new File(DataHandler.recentDirPath + File.separator + recentList.get(3)[0] + ".txt").delete();
                 recentList.remove(3);
             }
             recentList.add(0, new String[]{FileManager.fileName, PathHandler.path});
@@ -67,9 +66,6 @@ public class RecentListManager {
                 throw new RuntimeException(e);
             }
         }
-        //ArrayList Printer
-        Log.d("TTST/Size", String.valueOf(recentList.size()));
-        for (int i = 0 ; i < recentList.size(); i++) Log.d("TTST/Registry" + " - " + i, recentList.get(i)[0] + " | " + recentList.get(i)[1].substring(0,20));
     }
 
     private void loadList() {
@@ -79,8 +75,6 @@ public class RecentListManager {
                 ObjectInputStream ois = new ObjectInputStream(new FileInputStream(recentListRegistry)); // Reads Arraylist from the saved Registry file
                 recentList = (ArrayList<String[]>) ois.readObject();
                 ois.close();
-                Log.d("TTST/loadList()", "success loading");
-                for (int i = 0 ; i < recentList.size(); i++) Log.d("TTST/Registry" + " - " + i, recentList.get(i)[0] + " | " + recentList.get(i)[1].substring(0,20));
             }
         } catch (IOException | ClassNotFoundException e) {
             throw new RuntimeException(e);
@@ -92,7 +86,7 @@ public class RecentListManager {
     // checks if a file being added, which already exists within the "RecentListRegistry"
     private boolean isPathMatching () {
         for (String[] temp : recentList) {
-            if (temp[1].equals(PathHandler.path)) { // "temp[1]" means the path part of the ArrayList "RecentListRegistry""
+            if (temp[1].equals(PathHandler.path)) { // "temp[1]" means the path element of the ArrayList "RecentListRegistry""
                return true;
             }
         }

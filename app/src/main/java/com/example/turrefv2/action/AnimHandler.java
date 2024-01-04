@@ -73,11 +73,12 @@ public class AnimHandler implements Runnable {
         if(toggleAnim.isPaused()) toggleAnim.end();
     }
 
-    public void openAttach() {
-
+    public void openAttach(boolean isFileFromRecentList) {
+        LogicHandler.initiationStatus = false; // resets the first initiation state of Spinning
         fileManager.isFileExist(false);
         if (fileManager.isFileExist) {
-            fileManager.recentDirManager();
+            if(!isFileFromRecentList)
+                fileManager.recentDirManager();
             wordHandler.LineCounter();
             wordHandler.WordCounter();
 
@@ -116,19 +117,20 @@ public class AnimHandler implements Runnable {
 
     }
 
-    public void changeFileFromRecList(String path) {
+    public void changeFileFromRecentList(String path) {
 
-        isTolerance = true;
         PathHandler.path = path;
+        Log.d("TTST/AnimHandler:path", PathHandler.path);
         fileManager.isFileExist(true);
 
         // checks whether the requested file can be found or not
         if (fileManager.isFileExist) {
             FileManager.isFileGlobal = false;
-            wordHandler.WordCounter();
-            wordHandler.LineCounter();
 
             if (isAttachOn) {
+                LogicHandler.initiationStatus = false;
+                wordHandler.WordCounter();
+                wordHandler.LineCounter();
                 binding.ViewCurrentlist.startAnimation(AnimationUtils.loadAnimation(context, R.anim.bounce));
                 binding.TextWordCount.startAnimation(AnimationUtils.loadAnimation(context, R.anim.fadein));
                 binding.TextWordCount.getAnimation().setStartOffset(400);
@@ -140,12 +142,14 @@ public class AnimHandler implements Runnable {
                 binding.TextFilename.getAnimation().setStartOffset(800);
                 binding.TextFilename.setText(path.substring(path.lastIndexOf("/") + 1, path.indexOf(".")));
             } else {
-                openAttach();
+                openAttach(true);
             }
         }
         else {
             Toast.makeText(context, "Path to file is corrupted!", Toast.LENGTH_SHORT).show();
         }
+
+
 
     }
 

@@ -2,6 +2,7 @@ package com.example.turrefv2.logic;
 
 import android.content.ContentResolver;
 import android.content.Context;
+import android.content.IntentFilter;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.Environment;
@@ -11,12 +12,19 @@ import android.util.Log;
 import com.example.turrefv2.MainActivity;
 import com.example.turrefv2.utils.SettingsManager;
 
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.io.OutputStream;
+import java.nio.channels.Channel;
+import java.nio.channels.FileChannel;
+import java.nio.file.Files;
 
 public class FileManager {
 
@@ -31,18 +39,24 @@ public class FileManager {
     }
 
     public boolean isFileGlobal() {
-        return isFileGlobal = PathHandler.path.contains("com.microsoft.skydrive.content.metadata");
+        for (String drive : PathHandler.globalDrives) {
+            isFileGlobal = PathHandler.path.contains(drive);
+        }
+        Log.d("TTST/?", isFileGlobal + "");
+        return isFileGlobal;
     }
 
-    public void isFileExist(boolean isPresent) {
+    public void isFileExist(boolean isNamePresent) {
         if(isFileGlobal()) {
+            Log.d("TTST/FileState", "global ");
             readLink = Uri.parse(PathHandler.path);
-            if(!isPresent) {
+            if(!isNamePresent) {
                 fileNameRetriever();
             }
             isFileExist = true;
         }
         else {
+            Log.d("TTST/FileState", "local ");
             readFile = new File(PathHandler.path);
             fileName = PathHandler.path.substring(PathHandler.path.lastIndexOf("/") + 1,PathHandler.path.indexOf("."));
             isFileExist = readFile.exists();
@@ -64,18 +78,25 @@ public class FileManager {
         }
     }
 
-    public void recentDirManager() { // recreates files into Recentdir
+    public void recentDirManager() { // recreates files into "Recentdir"
 
         try {
             // defines InputStream based on it's status(global/local)
-            InputStream inputStream = FileManager.isFileGlobal ? context.getContentResolver().openInputStream(readLink) : new FileInputStream(readFile.getPath());
-            OutputStream outputStream = new FileOutputStream(DataHandler.recentDirPath + File.separator + FileManager.fileName + ".txt");
-
-            int length;  byte[] buffer = new byte[1024];
-            while ((length = inputStream.read(buffer)) > 0) {
-                outputStream.write(buffer, 0, length);
+            BufferedReader reader;
+            if (isFileGlobal) {
+                reader = new BufferedReader(new InputStreamReader(context.getContentResolver().openInputStream(readLink), "UTF-8"));
             }
-            inputStream.close(); outputStream.close();
+            else {
+                reader = new BufferedReader(new InputStreamReader(new FileInputStream(readFile.getPath()), "UTF-8"));
+            }
+            BufferedWriter writer = new BufferedWriter(new FileWriter(DataHandler.recentDirPath + File.separator + FileManager.fileName + ".txt"));
+
+            String readLine;
+            while ((readLine = reader.readLine()) != null && readLine.length() > 0) {
+                writer.write(readLine);
+                writer.newLine();
+            }
+            reader.close(); writer.close();
 
         } catch (IOException e) {
             throw new RuntimeException(e);

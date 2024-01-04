@@ -4,7 +4,6 @@ package com.example.turrefv2.action;
 import android.content.Context;
 import android.os.Build;
 import android.os.Environment;
-import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
@@ -16,6 +15,8 @@ import com.example.turrefv2.logic.LogicHandler;
 import com.example.turrefv2.logic.PathHandler;
 import com.example.turrefv2.logic.WordHandler;
 import com.example.turrefv2.utils.PermissionHandler;
+
+import java.io.File;
 
 public class ButtonHandler implements View.OnClickListener {
 
@@ -65,6 +66,7 @@ public class ButtonHandler implements View.OnClickListener {
 
             case R.id.ButtonInfo:
                 animHandler.moveToggle(binding.ButtonInfo.getLeft()-62);
+               //
                 break;
 
             case R.id.ButtonSettings:
@@ -102,7 +104,7 @@ public class ButtonHandler implements View.OnClickListener {
                 logicHandler.beginLogic(false);
                 break;
 
-            case R.id.ButtonReturn:
+            case R.id.ButtonClue:
                 String[] separatedWords = logicHandler.Words.split("=");
                 if(!LogicHandler.isInverse) {
                     Toast.makeText(context, "Clue: " + (separatedWords[1] = separatedWords[1].trim()).substring(0, logicHandler.countClue > separatedWords[1].length() ? separatedWords[1].length() : logicHandler.countClue), Toast.LENGTH_SHORT).show();
@@ -121,11 +123,12 @@ public class ButtonHandler implements View.OnClickListener {
                 animHandler.toggleInfo();
                 break;
 
+            case R.id.ButtonReturn:
+                logicHandler.historyLogic();
+                break;
             case R.id.ButtonReset:
                 WordHandler.selectedLine = 0;
-                WordHandler.repetitionList.clear();
-                LogicHandler.countSpin = 0;
-                binding.TextSpinCount.setText(String.valueOf(LogicHandler.countSpin));
+                binding.TextSpinCount.setText(String.valueOf(LogicHandler.countSpin = 0));
                 logicHandler.beginLogic(false);
                 Toast.makeText(context, "The list has been reset", Toast.LENGTH_SHORT).show();
                 break;

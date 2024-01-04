@@ -342,8 +342,7 @@
         android:background="@drawable/page"
         android:visibility="gone"
         tools:layout_editor_absoluteX="16dp"
-        tools:layout_editor_absoluteY="27dp"
-        tools:visibility="visible">
+        tools:layout_editor_absoluteY="27dp">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/bottomPanel_pW"
@@ -612,8 +611,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         tools:layout_editor_absoluteX="191dp"
-        tools:layout_editor_absoluteY="232dp"
-        tools:visibility="gone">
+        tools:layout_editor_absoluteY="232dp">
 
         <ImageView
             android:id="@+id/ITextWelcome"
@@ -819,8 +817,7 @@
                 android:paddingStart="6dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/TextRecentlist"
-                tools:visibility="gone" />
+                app:layout_constraintTop_toBottomOf="@+id/TextRecentlist" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -834,8 +831,7 @@
         android:elevation="1dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        tools:visibility="gone">
+        app:layout_constraintStart_toStartOf="parent">
 
         <Button
             android:id="@+id/ButtonHome"

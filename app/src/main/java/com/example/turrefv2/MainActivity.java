@@ -1,7 +1,8 @@
 package com.example.turrefv2;
 
-import android.content.ContentResolver;
+import android.os.Build;
 import android.os.Bundle;
+import android.os.Environment;
 import android.util.Log;
 import android.view.View;
 
@@ -22,6 +23,10 @@ import com.example.turrefv2.logic.WordHandler;
 import com.example.turrefv2.utils.PermissionHandler;
 import com.example.turrefv2.utils.SettingsManager;
 
+import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
+
 public class MainActivity extends AppCompatActivity {
 
     public static String appName = "Turref";
@@ -38,7 +43,7 @@ public class MainActivity extends AppCompatActivity {
         PermissionHandler permissionHandler = new PermissionHandler(this, this);
         FileManager fileManager = new FileManager(this);
         WordHandler wordHandler = new WordHandler(this, fileManager);
-        LogicHandler logicHandler = new LogicHandler(binding , wordHandler);
+        LogicHandler logicHandler = new LogicHandler(binding , this, wordHandler);
         SettingsManager settingsManager = new SettingsManager(binding, this);
         EditorWrapper editorWrapper = new EditorWrapper(binding, settingsManager);
         SwitchHandler switchHandler = new SwitchHandler(binding, logicHandler, settingsManager);
@@ -76,6 +81,8 @@ public class MainActivity extends AppCompatActivity {
             binding.ButtonLowerDisplay.setOnClickListener(buttonHandler);
             binding.ButtonLowerDisplay.setOnTouchListener(touchHandler);
             binding.SwitchSide.setOnCheckedChangeListener(switchHandler);
+            binding.ButtonReturn.setOnClickListener(buttonHandler);
+            binding.ButtonReturn.setOnTouchListener(touchHandler);
             binding.ButtonReset.setOnClickListener(buttonHandler);
             binding.ButtonReset.setOnTouchListener(touchHandler);
 
@@ -98,6 +105,7 @@ public class MainActivity extends AppCompatActivity {
         permissionHandler.getPermission();
         recentListManager.initiateRecycler();
         AnimHandler.currentPage = binding.pageHome;
+
     }
 }
 
