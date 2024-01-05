@@ -40,10 +40,10 @@ public class FileManager {
 
     public boolean isFileGlobal() {
         for (String drive : PathHandler.globalDrives) {
-            isFileGlobal = PathHandler.path.contains(drive);
+            if(isFileGlobal = PathHandler.path.contains(drive))
+                return isFileGlobal = true;
         }
-        Log.d("TTST/?", isFileGlobal + "");
-        return isFileGlobal;
+        return isFileGlobal = false;
     }
 
     public void isFileExist(boolean isNamePresent) {

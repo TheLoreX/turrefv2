@@ -44,9 +44,6 @@ public class PathHandler {
         public void onActivityResult(ActivityResult result) {
             if(result.getResultCode() == Activity.RESULT_OK && result.getData() != null) {
 
-                Log.d("TTST/Path", String.valueOf(result.getData().getData().toString()));
-                Log.d("TTST/Check", String.valueOf(result.getData().getData().toString().contains(globalDrives[0])));
-                Log.d("TTST/Check2", String.valueOf(result.getData().getData().toString().contains(globalDrives[1])));
                 if (isPathOnCloud(result)) {
                     path = result.getData().getData().toString();
                 }
