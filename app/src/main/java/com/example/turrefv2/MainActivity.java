@@ -1,9 +1,6 @@
 package com.example.turrefv2;
 
-import android.os.Build;
 import android.os.Bundle;
-import android.os.Environment;
-import android.util.Log;
 import android.view.View;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -22,10 +19,6 @@ import com.example.turrefv2.logic.RecentListManager;
 import com.example.turrefv2.logic.WordHandler;
 import com.example.turrefv2.utils.PermissionHandler;
 import com.example.turrefv2.utils.SettingsManager;
-
-import java.io.File;
-import java.io.IOException;
-import java.nio.file.Files;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -53,6 +46,7 @@ public class MainActivity extends AppCompatActivity {
         ButtonHandler buttonHandler = new ButtonHandler(binding, this, animHandler, permissionHandler, pathHandler, wordHandler, logicHandler, dataHandler);
         RecentListManager recentListManager = new RecentListManager(binding, this, animHandler, dataHandler);
         // listeners
+
             // homepage
             binding.ButtonHome.setOnClickListener(buttonHandler);
             binding.ButtonHome.setOnTouchListener(touchHandler);
@@ -70,8 +64,8 @@ public class MainActivity extends AppCompatActivity {
             // wordpage
             binding.ButtonBack.setOnClickListener(buttonHandler);
             binding.ButtonBack.setOnTouchListener(touchHandler);
-            binding.TouchButtonSlider.setOnClickListener(buttonHandler);
-            binding.TouchButtonSlider.setOnTouchListener(touchHandler);
+            binding.ButtonSlider.setOnClickListener(buttonHandler);
+            binding.ButtonSlider.setOnTouchListener(touchHandler);
             binding.ButtonReplay.setOnClickListener(buttonHandler);
             binding.ButtonReplay.setOnTouchListener(touchHandler);
             binding.ButtonClue.setOnClickListener(buttonHandler);

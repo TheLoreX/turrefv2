@@ -119,7 +119,7 @@ public class ButtonHandler implements View.OnClickListener {
                 logicHandler.endLogic();
                 break;
 
-            case R.id.TouchButtonSlider:
+            case R.id.ButtonSlider:
                 animHandler.toggleInfo();
                 break;
 

@@ -81,7 +81,6 @@ public class AnimHandler implements Runnable {
                 fileManager.recentDirManager();
             wordHandler.LineCounter();
             wordHandler.WordCounter();
-
             binding.attachPanelPH.setVisibility(View.VISIBLE);
             binding.TextFilename.setText(fileManager.fileName);
             binding.FrameAttach.startAnimation(AnimationUtils.loadAnimation(context, R.anim.attachin));
@@ -120,8 +119,8 @@ public class AnimHandler implements Runnable {
     public void changeFileFromRecentList(String path) {
 
         PathHandler.path = path;
-        Log.d("TTST/AnimHandler:path", PathHandler.path);
         fileManager.isFileExist(true);
+        binding.TextSpinCount.setText("0");
 
         // checks whether the requested file can be found or not
         if (fileManager.isFileExist) {
@@ -260,7 +259,7 @@ public class AnimHandler implements Runnable {
                 }
                 break;
 
-            case R.id.TouchButtonSlider:
+            case R.id.ButtonSlider:
                 if (!toggleInfo) {
                     binding.TextSpinCount.setVisibility(View.VISIBLE);
                     binding.TextSpinCapacity.setVisibility(View.VISIBLE);

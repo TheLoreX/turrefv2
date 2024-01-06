@@ -29,7 +29,7 @@ public class PathHandler {
 
     public ActivityResultLauncher<Intent> activityResultLauncher;
     public static String path;
-    public static final String[] globalDrives = {"com.microsoft.skydrive.content.metadata", "com.google.android.apps.docs.storage"};
+    public static final String[] globalDrives = {"com.microsoft.skydrive.content.metadata", "com.google.android.apps.docs.storage", "content://com.android.providers.media.documents"};
 
     public void pathReceiver() {
         Intent intent = new Intent(Intent.ACTION_OPEN_DOCUMENT);
@@ -43,7 +43,6 @@ public class PathHandler {
         @Override
         public void onActivityResult(ActivityResult result) {
             if(result.getResultCode() == Activity.RESULT_OK && result.getData() != null) {
-
                 if (isPathOnCloud(result)) {
                     path = result.getData().getData().toString();
                 }

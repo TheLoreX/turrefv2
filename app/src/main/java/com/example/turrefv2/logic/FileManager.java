@@ -48,7 +48,6 @@ public class FileManager {
 
     public void isFileExist(boolean isNamePresent) {
         if(isFileGlobal()) {
-            Log.d("TTST/FileState", "global ");
             readLink = Uri.parse(PathHandler.path);
             if(!isNamePresent) {
                 fileNameRetriever();
@@ -56,7 +55,6 @@ public class FileManager {
             isFileExist = true;
         }
         else {
-            Log.d("TTST/FileState", "local ");
             readFile = new File(PathHandler.path);
             fileName = PathHandler.path.substring(PathHandler.path.lastIndexOf("/") + 1,PathHandler.path.indexOf("."));
             isFileExist = readFile.exists();

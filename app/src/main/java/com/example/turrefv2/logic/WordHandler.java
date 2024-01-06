@@ -122,10 +122,7 @@ public class WordHandler {
             bounds:
             while(true) {
                 selectedLine = rand.nextInt(LineCount);
-                Log.d("TTST/RepetitionListSize", "Size: " + repetitionList.size());
                 for(int i = 0; i < repetitionList.size(); i++) {
-                    Log.d("TTST/RepetitionListI", i + "");
-                    Log.d("TTST/RepetitionListNum", i + " Num: " + repetitionList.get(i).Num);
                     if(selectedLine == repetitionList.get(i).Num) {
                         break;
                     }

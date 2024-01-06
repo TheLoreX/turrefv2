@@ -3,7 +3,7 @@
     <style name="Theme.Turrefv2" parent="Theme.AppCompat.Light.NoActionBar">
         <item name="windowActionBar">false</item>
         <item name="android:windowTranslucentStatus">true</item>
-        <item name="android:windowTranslucentNavigation">true</item>
+        <item name="android:navigationBarColor">#FFFFFF</item>
 
     </style>
 </resources>
