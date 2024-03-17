@@ -22,8 +22,8 @@ public class LogicHandler {
 
     public static boolean initiationStatus, isInverse, isRandom, allowRepetition, forbidRepetition;
     public static int countSpin = 0, countClue = 1, wordLimit = 20;
-    private int currentWord;
     private ArrayList<String> wordHistory = new ArrayList<>(wordLimit); // stores up the displayed words
+    private int currentWord;
     public String Words;
 
     public void beginLogic(boolean isPlayButton) {
@@ -55,6 +55,7 @@ public class LogicHandler {
         }
     }
 
+    // shows previously turned words
     public void historyLogic() {
         if (currentWord != 0) {
             currentWord--;
@@ -66,7 +67,7 @@ public class LogicHandler {
     }
 
     // arranges the words that are about to be shown based on the "isInverse" boolean
-    private void arrangeDisplay() {
+    public void arrangeDisplay() {
         if (isInverse) {
             binding.TextUpperDisplay.setText("Tap to show");
             binding.TextLowerDisplay.setText(Words.substring(Words.indexOf('=') + 1));
