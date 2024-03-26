@@ -4,13 +4,18 @@ import android.os.Bundle;
 import android.view.View;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.FragmentTransaction;
 
+import com.example.turrefv2.action.ActionProvider;
 import com.example.turrefv2.action.AnimHandler;
 import com.example.turrefv2.action.ButtonHandler;
 import com.example.turrefv2.action.SwitchHandler;
 import com.example.turrefv2.action.TouchHandler;
 import com.example.turrefv2.component.EditorWrapper;
 import com.example.turrefv2.databinding.ActivityMainBinding;
+import com.example.turrefv2.databinding.FragmentHomeBinding;
+import com.example.turrefv2.databinding.FragmentSettingsBinding;
+import com.example.turrefv2.databinding.FragmentWordBinding;
 import com.example.turrefv2.logic.DataHandler;
 import com.example.turrefv2.logic.FileManager;
 import com.example.turrefv2.logic.LogicHandler;
@@ -24,6 +29,9 @@ public class MainActivity extends AppCompatActivity {
 
     public static String appName = "Turref";
     ActivityMainBinding binding;
+    FragmentHomeBinding fragmentHomeBinding;
+    FragmentSettingsBinding fragmentSettingsBinding;
+    FragmentWordBinding fragmentWordBinding;
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -32,6 +40,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(view);
 
         // class definitions
+        ActionProvider actionProvider = new ActionProvider();
         TouchHandler touchHandler = new TouchHandler(this);
         PermissionHandler permissionHandler = new PermissionHandler(this, this);
         FileManager fileManager = new FileManager(this);
@@ -45,9 +54,14 @@ public class MainActivity extends AppCompatActivity {
         PathHandler pathHandler = new PathHandler(this, animHandler);
         ButtonHandler buttonHandler = new ButtonHandler(binding, this, animHandler, permissionHandler, pathHandler, wordHandler, logicHandler, dataHandler);
         RecentListManager recentListManager = new RecentListManager(binding, this, animHandler, dataHandler);
-        // listeners
 
-            // homepage
+
+        // fragments
+        FragmentWord fragmentWord = new FragmentWord(fragmentWordBinding, buttonHandler, touchHandler, switchHandler);
+        FragmentHome fragmentHome = new FragmentHome(fragmentHomeBinding, buttonHandler, touchHandler);
+        FragmentSettings fragmentSettings = new FragmentSettings(fragmentSettingsBinding, buttonHandler, touchHandler, switchHandler, editorWrapper);
+        // listeners
+            // palette
             binding.ButtonHome.setOnClickListener(buttonHandler);
             binding.ButtonHome.setOnTouchListener(touchHandler);
             binding.ButtonList.setOnClickListener(buttonHandler);
@@ -58,47 +72,17 @@ public class MainActivity extends AppCompatActivity {
             binding.ButtonInfo.setOnTouchListener(touchHandler);
             binding.ButtonSettings.setOnClickListener(buttonHandler);
             binding.ButtonSettings.setOnTouchListener(touchHandler);
-            binding.ButtonAdd.setOnClickListener(buttonHandler);
-            binding.ButtonAdd.setOnTouchListener(touchHandler);
 
-            // wordpage
-            binding.ButtonBack.setOnClickListener(buttonHandler);
-            binding.ButtonBack.setOnTouchListener(touchHandler);
-            binding.ButtonSlider.setOnClickListener(buttonHandler);
-            binding.ButtonSlider.setOnTouchListener(touchHandler);
-            binding.ButtonReplay.setOnClickListener(buttonHandler);
-            binding.ButtonReplay.setOnTouchListener(touchHandler);
-            binding.ButtonClue.setOnClickListener(buttonHandler);
-            binding.ButtonClue.setOnTouchListener(touchHandler);
-            binding.ButtonUpperDisplay.setOnClickListener(buttonHandler);
-            binding.ButtonUpperDisplay.setOnTouchListener(touchHandler);
-            binding.ButtonLowerDisplay.setOnClickListener(buttonHandler);
-            binding.ButtonLowerDisplay.setOnTouchListener(touchHandler);
-            binding.SwitchSide.setOnCheckedChangeListener(switchHandler);
-            binding.ButtonReturn.setOnClickListener(buttonHandler);
-            binding.ButtonReturn.setOnTouchListener(touchHandler);
-            binding.ButtonReset.setOnClickListener(buttonHandler);
-            binding.ButtonReset.setOnTouchListener(touchHandler);
-
-            // settingspage
-            binding.SwitchRandomMode.setOnCheckedChangeListener(switchHandler);
-            binding.SwitchRepetition.setOnCheckedChangeListener(switchHandler);
-            binding.SwitchRepetitionLimit.setOnCheckedChangeListener(switchHandler);
-            binding.ButtonInfoRandomMode.setOnClickListener(buttonHandler);
-            binding.ButtonInfoRandomMode.setOnTouchListener(touchHandler);
-            binding.ButtonInfoRepetition.setOnClickListener(buttonHandler);
-            binding.ButtonInfoRepetition.setOnTouchListener(touchHandler);
-            binding.ButtonInfoClue.setOnClickListener(buttonHandler);
-            binding.ButtonInfoClue.setOnTouchListener(touchHandler);
-            binding.EditRepetition.setOnEditorActionListener(editorWrapper);
-            binding.EditClue.setOnEditorActionListener(editorWrapper);
 
         // executions
         settingsManager.loadSettings();
         pathHandler.onIntentResult();
         permissionHandler.getPermission();
         recentListManager.initiateRecycler();
-        AnimHandler.currentPage = binding.pageHome;
+
+        // initiate fragment
+        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+        transaction.setReorderingAllowed(true).add(R.id.pageHome, fragmentWord, null).commit();
 
     }
 }

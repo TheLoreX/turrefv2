@@ -1,0 +1,274 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".FragmentWord">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/pageWord"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/page"
+        android:visibility="visible"
+        tools:layout_editor_absoluteX="16dp"
+        tools:layout_editor_absoluteY="27dp">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/bottomPanel_pW"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            android:layout_width="0dp"
+            android:layout_height="86dp"
+            android:background="@drawable/palette"
+            android:elevation="2dp">
+
+            <Button
+                android:id="@+id/ButtonBack"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="@+id/bottomPanel_pW"
+                android:layout_width="55dp"
+                android:layout_height="35dp"
+                android:layout_marginStart="56dp"
+                android:layout_marginBottom="26dp"
+                android:background="@drawable/back"
+                tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck" />
+
+            <Button
+                android:id="@+id/ButtonReplay"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/SwitchSide"
+                app:layout_constraintStart_toEndOf="@+id/ButtonBack"
+                android:layout_width="42dp"
+                android:layout_height="40dp"
+                android:layout_marginBottom="24dp"
+                android:background="@drawable/replay"
+                tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck" />
+
+            <Switch
+
+                android:id="@+id/SwitchSide"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="@+id/bottomPanel_pW"
+                android:layout_width="61dp"
+                android:layout_height="30dp"
+                android:layout_marginEnd="56dp"
+                android:layout_marginBottom="27dp"
+                android:thumb="@drawable/customthumb"
+                android:track="@drawable/customtrack"
+                tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/midPanel_pW"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            android:layout_width="0dp"
+            android:layout_height="260dp"
+            android:layout_marginBottom="-155dp"
+            android:background="@drawable/midframe_pw"
+            android:elevation="1dp">
+
+            <Button
+                android:id="@+id/ButtonReset"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/TextSpinCapacity"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_marginTop="15dp"
+                android:layout_marginEnd="15dp"
+                android:background="@drawable/resetbutton"
+                android:fontFamily="@font/anonymous_pro_bold"
+                android:shadowColor="#000000"
+                android:textColor="#C1BDBA"
+                tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck" />
+
+            <TextView
+                android:id="@+id/TextSpinType"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/TextListName"
+                android:layout_width="230dp"
+                android:layout_height="30dp"
+                android:layout_marginStart="24dp"
+                android:layout_marginTop="7dp"
+                android:elevation="1dp"
+                android:fontFamily="@font/anonymous_pro_bold"
+                android:shadowColor="@color/black"
+                android:textAlignment="textStart"
+                android:textColor="#C1BDBA"
+                android:textSize="26sp"
+                tools:ignore="TextContrastCheck" />
+
+            <TextView
+                android:id="@+id/TextListName"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                android:layout_width="230dp"
+                android:layout_height="30dp"
+                android:layout_marginStart="24dp"
+                android:layout_marginTop="20dp"
+                android:elevation="1dp"
+                android:ellipsize="end"
+                android:fontFamily="@font/anonymous_pro_bold"
+                android:maxLines="1"
+                android:shadowColor="@color/black"
+                android:textAlignment="textStart"
+                android:textColor="#C1BDBA"
+                android:textSize="26sp"
+                tools:ignore="TextContrastCheck" />
+
+            <Button
+                android:id="@+id/ButtonSlider"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                android:layout_width="200dp"
+                android:layout_height="48dp"
+                android:layout_marginTop="-15dp"
+                android:background="@drawable/midframeslider"
+                tools:ignore="SpeakableTextPresentCheck" />
+
+            <TextView
+                android:id="@+id/TextSpinCount"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                android:layout_width="90dp"
+                android:layout_height="25dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginEnd="50dp"
+                android:elevation="1dp"
+                android:fontFamily="@font/anonymous_pro_bold"
+                android:shadowColor="@color/black"
+                android:textAlignment="textEnd"
+                android:textColor="#C1BDBA"
+                android:textSize="26sp"
+                tools:ignore="TextContrastCheck" />
+
+            <TextView
+                android:id="@+id/TextSpinCapacity"
+                app:layout_constraintBottom_toTopOf="@+id/TextSpinCount"
+                app:layout_constraintStart_toStartOf="@+id/TextSpinCount"
+                android:layout_width="70dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="90dp"
+                android:layout_marginBottom="-15dp"
+                android:elevation="1dp"
+                android:fontFamily="@font/anonymous_pro_bold"
+                android:shadowColor="@color/black"
+                android:textAlignment="viewStart"
+                android:textColor="#C1BDBA"
+                android:textSize="16sp"
+                tools:ignore="TextContrastCheck" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/wordshowPanel_pW"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:layout_width="0dp"
+            android:layout_height="645dp"
+            android:layout_marginTop="60dp">
+
+            <Button
+                android:id="@+id/ButtonUpperDisplay"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/upperPanel_pW"
+                android:layout_width="380dp"
+                android:layout_height="220dp"
+                android:layout_marginTop="30dp"
+                android:background="@drawable/frameleft"
+                android:enabled="false"
+                tools:ignore="TextContrastCheck,SpeakableTextPresentCheck" />
+
+            <Button
+                android:id="@+id/ButtonLowerDisplay"
+                android:layout_width="380dp"
+                android:layout_height="220dp"
+                android:background="@drawable/frameright"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/ButtonUpperDisplay"
+                tools:ignore="DuplicateSpeakableTextCheck,TextContrastCheck,SpeakableTextPresentCheck" />
+
+            <TextView
+                android:id="@+id/TextUpperDisplay"
+                app:autoSizeMaxTextSize="20sp"
+                app:autoSizeMinTextSize="1sp"
+                app:autoSizeTextType="uniform"
+                app:layout_constraintBottom_toBottomOf="@+id/ButtonUpperDisplay"
+                app:layout_constraintEnd_toEndOf="@+id/ButtonUpperDisplay"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/ButtonUpperDisplay"
+                android:layout_width="300dp"
+                android:layout_height="120dp"
+                android:elevation="20dp"
+                android:ellipsize="none"
+                android:fontFamily="monospace"
+                android:gravity="center"
+                android:maxLines="20"
+                android:textColor="#5E5D5D"
+                android:textSize="20sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/TextLowerDisplay"
+                app:autoSizeMaxTextSize="20sp"
+                app:autoSizeMinTextSize="1sp"
+                app:autoSizeTextType="uniform"
+                app:layout_constraintBottom_toBottomOf="@+id/ButtonLowerDisplay"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="@+id/ButtonLowerDisplay"
+                app:layout_constraintTop_toTopOf="@+id/ButtonLowerDisplay"
+                android:layout_width="300dp"
+                android:layout_height="120dp"
+                android:elevation="20dp"
+                android:fontFamily="monospace"
+                android:gravity="center"
+                android:maxLines="20"
+                android:textColor="#5E5D5D"
+                android:textSize="20sp"
+                android:textStyle="bold" />
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/upperPanel_pW"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                android:layout_width="200dp"
+                android:layout_height="80dp"
+                android:background="@drawable/upperframe">
+
+                <Button
+                    android:id="@+id/ButtonReturn"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    android:layout_width="48dp"
+                    android:layout_height="48dp"
+                    android:layout_marginStart="40dp"
+                    android:background="@drawable/returnicon"
+                    tools:ignore="SpeakableTextPresentCheck" />
+
+                <Button
+                    android:id="@+id/ButtonClue"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    android:layout_width="48dp"
+                    android:layout_height="48dp"
+                    android:layout_marginEnd="40dp"
+                    android:background="@drawable/clue"
+                    tools:ignore="SpeakableTextPresentCheck" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</FrameLayout>

@@ -96,8 +96,8 @@ public class ButtonHandler implements View.OnClickListener {
         //wordpage
             case R.id.ButtonBack:
                 animHandler.pageHandler((byte) 2, true);
-                binding.midPanelPW.clearAnimation();
-                binding.wordshowPanelPW.clearAnimation();
+//                binding.midPanelPW.clearAnimation();
+//                binding.wordshowPanelPW.clearAnimation();
                 break;
 
             case R.id.ButtonReplay:
@@ -138,7 +138,7 @@ public class ButtonHandler implements View.OnClickListener {
                 break;
             case R.id.ButtonReset:
                 WordHandler.selectedLine = 0;
-                binding.TextSpinCount.setText(String.valueOf(LogicHandler.countSpin = 0));
+//                binding.TextSpinCount.setText(String.valueOf(LogicHandler.countSpin = 0));
                 logicHandler.beginLogic(false);
                 Toast.makeText(context, "The list has been reset", Toast.LENGTH_SHORT).show();
                 break;
